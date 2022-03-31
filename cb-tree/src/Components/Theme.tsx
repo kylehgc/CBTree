@@ -10,7 +10,7 @@ const theme = extendTheme({
     Button: {
       variants: {
         "solid": {
-          bg: 'blue.400',
+          bg: 'white',
           rounded: "2xl"
         }
       }
@@ -20,6 +20,7 @@ const theme = extendTheme({
   styles: {
     global: (props: ThemeComponentProps) => ({
       body: {
+        height: "100vh",
         bg: mode('blue.400', 'black')(props)
       }
     })

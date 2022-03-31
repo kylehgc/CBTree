@@ -1,20 +1,19 @@
 import * as React from "react"
+import Logo from './Components/Logo'
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
+  Flex
 } from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
-import ThoughtRecord from "./Components/ThoughtRecord"
+
+import Situation from "./Components/SituationRecord"
 import theme from './Components/Theme'
+import Moods from './Components/MoodsRecord'
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <ThoughtRecord />
+    <Flex height='80vh' overflow='hidden' flexDirection="column">
+      <Logo/>
+      <Moods />
+    </Flex>
   </ChakraProvider>
 )

@@ -1,0 +1,222 @@
+[
+  {
+      "label": "Afraid",
+      "value": "Afraid"
+  },
+  {
+      "label": "Aggravated",
+      "value": "Aggravated"
+  },
+  {
+      "label": "Angry",
+      "value": "Angry"
+  },
+  {
+      "label": "Anxious",
+      "value": "Anxious"
+  },
+  {
+      "label": "Ashamed",
+      "value": "Ashamed"
+  },
+  {
+      "label": "Assertive",
+      "value": "Assertive"
+  },
+  {
+      "label": "Burdened",
+      "value": "Burdened"
+  },
+  {
+      "label": "Brave",
+      "value": "Brave"
+  },
+  {
+      "label": "Calm",
+      "value": "Calm"
+  },
+  {
+      "label": "Cautious",
+      "value": "Cautious"
+  },
+  {
+      "label": "Challenged",
+      "value": "Challenged"
+  },
+  {
+      "label": "Cheerful",
+      "value": "Cheerful"
+  },
+  {
+      "label": "Cherished",
+      "value": "Cherished"
+  },
+  {
+      "label": "Comforted",
+      "value": "Comforted"
+  },
+  {
+      "label": "Contented",
+      "value": "Contented"
+  },
+  {
+      "label": "Creative",
+      "value": "Creative"
+  },
+  {
+      "label": "Curious",
+      "value": "Curious"
+  },
+  {
+      "label": "Depressed",
+      "value": "Depressed"
+  },
+  {
+      "label": "Embarrassed",
+      "value": "Embarrassed"
+  },
+  {
+      "label": "Energized",
+      "value": "Energized"
+  },
+  {
+      "label": "Envious",
+      "value": "Envious"
+  },
+  {
+      "label": "Excited",
+      "value": "Excited"
+  },
+  {
+      "label": "Furious",
+      "value": "Furious"
+  },
+  {
+      "label": "Guilty",
+      "value": "Guilty"
+  },
+  {
+      "label": "Grumpy",
+      "value": "Grumpy"
+  },
+  {
+      "label": "Happy",
+      "value": "Happy"
+  },
+  {
+      "label": "Hopeful",
+      "value": "Hopeful"
+  },
+  {
+      "label": "Humiliated",
+      "value": "Humiliated"
+  },
+  {
+      "label": "Hurt",
+      "value": "Hurt"
+  },
+  {
+      "label": "Indifferent",
+      "value": "Indifferent"
+  },
+  {
+      "label": "Insecure",
+      "value": "Insecure"
+  },
+  {
+      "label": "Irritated",
+      "value": "Irritated"
+  },
+  {
+      "label": "Lonely",
+      "value": "Lonely"
+  },
+  {
+      "label": "Loved",
+      "value": "Loved"
+  },
+  {
+      "label": "Mad",
+      "value": "Mad"
+  },
+  {
+      "label": "Optimistic",
+      "value": "Optimistic"
+  },
+  {
+      "label": "Overwhelmed",
+      "value": "Overwhelmed"
+  },
+  {
+      "label": "Panicked",
+      "value": "Panicked"
+  },
+  {
+      "label": "Peaceful",
+      "value": "Peaceful"
+  },
+  {
+      "label": "Positive",
+      "value": "Positive"
+  },
+  {
+      "label": "Pessimistic",
+      "value": "Pessimistic"
+  },
+  {
+      "label": "Prepared",
+      "value": "Prepared"
+  },
+  {
+      "label": "Proud",
+      "value": "Proud"
+  },
+  {
+      "label": "Ready for",
+      "value": "Ready for"
+  },
+  {
+      "label": "Change",
+      "value": "Change"
+  },
+  {
+      "label": "Regretful",
+      "value": "Regretful"
+  },
+  {
+      "label": "Relieved",
+      "value": "Relieved"
+  },
+  {
+      "label": "Renewed",
+      "value": "Renewed"
+  },
+  {
+      "label": "Sad",
+      "value": "Sad"
+  },
+  {
+      "label": "Self-confident",
+      "value": "Self-confident"
+  },
+  {
+      "label": "Shameful",
+      "value": "Shameful"
+  },
+  {
+      "label": "Skeptical",
+      "value": "Skeptical"
+  },
+  {
+      "label": "Sorrowful",
+      "value": "Sorrowful"
+  },
+  {
+      "label": "Suicidal",
+      "value": "Suicidal"
+  },
+  {
+      "label": "Worried",
+      "value": "Worried"
+  }
+]
