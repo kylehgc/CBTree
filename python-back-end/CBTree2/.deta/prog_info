@@ -1,0 +1,1 @@
+{"id":"d42ae797-a421-477f-99ab-64e967f59ae9","space":20624,"runtime":"python3.9","name":"CBTree2","path":"7astgo","project":"b0n437ba","account":"144798365827","region":"us-east-1","deps":["fastapi","pydantic","email-validator","python-multipart","python-jose[cryptography]","passlib[bcrypt]","deta"],"envs":null,"public":true,"log_level":"debug","cron":""}
