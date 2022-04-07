@@ -5,15 +5,16 @@ import {
   Flex
 } from "@chakra-ui/react"
 
-import Situation from "./Components/SituationRecord"
 import theme from './Components/Theme'
-import Moods from './Components/MoodsRecord'
+import Login from './Components/Login'
+// import Situation from './Components/SituationRecord'
+// import Moods from './Components/MoodsRecord'
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <Flex height='80vh' overflow='hidden' flexDirection="column">
+    <Flex height='80vh' overflow={'hidden'} flexDirection="column">
       <Logo/>
-      <Moods />
+      <Login />
     </Flex>
   </ChakraProvider>
 )

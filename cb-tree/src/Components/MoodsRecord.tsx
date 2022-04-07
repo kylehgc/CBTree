@@ -10,10 +10,14 @@ type Option = {
   label: string
 }
 
+type Mood = {
+  mood: string,
+  moodRating?: number
+}
 
 const MoodsRecord: React.FC = () => {
 
-  const [moods, setMoods] = useState<string[]>([])
+  const [moods, setMoods] = useState<Mood[]>([])
   console.log(moods)
 
   const handleChange = (option: Option | null, actionMeta: ActionMeta<Option>) => {
@@ -21,7 +25,7 @@ const MoodsRecord: React.FC = () => {
       console.log(moods)
       if(!(option.value in moods)) {
         
-        setMoods((moods) => [...moods, option.value])
+        setMoods((moods) => [...moods, {mood: option.value}])
       }
     }
   }

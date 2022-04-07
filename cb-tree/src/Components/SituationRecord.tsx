@@ -6,10 +6,6 @@ import {
   FormControl,
   Textarea,
   Button,
-  Container,
-  WrapItem,
-  Wrap,
-  Center,
   useColorMode,
   Flex,
 } from '@chakra-ui/react'
