@@ -1,94 +1,96 @@
 import {
   Flex,
   Box,
+  Spinner,
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
+  FormErrorMessage,
   Stack,
   Link,
   Button,
   Heading,
+  useToast,
   useColorModeValue,
 } from '@chakra-ui/react';
-
 import {login} from '../utils/api';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { FormEventHandler, useEffect, useState } from 'react';
+import { useState } from 'react';
+// import { useEffect, useState } from 'react';
 
-
+interface Token {
+  access_token: string,
+  tokenType: 'bearer'
+}
 interface FormValues {
   username: string,
   password: string
 }
 
 export default function Login() {
+  const [token, setToken] = useState<Token>()
+  const {register, handleSubmit, reset, formState: {errors , isSubmitting, isSubmitted}} = useForm<FormValues>()
+  const toast = useToast()
 
-  const [credentials, setCredentials] = useState<FormValues | null>(null)
-  const {register, handleSubmit, formState: {errors ,isSubmitting}} = useForm<FormValues>()
-
-  useEffect(() => {
-    const login = async () => {  
-    }
-    if(credentials) {
-
-    }
-    login()
-  }, [credentials])
-
-  
   const onSubmit: SubmitHandler<FormValues> = async(value) => {
-    const response = await fetch(login, {
-      body: new URLSearchParams({...value}),
-      method: "POST",
-      mode: "no-cors"
-    })
 
-    console.log(await response.text())
+    try{
+      const response = await fetch(login, {
+        body: new URLSearchParams({...value}),
+        method: "POST",
+        mode: "cors"
+      })
+      if(response.status === 200) {
+        setToken(await response.json()) 
+        toast({
+          status: 'success',
+          description: "Login successful.  Redirecting..."
+          
+        })
+      
+      } else {
+        throw new Error("Incorrect Username or Password")
+        
+      }
+    }
+    catch (error) {
+      if(error instanceof Error) {   
+        toast({
+          status: 'error',
+          description: error.message
+        })
+      }
+      reset({},{keepValues: true})
+      console.log(isSubmitted)
+    }
   }
-
-  // const onSubmit: FormEventHandler = async(event) => {
-  //   event.preventDefault()
-  //   if (event.target instanceof HTMLFormElement){
-  //     const data = new FormData(event.target)
-  //     console.log(data)
-  //     const response = await fetch(login, {
-  //       body: data,
-  //       method: "post",
-  //       mode: 'no-cors'
-  //     })
-  //     console.log(await response.json())
-  //   }}
-
-  
-
   return (
-    <Flex
-      h={'100%'}
-      align='center'
-      justify='center'
-      // bg={useColorModeValue('gray.50', 'gray.800')}
-    >
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+    <Flex overflow='auto' h={'100%'} align='center' justify='center'>
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} maxH={'100%'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading color={'white'} fontSize={'4xl'}>Sign in to your account</Heading>
+          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
         </Stack>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}>
-         
+          <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
             <Stack spacing={4}>
-          
-              <FormControl isInvalid={!!errors?.username?.message} id="email">
+              <FormControl isRequired isInvalid={!!errors?.username} id="email">
                 <FormLabel>Email address</FormLabel>
-                <Input type="text" placeholder="Email" {...register("username", {required: true, pattern: /^\S+@\S+$/i})}  />
+                <Input type="text" placeholder="Email" {...register(
+                  "username", {required: true, pattern:{
+                    value: /^\S+@\S+$/i, message: "Not a valid email address"}})}  />
+                <FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors?.password?.message} id="password">
                 <FormLabel>Password</FormLabel>
-                <Input  type="password" placeholder="password" {...register("password", {required: true, max: 6, min: 4})} /> 
+                <Input type="password" placeholder="password" {
+                  ...register("password", {
+                    required: true, maxLength:{
+                      value: 10,
+                      message:"Your password is too long"},
+                    minLength:{
+                      value: 4,
+                      message: "Your password is too short"}})} /> 
+                <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
               </FormControl>
               <Stack spacing={10}>
                 <Stack
@@ -99,15 +101,15 @@ export default function Login() {
                   <Link color={'blue.400'}>Forgot password?</Link>
                 </Stack>
                 <Button
+                  isDisabled={isSubmitting || token !== undefined}
                   type='submit'
                   bg={'blue.400'}
                   color={'white'}
                   _hover={{
                     bg: 'blue.500',
                   }}>
-                Sign in
+                  {isSubmitting ? <Spinner/> : "Sign in"}
                 </Button>
-            
               </Stack>
             </Stack>
           </Box>

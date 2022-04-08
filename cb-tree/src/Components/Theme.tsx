@@ -1,12 +1,14 @@
 import { extendTheme, ThemeComponentProps } from "@chakra-ui/react";
-import { mode } from '@chakra-ui/theme-tools'
+import { mode, SystemStyleObject } from '@chakra-ui/theme-tools'
 import {} from '@chakra-ui/react'
 
-
-
-const theme = extendTheme({
-
+const theme: SystemStyleObject = extendTheme({
   components: {
+    Heading: {
+      baseStyle: {
+        color: "white"
+      }
+    },
     Button: {
       variants: {
         "solid": {
@@ -16,7 +18,6 @@ const theme = extendTheme({
       }
     }
   },
-
   styles: {
     global: (props: ThemeComponentProps) => ({
       body: {
@@ -26,5 +27,4 @@ const theme = extendTheme({
     })
   }
 })
-
 export default theme
