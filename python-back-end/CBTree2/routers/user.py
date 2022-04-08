@@ -25,7 +25,7 @@ db = deta.Base('monkey')
 
 
 class New_User(BaseModel):
-  email: EmailStr 
+  username: EmailStr 
   password: str
   firstName: Optional[str] = None
   lastName: Optional[str] = None
@@ -53,14 +53,14 @@ async def get_user_key(username: str):
 @router.post("/user/")
 async def new_user(new_user: New_User):
   new_user_dict = new_user.dict()
-  user_key = await get_user_key(new_user_dict['email'])
+  user_key = await get_user_key(new_user_dict['username'])
   if user_key:
     return {"key": user_key, "message": "no good bro"}
   else:
     hashed_password = pwd_context.hash(new_user_dict['password'])
     user = db.put({**new_user_dict,'password': hashed_password})
     from routers.auth import create_access_token
-    encode_data = {"sub": user['email'], "key": user['key']}
+    encode_data = {"sub": user['username'], "key": user['key']}
     access_token= create_access_token(encode_data)
     return {"access_token": access_token, "token_type": "bearer"}
   
