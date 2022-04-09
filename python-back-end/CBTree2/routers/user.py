@@ -34,7 +34,7 @@ class New_User(BaseModel):
 router = APIRouter()
 
 async def get_user(username: EmailStr):
-  user = db.fetch({"email": username})
+  user = db.fetch({"username": username})
   if user.count > 0: 
     return user.items[0]
   return False
