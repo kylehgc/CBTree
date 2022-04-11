@@ -1,27 +1,22 @@
 import { useForm, SubmitHandler } from "react-hook-form"
-import logo from '../media/cbtree-logo.png'
 import {
-  Image,
   FormLabel,
-  FormControl,
+  // FormControl,
   Textarea,
   Button,
-  useColorMode,
+  // useColorMode,
   Flex,
 } from '@chakra-ui/react'
-type FormValues = {
-  firstName: string;
-  lastName: string;
-  email: string;
-};
+
+
 
 
 export default function Situation() {
-  const {toggleColorMode} = useColorMode()
+
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
+    // formState: { errors, isSubmitting },
   } = useForm<FormValues>()
 
   type FormValues = {
