@@ -23,7 +23,7 @@ interface FormValues {
   password: string
 }
 
-export default function Login() {
+const Login: React.FC = () => {
   const [token, setToken] = useState<Token>()
   const {register, handleSubmit, formState: {errors , isSubmitting}} = useForm<FormValues>()
   const toast = useToast()
@@ -94,3 +94,5 @@ export default function Login() {
     </Flex>
   );
 }
+
+export default Login
