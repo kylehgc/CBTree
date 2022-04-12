@@ -9,7 +9,7 @@ import theme from './Components/Theme'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
 // import Situation from './Components/SituationRecord'
-// import Moods from './Components/MoodsRecord'
+import MoodsRecord from './Components/MoodsRecord'
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -18,6 +18,7 @@ export const App = () => (
       <Router>
         <Routes>
           <Route path="/" element={<Login/>} />
+          <Route path="/mood" element={<MoodsRecord />} />
           <Route path="/signup" element={<Signup/>} />
         </Routes>
       </Router>
