@@ -1,7 +1,7 @@
-from fastapi import Depends, APIRouter, HTTPException, status 
+from fastapi import Depends, APIRouter, HTTPException, status
 from os import getenv
 from deta import Deta
-from datetime import datetime, timedelta    
+from datetime import datetime, timedelta
 from typing import Optional
 from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -11,17 +11,19 @@ from routers.user import get_user
 from passlib.context import CryptContext
 
 deta = Deta()
-db = deta.Base('monkey')
+db = deta.Base("monkey")
 router = APIRouter()
 
-SECRET_KEY = getenv('SECRET_TOKEN')
+SECRET_KEY = getenv("SECRET_TOKEN")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
+
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
@@ -33,6 +35,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
+
 class Token(BaseModel):
     access_token: str
     token_type: str
@@ -41,16 +44,17 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     username: Optional[str] = None
 
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-
 
 
 class UserInDB(User):
     password: str
 
+
 def get_password_hash(password):
     return pwd_context.hash(password)
+
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -71,10 +75,12 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         raise credentials_exception
     return user
 
+
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
+
 
 # def get_user(username: str):
 #     if username in db:
@@ -86,7 +92,7 @@ async def authenticate_user(username: str, password: str):
     user = await get_user(username)
     if not user:
         return False
-    if not verify_password(password, user['password']):
+    if not verify_password(password, user["password"]):
         return False
     return user
 
@@ -103,18 +109,21 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     print(user)
     access_token = create_access_token(
-        data={"sub": user['email'], "key": user['key']}, expires_delta=access_token_expires
+        data={"sub": user["email"], "key": user["key"]},
+        expires_delta=access_token_expires,
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
 
 @router.get("/items/")
 async def read_items(token: str = Depends(oauth2_scheme)):
-    return {"token": token} 
+    return {"token": token}
+
 
 @router.get("/users/me/items/")
 async def read_own_items(current_user: User = Depends(get_current_active_user)):
     return [{"item_id": "Foo", "owner": current_user.username}]
+
 
 @router.get("/users/me")
 async def read_users_me(current_user: User = Depends(get_current_user)):
