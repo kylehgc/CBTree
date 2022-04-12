@@ -1,2 +1,7 @@
 fastapi
+uuid
 pydantic
+email-validator
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
