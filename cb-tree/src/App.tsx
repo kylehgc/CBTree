@@ -8,8 +8,8 @@ import {
 import theme from './Components/Theme'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
-// import Situation from './Components/SituationRecord'
-import MoodsRecord from './Components/MoodsRecord'
+import ThoughtQuestion from './Components/ThoughtQuestion'
+import MoodSlider from './Components/EmotionSlider'
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -18,7 +18,8 @@ export const App = () => (
       <Router>
         <Routes>
           <Route path="/" element={<Login/>} />
-          <Route path="/mood" element={<MoodsRecord />} />
+          <Route path="/mood" element={<MoodSlider />} />
+          <Route path="/thoughts" element={<ThoughtQuestion/>} />
           <Route path="/signup" element={<Signup/>} />
         </Routes>
       </Router>
