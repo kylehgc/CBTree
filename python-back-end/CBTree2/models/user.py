@@ -1,5 +1,5 @@
-from pydantic import BaseModel, NameEmail
 from typing import Optional
+from pydantic import BaseModel, NameEmail
 
 
 class User(BaseModel):
