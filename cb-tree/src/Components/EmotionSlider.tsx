@@ -1,24 +1,26 @@
+import { Button } from '@chakra-ui/react'
 import { useState } from 'react'
 import feelings from '../Data/feelings.json'
+import UseThoughtRecord from '../Hooks/UseThoughtRecord'
 import FeelingSlider,{Mood} from './FeelingSlider'
 
 
 
 const EmotionSlider = () => {
   const [moods, setMoods] = useState<Mood[]>([])
-  const label = "Add any emotions you felt and rate them"
+  const [label,onSubmit] = UseThoughtRecord()
 
-  const handleMoodSubmit = () => {
-
-  }
+  
   return (
-    <FeelingSlider 
-      moods={moods} 
-      setMoods={setMoods} 
-      selectOptions={feelings} 
-      label={label}
-      handleMoodSubmit={handleMoodSubmit} / >
-    
+    <>
+      <FeelingSlider 
+        moods={moods} 
+        setMoods={setMoods} 
+        selectOptions={feelings} 
+        label={label}
+      / >
+      {moods.length > 0 ? <Button onClick={onSubmit} variant="submit"> Submit </Button> : null}
+    </>
   )
 }
 

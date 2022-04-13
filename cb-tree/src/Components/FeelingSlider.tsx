@@ -27,10 +27,9 @@ interface RecordProps {
   setMoods: Dispatch<SetStateAction<Mood[]>>,
   selectOptions: SelectOption[],
   label:string,
-  handleMoodSubmit: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const FeelingSlider: React.FC<RecordProps> = ({moods,setMoods, handleMoodSubmit, selectOptions,label}: RecordProps) => {
+const FeelingSlider: React.FC<RecordProps> = ({moods,setMoods,  selectOptions,label}: RecordProps) => {
   const [selectedMood, setSelectedMood] = useState<string>("")
   
 
@@ -88,7 +87,7 @@ const FeelingSlider: React.FC<RecordProps> = ({moods,setMoods, handleMoodSubmit,
       )
       }
       
-      {moods.length > 0 ? <Button m={5} alignSelf={"center"} onClick={handleMoodSubmit} w={"60%"} minH={10}> Submit </Button> : null}
+      
     </>
   )
 }

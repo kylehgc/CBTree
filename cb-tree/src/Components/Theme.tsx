@@ -3,6 +3,12 @@ import { mode, SystemStyleObject } from '@chakra-ui/theme-tools'
 import {} from '@chakra-ui/react'
 
 const theme: SystemStyleObject = extendTheme({
+  colors:{
+    theme: {
+      100:"teal.400",
+      foreground: "white"
+    }
+  },
   components: {
     Heading: {
       baseStyle: {
@@ -11,18 +17,27 @@ const theme: SystemStyleObject = extendTheme({
     },
     Button: {
       variants: {
-        "solid": {
-          bg: 'white',
-          rounded: "2xl"
-        }
+        "submit": {
+          minHeight: 10,
+          w: "60%",
+          bg: "white",
+          rounded: "2xl",
+          alignSelf: "center"}
+      },
+      "solid": {
+        bg: 'white',
+        rounded: "3xl"
       }
     }
+    
   },
   styles: {
     global: (props: ThemeComponentProps) => ({
       body: {
+        
+        
         height: "100vh",
-        bg: mode('blue.400', 'black')(props)
+        bg: mode('teal.400', "primary")(props)
       }
     })
   }
