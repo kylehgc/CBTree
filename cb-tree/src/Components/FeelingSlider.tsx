@@ -1,9 +1,10 @@
 import {CreatableSelect, ActionMeta} from 'chakra-react-select'
-import feelings from '../Data/feelings.json'
+import { Dispatch, SetStateAction } from 'react'
 import {Button,Box, FormLabel} from '@chakra-ui/react'
 import {useState } from 'react'
 
 import MoodEntry from './MoodEntry'
+import UseThemeColors from '../Hooks/useThemeColors'
 
 
 type Option = {
@@ -11,14 +12,28 @@ type Option = {
   label: string
 }
 
-type Mood = {
+export type Mood = {
   mood: string,
   moodRating: number
 }
 
-const MoodsRecord: React.FC = () => {
+
+interface SelectOption {
+  label: string,
+  value: string
+}
+
+interface RecordProps {
+  moods: Mood[],
+  setMoods: Dispatch<SetStateAction<Mood[]>>,
+  selectOptions: SelectOption[],
+  label:string,
+}
+
+const FeelingSlider: React.FC<RecordProps> = ({moods,setMoods,  selectOptions,label}: RecordProps) => {
+  const {backgroundColor, foregroundColor} = UseThemeColors()
   const [selectedMood, setSelectedMood] = useState<string>("")
-  const [moods, setMoods] = useState<Mood[]>([])
+  
 
   const deleteHandler = (moodName: string) => {
     setMoods(moods.filter(mood => mood.mood !== moodName))
@@ -39,9 +54,14 @@ const MoodsRecord: React.FC = () => {
       setSelectedMood(option.value)
     }
   }
-  const addMood = () => {
+
+  const onCreate = async(value: string) => { 
+    addMood(value)
+  }
+
+  const addMood = (mood: string) => {
     
-    if(!(moods.map(mood => mood.mood)).includes(selectedMood) && selectedMood) {
+    if(!(moods.map(mood => mood.mood)).includes(mood) && mood) {
       setMoods([...moods, {mood: selectedMood, moodRating: 0}])
     }
   }
@@ -49,15 +69,15 @@ const MoodsRecord: React.FC = () => {
   return (
     <>
       
-      <Box p={2} bg="white" mt={10} mx={10} >
-        <FormLabel mb={2} fontSize={14}> Add any emotions you felt and rate them </FormLabel>
+      <Box p={2} bg={foregroundColor} mt={10} mx={7} >
+        <FormLabel mb={2} fontSize={14}> {label} </FormLabel>
         <CreatableSelect
           size='md'
           onChange={handleChange}
-          options={feelings}
+          options={selectOptions}
         />
       </Box>
-      <Button alignSelf={'center'} onClick={addMood} w={"60%"} minH={10} mb={4} mt={7}> Add </Button>
+      <Button alignSelf={'center'} onClick={() => addMood(selectedMood)} w={"60%"} minH={10} mb={4} mt={7}> Add </Button>
       {moods.map(({mood,moodRating}) => 
         <MoodEntry 
           mood={mood} 
@@ -69,10 +89,10 @@ const MoodsRecord: React.FC = () => {
       )
       }
       
-      {moods.length > 0 ? <Button m={5} alignSelf={"center"} w={"60%"} minH={10}> Submit </Button> : null}
+      
     </>
   )
 }
 
 
-export default MoodsRecord
+export default FeelingSlider

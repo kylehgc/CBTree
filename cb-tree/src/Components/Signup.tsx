@@ -17,9 +17,10 @@ import {
 import {Link as ReactRouterLink} from 'react-router-dom'
 
 // import { useState } from 'react';
-import { signup } from '../utils/api';
+import { signupEndPoint } from '../utils/api';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import UserPassFormElements from './UserPassFormElements';
+import useThemeColors from '../Hooks/useThemeColors'
 
 interface FormValues {
   firstName?: string,
@@ -29,12 +30,13 @@ interface FormValues {
 }
 
 export default function SignupCard() {
+  const {foregroundColor, backgroundColor} = useThemeColors()
   const toast = useToast()
   const {register, handleSubmit, formState: {errors , isSubmitting}} = useForm<FormValues>()
   
   const onSubmit: SubmitHandler<FormValues> = async (value) => {
     try {
-      const response = await fetch(signup, {
+      const response = await fetch(signupEndPoint, {
         body: JSON.stringify(value),
         method: "POST",
         mode: "cors",
@@ -52,7 +54,7 @@ export default function SignupCard() {
 
   return (
     <Flex
-      mt={10}
+      mt={5}
       height={'100%'}
       align={'center'}
       justify={'center'}
@@ -65,7 +67,7 @@ export default function SignupCard() {
         </Stack>
         <Box
           rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
+          bg={foregroundColor}
           boxShadow={'lg'}
           p={8}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -105,10 +107,10 @@ export default function SignupCard() {
                   isLoading={isSubmitting}
                   loadingText="Submitting"
                   size="lg"
-                  bg={'blue.400'}
-                  color={'white'}
+                  bg={backgroundColor}
+                  color={foregroundColor}
                   _hover={{
-                    bg: 'blue.500',
+                    bg: 'blue.500'
                   }}>
                 Sign up
                 </Button>

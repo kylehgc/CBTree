@@ -1,13 +1,13 @@
 import { 
   Tooltip,
   Box, 
-  Slider, Text, IconButton, HStack, SliderFilledTrack, SliderThumb, SliderTrack} from "@chakra-ui/react"
+  Slider, Text, IconButton, HStack, SliderFilledTrack, SliderThumb, SliderTrack, VStack} from "@chakra-ui/react"
 import {CloseIcon} from '@chakra-ui/icons'
 
 
 
 interface ButtonProps {
-  deleteHandler: () => void
+  deleteHandler: React.MouseEventHandler<HTMLButtonElement>
 }
 
 interface MoodEntryProps {
@@ -35,26 +35,28 @@ const MoodEntry: React.FC<MoodEntryProps> =
     return (
       <>
         <Box w={{base:"full", lg:"50%"}} alignSelf={"center"}>
-          <HStack mx={3} my={4} minH={20} p={2}  bg={"white"} justifyContent={"space-between"}>
-            <Text p={1} w={"30%"}>
-              {mood} 
-            </Text>
-            <Slider colorScheme={"teal"} onChange={(value) => sliderChange(value)} value={moodRating}>
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <Tooltip
-                hasArrow
-                fontSize={11}
-                bg={sliderColor(moodRating)}
-                color='white'
-                placement='top'
-                isOpen
-                label={`${moodRating}%`}
-              > 
-                <SliderThumb /> 
-              </Tooltip>
-            </Slider>
+          <HStack mx={3} pl={2} my={4} minH={20} bg={"white"} justifyContent={"center"}>
+            <VStack ml={2} spacing={1} p={1} w={"100%"}>
+              <Text w={"100%"} textAlign={"left"}>
+                {mood} 
+              </Text>
+              <Slider colorScheme={"teal"} ml={2} mb={2} onChange={(value) => sliderChange(value)} value={moodRating}>
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <Tooltip
+                  hasArrow
+                  fontSize={"sm"}
+                  bg={sliderColor(moodRating)}
+                  color='white'
+                  placement='right'
+                  isOpen
+                  label={`${moodRating}%`}
+                > 
+                  <SliderThumb bg="teal.400"/>
+                </Tooltip>
+              </Slider>
+            </VStack>
             {<DeleteButton deleteHandler={deleteHandler}/>}
           </HStack>
         </Box>
@@ -69,6 +71,7 @@ const DeleteButton : React.FC<ButtonProps> = ({deleteHandler}) => {
     <IconButton 
       aria-label='Delete Mood' 
       variant='ghost'
+      size={"lg"}
       icon={<CloseIcon/>}
       onClick={deleteHandler}/>
   )

@@ -172,13 +172,10 @@
       "value": "Proud"
   },
   {
-      "label": "Ready for",
-      "value": "Ready for"
+      "label": "Ready for Change",
+      "value": "Ready for Change"
   },
-  {
-      "label": "Change",
-      "value": "Change"
-  },
+ 
   {
       "label": "Regretful",
       "value": "Regretful"

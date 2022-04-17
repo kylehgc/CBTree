@@ -6,17 +6,12 @@ import {
   Button,
   Heading,
   useToast,
-  useColorModeValue,
 } from '@chakra-ui/react';
-import {login} from '../utils/api';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
-import UserPassFormElements from './UserPassFormElements'
 
-interface Token {
-  access_token: string,
-  tokenType: 'bearer'
-}
+import { useForm, SubmitHandler } from 'react-hook-form';
+import UserPassFormElements from './UserPassFormElements'
+import UseThemeColors from '../Hooks/useThemeColors';
+import useAuth from '../Hooks/UseAuth'
 
 interface FormValues {
   username: string,
@@ -24,37 +19,12 @@ interface FormValues {
 }
 
 const Login: React.FC = () => {
-  const [token, setToken] = useState<Token>()
+  const {foregroundColor, backgroundColor} = UseThemeColors()
   const {register, handleSubmit, formState: {errors , isSubmitting}} = useForm<FormValues>()
-  const toast = useToast()
+  const {login} = useAuth()
 
   const onSubmit: SubmitHandler<FormValues> = async(value) => {
-    try{
-      const response = await fetch(login, {
-        body: new URLSearchParams({...value}),
-        method: "POST",
-        mode: "cors",
-        
-      })
-      if(response.status === 200) {
-        setToken(await response.json()) 
-        toast({
-          status: 'success',
-          description: "Login successful.  Redirecting..."
-          
-        })
-      } else {
-        throw new Error("Incorrect Username or Password")
-      }
-    } catch (error) {
-      if(error instanceof Error) {   
-        toast({
-          status: 'error',
-          description: error.message
-        })
-      }
-      
-    }
+    await login(value)
   }
 
   return (
@@ -64,7 +34,7 @@ const Login: React.FC = () => {
           <Heading fontSize={'4xl'}>Sign in to your account</Heading>
         </Stack>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
+          <Box rounded={'lg'} bg={foregroundColor} boxShadow={'lg'} p={8}>
             <Stack spacing={4}>
               <UserPassFormElements register={register} errors={errors} />
               <Stack spacing={10}>
@@ -75,15 +45,15 @@ const Login: React.FC = () => {
                   <Link color={'blue.400'}>Forgot password?</Link>
                 </Stack>
                 <Button
+                  type={"submit"}
                   isLoading={isSubmitting}
-                  isDisabled={token !== undefined}
-                  type='submit'
                   loadingText={"Submitting"}
-                  bg={'blue.400'}
-                  color={'white'}
+                  variant={"loginSubmit"}
+                  bg={backgroundColor}
                   _hover={{
                     bg: 'blue.500',
-                  }}>
+                  }}
+                >
                   Sign in
                 </Button>
               </Stack>
