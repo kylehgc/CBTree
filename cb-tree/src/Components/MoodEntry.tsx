@@ -36,8 +36,8 @@ const MoodEntry: React.FC<MoodEntryProps> =
       <>
         <Box w={{base:"full", lg:"50%"}} alignSelf={"center"}>
           <HStack mx={3} pl={2} my={4} minH={20} bg={"white"} justifyContent={"center"}>
-            <VStack ml={2} spacing={1} w={"100%"}>
-              <Text p={1} w={"100%"} textAlign={"left"}>
+            <VStack ml={2} spacing={1} p={1} w={"100%"}>
+              <Text w={"100%"} textAlign={"left"}>
                 {mood} 
               </Text>
               <Slider colorScheme={"teal"} ml={2} mb={2} onChange={(value) => sliderChange(value)} value={moodRating}>

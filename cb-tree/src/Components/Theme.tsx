@@ -1,43 +1,48 @@
 import { extendTheme, ThemeComponentProps } from "@chakra-ui/react";
 import { mode, SystemStyleObject } from '@chakra-ui/theme-tools'
-import {} from '@chakra-ui/react'
+import UseThemeColors from "../Hooks/useThemeColors";
+
 
 const theme: SystemStyleObject = extendTheme({
   colors:{
     theme: {
-      100:"teal.400",
-      foreground: "white"
+      background:'teal.400',
+      backgroundDark: "black",
+      foreground: "white",
+      foregroundDark: "black",
     }
   },
   components: {
     Heading: {
-      baseStyle: {
-        color: "white"
-      }
+      baseStyle: (props: ThemeComponentProps) => ({
+        color: mode("theme.foreground","theme.foregroundDark")(props)
+      })
     },
     Button: {
       variants: {
-        "submit": {
+        "submit": (props: ThemeComponentProps) => ({
           minHeight: 10,
           w: "60%",
-          bg: "white",
+          bg: mode("theme.foreground","theme.foregroundDark")(props),
           rounded: "2xl",
-          alignSelf: "center"}
+          alignSelf: "center"})
       },
-      "solid": {
-        bg: 'white',
+      "loginSubmit": (props: ThemeComponentProps) => ({
+        bg: mode("theme.background","theme.backGroundDark")(props),
+      }),
+      "solid":(props: ThemeComponentProps) => ({
+        bg: mode("theme.foreground","theme.foregroundDark")(props),
         rounded: "3xl"
-      }
+      })
     }
     
   },
   styles: {
     global: (props: ThemeComponentProps) => ({
       body: {
-        
-        
         height: "100vh",
-        bg: mode('teal.400', "primary")(props)
+        bg: mode('teal.400', "black")(props)
+        
       }
     })
   }

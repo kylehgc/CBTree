@@ -1,22 +1,26 @@
-import { useForm, SubmitHandler } from "react-hook-form"
-import useThoughtRecord from '../Hooks/UseThoughtRecord'
+
+import useThoughtRecord, {ThoughtRecordState} from '../Hooks/UseThoughtRecord'
 
 import {
-  FormLabel,
   Textarea,
   Button,
-  Flex,
-  Heading,
   VStack,
 } from '@chakra-ui/react'
 import { useLocation } from "react-router-dom"
+import { useState } from "react"
+import UseThemeColors from '../Hooks/useThemeColors'
 
 
 
 
 const TextFieldQuestion: React.FC = () => {
-  const [label, onSubmit] = useThoughtRecord()
+  const {foregroundColor} = UseThemeColors()
+  const [fieldState, setFieldState] = useState<string>("")
+  const [label, onSubmit] = useThoughtRecord({answer: fieldState})
   
+  const onChange:  React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+    setFieldState(event.target.value)
+  }
   
 
   
@@ -39,8 +43,18 @@ const TextFieldQuestion: React.FC = () => {
         px={7} 
         pt={4} 
       >        
-        {/* <Heading mt={6} color="white"textAlign={"center"} fontSize={"3xl"}> {question} </Heading> */}
-        <Textarea placeholder={label} _placeholder={{color: 'blackAlpha.800', fontSize: "3xl"}}p={4} m={4} bg='theme.primary' h={'full'}  rounded={"xl"} size="lg"/>
+        <Textarea 
+          placeholder={label} 
+          onChange={onChange}
+          value={fieldState}
+          _placeholder={{color: 'blackAlpha.800', fontSize: "3xl"}}
+          p={4} 
+          m={4} 
+          bg={foregroundColor} 
+          h={'full'}  
+          rounded={"xl"} 
+          size="lg"
+        />
         <Button onClick={onSubmit} variant="submit">Submit</Button> 
       </VStack>
         

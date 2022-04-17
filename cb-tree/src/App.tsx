@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import {lazy, Suspense} from 'react'
-import Logo from './Components/Logo'
+import Nav from './Components/Nav'
+import { AuthProvider } from './Hooks/UseAuth'
 import {
-  ChakraProvider,
   Flex
 } from "@chakra-ui/react"
 
-import theme from './Components/Theme'
-import Login from './Components/Login'
+
+import Login from './Components/LoginForm'
 import Signup from './Components/Signup'
 
 
@@ -16,11 +16,10 @@ const MoodSlider = lazy(() => import('./Components/EmotionSlider'))
 const TextFieldQuestion = lazy(() => import('./Components/TextFieldQuestion'))
 const ThoughtQuestion = lazy(() => import ('./Components/ThoughtQuestion'))
 
-
 export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Flex height='70vh' overflow={{sm:'hidden', large:'show'}} flexDirection="column">
-      <Logo/>
+  <AuthProvider>
+    <Flex height='70vh' flexDirection="column">
+      <Nav/>
       <Suspense fallback={<div> loading... </div>}>
         <Router>
           <Routes>
@@ -28,12 +27,12 @@ export const App = () => (
             <Route path="/situationquestion" element={<TextFieldQuestion/>}/>
             <Route path="/mood" element={<MoodSlider />} />
             <Route path="/evidencefor" element={<TextFieldQuestion/>} />
-            <Route path="/evidenceAgainst" element={<TextFieldQuestion/>} />
+            <Route path="/evidenceagainst" element={<TextFieldQuestion key={"rerender"} />} />
             <Route path="/thoughts" element={<ThoughtQuestion/>} />
             <Route path="/signup" element={<Signup/>} />
           </Routes>
         </Router>
       </Suspense>
     </Flex>
-  </ChakraProvider>
+  </AuthProvider>
 )

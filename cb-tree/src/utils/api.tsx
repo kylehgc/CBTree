@@ -9,5 +9,5 @@ const endpoints: Endpoints = {
   signup: new URL(`${BASEURL}user`)
 }
 
-export const login = endpoints.login.href
-export const signup = endpoints.signup.href
+export const loginEndpoint = endpoints.login.href
+export const signupEndPoint = endpoints.signup.href

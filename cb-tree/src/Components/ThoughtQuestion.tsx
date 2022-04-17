@@ -8,12 +8,10 @@ import UseThoughtRecord from '../Hooks/UseThoughtRecord'
 const ThoughtQuestion = () => {
   const thoughtData = partialThoughtData.map(thought => ({...thought, value: thought.label}))
   const [thoughts, setThoughts] = useState<Mood[]>([])
-  const [label, onSubmit] = UseThoughtRecord()
   const [selected, SetSelected] = useState<string>("")
+  const [label, onSubmit] = UseThoughtRecord({moods:thoughts,hotThought:selected})
   const [doneThoughts, setDoneThoughts] = useState<Boolean>(false)
   
-
-
   const onSelect = (value: string) => {
     SetSelected(value)
   }

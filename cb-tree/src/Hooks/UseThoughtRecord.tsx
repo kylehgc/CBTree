@@ -1,7 +1,8 @@
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import { Mood } from "../Components/FeelingSlider"
 
-const rootUrl = "/thoughtrecord/"
+
 
 const question = [
   "/situationquestion" ,
@@ -25,18 +26,25 @@ const labels = {
   "/Submit": "something"
 } 
 
+export interface ThoughtRecordState {
+  moods?: Mood[],
+  hotThought?: string,
+  answer?: string
 
-const UseThoughtRecord= (): [string,() => void] => {
+}
+
+const UseThoughtRecord= (recordState: ThoughtRecordState): [string,() => void] => {
   const navigate = useNavigate()
   const pathName = useLocation().pathname as typeof question[number]
   console.log(pathName)
   const label = labels[pathName]
   console.log(label)
-
   
+  useEffect(() => {
+    window.localStorage.setItem(pathName, JSON.stringify(recordState))
+    console.log(pathName,  window.localStorage.getItem(pathName))
+  },[recordState, pathName])
   
-  
-
   const submitGenerator = () => {
     const NextLinkIndex = question.indexOf(pathName) + 1
     return () => navigate(question[NextLinkIndex])
@@ -45,9 +53,6 @@ const UseThoughtRecord= (): [string,() => void] => {
   
 
   
-  useEffect(() => {
-
-  },[])
 
   
   return [label, submitGenerator()]

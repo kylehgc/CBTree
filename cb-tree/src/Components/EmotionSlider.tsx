@@ -8,7 +8,7 @@ import FeelingSlider,{Mood} from './FeelingSlider'
 
 const EmotionSlider = () => {
   const [moods, setMoods] = useState<Mood[]>([])
-  const [label,onSubmit] = UseThoughtRecord()
+  const [label,onSubmit] = UseThoughtRecord({moods})
 
   
   return (

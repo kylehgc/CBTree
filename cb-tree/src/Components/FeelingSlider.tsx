@@ -4,6 +4,7 @@ import {Button,Box, FormLabel} from '@chakra-ui/react'
 import {useState } from 'react'
 
 import MoodEntry from './MoodEntry'
+import UseThemeColors from '../Hooks/useThemeColors'
 
 
 type Option = {
@@ -30,6 +31,7 @@ interface RecordProps {
 }
 
 const FeelingSlider: React.FC<RecordProps> = ({moods,setMoods,  selectOptions,label}: RecordProps) => {
+  const {backgroundColor, foregroundColor} = UseThemeColors()
   const [selectedMood, setSelectedMood] = useState<string>("")
   
 
@@ -67,7 +69,7 @@ const FeelingSlider: React.FC<RecordProps> = ({moods,setMoods,  selectOptions,la
   return (
     <>
       
-      <Box p={2} bg="white" mt={10} mx={10} >
+      <Box p={2} bg={foregroundColor} mt={10} mx={7} >
         <FormLabel mb={2} fontSize={14}> {label} </FormLabel>
         <CreatableSelect
           size='md'

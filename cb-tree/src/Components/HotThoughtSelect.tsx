@@ -1,5 +1,6 @@
 
-import {Box, Center, Heading} from '@chakra-ui/react'
+import {Center, Heading} from '@chakra-ui/react'
+import UseThemeColors from '../Hooks/useThemeColors'
 
 interface HotThoughtProps {
   thoughts: string[],
@@ -10,7 +11,7 @@ interface HotThoughtProps {
 
 
 const HotThoughtSelect: React.FC<HotThoughtProps> = ({thoughts, onSelect, selected }) => {
-  
+  const {foregroundColor, backgroundColor} = UseThemeColors()
   return (
     <>
       <Heading m={4} textAlign={"center"}> Choose the Hot Thought </Heading>
@@ -25,7 +26,7 @@ const HotThoughtSelect: React.FC<HotThoughtProps> = ({thoughts, onSelect, select
               fontSize={14} 
               minH={"20%"} 
               width={"90%"} 
-              bg={selected === thought ? "red.400" : 'theme.foreground'} 
+              bg={selected === thought ? "red.400" : foregroundColor} 
               onClick={()=> onSelect(thought)}>
               {thought}
             </Center>
