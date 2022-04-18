@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from models.user import User
 from jose import JWTError, jwt
-from routers.user import get_user
+
 from passlib.context import CryptContext
 
 deta = Deta()
@@ -63,13 +63,17 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
+        
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        print(payload)
         username: str = payload.get("sub")
+        print(username)
         if username is None:
             raise credentials_exception
         token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
+    from routers.user import get_user
     user = await get_user(username=token_data.username)
     if user is None:
         raise credentials_exception
@@ -82,13 +86,8 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
     return current_user
 
 
-# def get_user(username: str):
-#     if username in db:
-#         user_dict = db[username]
-#         return UserInDB(**user_dict)
-
-
 async def authenticate_user(username: str, password: str):
+    from routers.user import get_user
     user = await get_user(username)
     if not user:
         return False
@@ -100,6 +99,7 @@ async def authenticate_user(username: str, password: str):
 @router.post("/token", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = await authenticate_user(form_data.username, form_data.password)
+    print(user)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -107,9 +107,8 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    print(user)
     access_token = create_access_token(
-        data={"sub": user["email"], "key": user["key"]},
+        data={"sub": user["userame"], "key": user["key"]},
         expires_delta=access_token_expires,
     )
     return {"access_token": access_token, "token_type": "bearer"}
@@ -124,7 +123,3 @@ async def read_items(token: str = Depends(oauth2_scheme)):
 async def read_own_items(current_user: User = Depends(get_current_active_user)):
     return [{"item_id": "Foo", "owner": current_user.username}]
 
-
-@router.get("/users/me")
-async def read_users_me(current_user: User = Depends(get_current_user)):
-    return current_user
