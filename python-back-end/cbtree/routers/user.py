@@ -15,17 +15,17 @@ class New_User(BaseModel):
   firstName: Optional[str] = None
   lastName: Optional[str] = None
 
-
 router = APIRouter()
+
+@router.get
 async def getUserByEmail(email: str):  
   response = db.fetch({"email": email})
-  print(response)
   return response
   
 
 
 
-@router.post("/user/")
+@router.post("/user/new")
 async def new_user(new_user: New_User):
   user_by_email = await getUserByEmail(new_user.dict()['email'])
   if user_by_email.count > 0:

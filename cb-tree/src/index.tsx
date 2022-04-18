@@ -10,9 +10,7 @@ import * as serviceWorker from "./serviceWorker"
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById("root"),
 )

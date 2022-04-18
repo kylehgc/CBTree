@@ -8,10 +8,12 @@ import {
   useToast,
 } from '@chakra-ui/react';
 
+import useAuth, {Token} from '../Hooks/useAuth'
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { loginEndpoint } from '../utils/api';
 import UserPassFormElements from './UserPassFormElements'
 import UseThemeColors from '../Hooks/useThemeColors';
-import useAuth from '../Hooks/UseAuth'
+
 
 interface FormValues {
   username: string,
@@ -19,12 +21,41 @@ interface FormValues {
 }
 
 const Login: React.FC = () => {
+  const toast = useToast()
+  const {login} = useAuth()
   const {foregroundColor, backgroundColor} = UseThemeColors()
   const {register, handleSubmit, formState: {errors , isSubmitting}} = useForm<FormValues>()
-  const {login} = useAuth()
+  
 
   const onSubmit: SubmitHandler<FormValues> = async(value) => {
-    await login(value)
+
+    try{
+      const response = await fetch(loginEndpoint, {
+        body: new URLSearchParams({...value}),
+        method: "POST",
+        mode: "cors",
+      })
+      if(response.status === 200) {
+        const token: Token = await response.json()
+        login(token)
+      
+        toast({
+          status: 'success',
+          description: "Login successful.  Redirecting..."
+        })
+      } else {
+        throw new Error("Incorrect Username or Password")
+      }
+    } catch (error) {
+      if(error instanceof Error) {   
+        toast({
+          status: 'error',
+          description: error.message
+        })
+    
+
+      }
+    }
   }
 
   return (

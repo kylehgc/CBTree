@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import {lazy, Suspense} from 'react'
 import Nav from './Components/Nav'
-import { AuthProvider } from './Hooks/UseAuth'
+import { ReactQueryDevtools} from 'react-query/devtools'
 import {
   Flex
 } from "@chakra-ui/react"
@@ -9,15 +9,14 @@ import {
 
 import Login from './Components/LoginForm'
 import Signup from './Components/Signup'
-
-
+import Providers from './Components/Providers'
 
 const MoodSlider = lazy(() => import('./Components/EmotionSlider'))
 const TextFieldQuestion = lazy(() => import('./Components/TextFieldQuestion'))
 const ThoughtQuestion = lazy(() => import ('./Components/ThoughtQuestion'))
 
 export const App = () => (
-  <AuthProvider>
+  <Providers>
     <Flex height='70vh' flexDirection="column">
       <Nav/>
       <Suspense fallback={<div> loading... </div>}>
@@ -32,7 +31,9 @@ export const App = () => (
             <Route path="/signup" element={<Signup/>} />
           </Routes>
         </Router>
+        <ReactQueryDevtools initialIsOpen />
       </Suspense>
     </Flex>
-  </AuthProvider>
+  </Providers>
+  
 )

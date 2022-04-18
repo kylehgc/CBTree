@@ -11,7 +11,7 @@ export default function Nav() {
 
   return (
     <Center flexDir={{base: "row"}}  m={2}> 
-      <Image w={{base:"50%", lg: "25%"}}  pt={4} ml={5} src={logo}/>
+      <Image w={{base:"50%", lg: "25%"}}  pt={4} ml={4} src={logo}/>
       <HStack 
         ml={2}
         mr={{lg:4}}
