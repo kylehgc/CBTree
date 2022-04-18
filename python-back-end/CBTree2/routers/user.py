@@ -62,7 +62,10 @@ async def new_user(new_user: New_User):
     new_user_dict = new_user.dict()
     user_key = await get_user_key(new_user_dict["username"])
     if user_key:
-        return {"key": user_key, "message": "no good bro"}
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="User Already Exists",
+            headers={"WWW-Authenticate": "Bearer"})
     else:
         hashed_password = pwd_context.hash(new_user_dict["password"])
         user = db.put({**new_user_dict, "password": hashed_password})

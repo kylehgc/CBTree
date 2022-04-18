@@ -14,14 +14,13 @@ const HotThoughtSelect: React.FC<HotThoughtProps> = ({thoughts, onSelect, select
   const {foregroundColor, backgroundColor} = UseThemeColors()
   return (
     <>
-      <Heading m={4} textAlign={"center"}> Choose the Hot Thought </Heading>
-      <Center p={4} flexDirection={"column"} mx={4} my={4} minHeight={"80%"} justifyContent={"space-around"}>
+      <Heading mt={2} mx={2} textAlign={"center"}> Choose the Hot Thought </Heading>
+      <Center p={4} flexDirection={"column"} mx={4} my={4} w={"100%"} minHeight={"80%"} justifyContent={"space-around"}>
       
         {thoughts.map(thought => {
           return (  
         
             <Center 
-              p={4}
               rounded={"2xl"} 
               fontSize={14} 
               minH={"20%"} 

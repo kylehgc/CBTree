@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import partialThoughtData from './../Data/thoughts.json'
 import FeelingSlider, {Mood} from './FeelingSlider'
-import {Button, ModalCloseButton, useToast} from '@chakra-ui/react'
+import {Button, ModalCloseButton, useToast, VStack} from '@chakra-ui/react'
 import HotThoughtSelect from './HotThoughtSelect'
 import UseThoughtRecord from '../Hooks/UseThoughtRecord'
 
@@ -25,6 +25,7 @@ const ThoughtQuestion = () => {
   const thoughtIDs = thoughts.map(thought => thought.mood)
   return (
     <>
+
       { !doneThoughts 
         ?
         <FeelingSlider 

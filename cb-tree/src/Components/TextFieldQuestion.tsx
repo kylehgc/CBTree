@@ -34,24 +34,25 @@ const TextFieldQuestion: React.FC = () => {
         rounded={'3xl'} 
         w={"full"} minH={"100%"} 
         flexDirection='column' 
-        mb={'10'}
+        
         spacing={8}
         justifyContent='center' 
-        mx={'auto'} 
-        pb={1} 
-        mt={10} 
-        px={7} 
-        pt={4} 
+        mx={2} 
+        pb={6} 
+        px={5} 
+        pt={2} 
       >        
         <Textarea 
-          placeholder={label} 
+          placeholder={"We're testing right now"} 
           onChange={onChange}
           value={fieldState}
           _placeholder={{color: 'blackAlpha.800', fontSize: "3xl"}}
           p={4} 
-          m={4} 
+          m={2}
+           
           bg={foregroundColor} 
-          h={'full'}  
+          h={'85%'}  
+          w={"full"}
           rounded={"xl"} 
           size="lg"
         />

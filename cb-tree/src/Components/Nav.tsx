@@ -1,21 +1,42 @@
 import logo from '../media/logo.png'
-import {Avatar, Button, Center,Text, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, useColorMode, useColorModeValue, HStack, IconButton} from '@chakra-ui/react'
+import {Avatar, Link, Button, Center,Text, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, useColorMode, useColorModeValue, HStack, IconButton} from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import UseThemeColors from '../Hooks/useThemeColors';
+import useAuth from '../Hooks/useAuth'
+import { useEffect, useState } from 'react';
+import {Link as RouterLink, useNavigate} from 'react-router-dom'
 
-   
+
 
 export default function Nav() {
   const {backgroundColor, foregroundColor} = UseThemeColors()
   const {colorMode, toggleColorMode } = useColorMode();
+  const {currentUser, logout} = useAuth()
+  const [displayName, setDisplayName] = useState<string | null>(null)
+  const navigate = useNavigate() 
 
+  useEffect(() => {
+    if(currentUser?.username) {
+      if(currentUser?.firstName){
+        setDisplayName(currentUser.firstName)
+      } else {
+        setDisplayName(currentUser.username)
+      }
+    } else {
+      setDisplayName(null)
+    }
+  },[currentUser?.firstName, currentUser?.username])
+  const handleLogout = () => {
+    logout()
+    navigate("/")
+  }
   return (
     <Center flexDir={{base: "row"}}  m={2}> 
-      <Image w={{base:"50%", lg: "25%"}}  pt={4} ml={4} src={logo}/>
+      <Image w={{base:"50%", lg: "25%"}}  p={2} pt={4} ml={4} src={logo}/>
       <HStack 
-        ml={2}
+       
         mr={{lg:4}}
-        spacing={{base:2, lg: 4}} 
+        spacing={{base:6, lg: 4}} 
         justifyContent={{base: "center", lg:"end"}}
         bg={backgroundColor} 
         h={"100%"} 
@@ -28,43 +49,50 @@ export default function Nav() {
           aria-label="Light and dark Switch"
           color={foregroundColor}
           bg={backgroundColor}
+          size="lg"
           _hover={{bg: backgroundColor}}
           _active={{bg: backgroundColor}}
-          icon={colorMode === 'light' ? <MoonIcon  /> : <SunIcon />}
+          icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           onClick={toggleColorMode}/>
-        <Menu>
-          <MenuButton
-            as={Button}
-            rounded={'full'}
-            variant={'link'}
-            cursor={'pointer'}
-            minW={0}>
-            <Text
-              mr={1}
-              size={'sm'}
-              color={useColorModeValue("theme.foreground", "theme.foregroundDark")}
-            >
-                 UserName 
-            </Text>
-          </MenuButton>
-          <MenuList alignItems={'center'} zIndex={"overlay"} >
-            <br />
-            <Center>
-              <Avatar
-                size={'2xl'}
-                src={'https://avatars.dicebear.com/api/male/username.svg'}
+        {displayName ? 
+          <Menu>
+            <MenuButton
+              maxW={"10%"}
+              as={Button}
+              rounded={'full'}
+              variant={'link'}
+              cursor={'pointer'}
+              minW={0}>
+              <Avatar 
+                name={displayName}
+                size="md"
+                color={backgroundColor}
+                bg={foregroundColor}
               />
-            </Center>
-            <br />
-            <Center>
-              <p>Username</p>
-            </Center>
-            <br />
-            <MenuDivider />
-            <MenuItem>New Thought Record</MenuItem>
-            <MenuItem>Logout</MenuItem>
-          </MenuList>
-        </Menu>
+            </MenuButton>
+            <MenuList alignItems={'center'} zIndex={"overlay"} >
+              <br />
+              <Center>
+                <Avatar
+                  size={'2xl'}
+                  bg={backgroundColor}
+                  color={foregroundColor}
+                  name={displayName}
+                />
+              </Center>
+              <br />
+              <Center>
+                <p>{displayName}</p>
+              </Center>
+              <br />
+              <MenuDivider />
+              <MenuItem>New Thought Record</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </MenuList>
+          </Menu> : 
+          <Link fontSize={15} color={foregroundColor} to="/" as={RouterLink}> 
+            Login 
+          </Link>}
 
       </HStack>
     </Center>
