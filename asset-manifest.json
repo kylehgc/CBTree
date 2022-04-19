@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/CBTree/static/js/main.4abb6f9f.js",
+    "main.js": "/CBTree/static/js/main.b0c7d6da.js",
     "static/js/31.c3797f07.chunk.js": "/CBTree/static/js/31.c3797f07.chunk.js",
     "static/js/870.311e2062.chunk.js": "/CBTree/static/js/870.311e2062.chunk.js",
     "static/js/982.52af1162.chunk.js": "/CBTree/static/js/982.52af1162.chunk.js",
@@ -11,7 +11,7 @@
     "static/js/901.9946477c.chunk.js": "/CBTree/static/js/901.9946477c.chunk.js",
     "static/media/logo.png": "/CBTree/static/media/logo.6a908c0765dff80fec6b.png",
     "index.html": "/CBTree/index.html",
-    "main.4abb6f9f.js.map": "/CBTree/static/js/main.4abb6f9f.js.map",
+    "main.b0c7d6da.js.map": "/CBTree/static/js/main.b0c7d6da.js.map",
     "31.c3797f07.chunk.js.map": "/CBTree/static/js/31.c3797f07.chunk.js.map",
     "870.311e2062.chunk.js.map": "/CBTree/static/js/870.311e2062.chunk.js.map",
     "982.52af1162.chunk.js.map": "/CBTree/static/js/982.52af1162.chunk.js.map",
@@ -22,6 +22,6 @@
     "901.9946477c.chunk.js.map": "/CBTree/static/js/901.9946477c.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.4abb6f9f.js"
+    "static/js/main.b0c7d6da.js"
   ]
 }
