@@ -32,7 +32,7 @@ export default function Nav() {
   }
   return (
     <Center flexDir={{base: "row"}}  m={2}> 
-      <Image w={{base:"50%", lg: "25%"}}  p={2} pt={4} ml={4} src={logo}/>
+      <Image w={{base:"50%", lg: "25%"}}  p={2} pt={4} ml={0} src={logo}/>
       <HStack 
        
         mr={{lg:4}}
@@ -90,7 +90,7 @@ export default function Nav() {
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </MenuList>
           </Menu> : 
-          <Link fontSize={15} color={foregroundColor} to="/" as={RouterLink}> 
+          <Link fontSize={15} color={foregroundColor} to={`/`} as={RouterLink}> 
             Login 
           </Link>}
 

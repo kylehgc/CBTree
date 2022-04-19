@@ -1,4 +1,4 @@
-import { Skeleton, Flex, VStack, Box, Button, Center, SkeletonText } from "@chakra-ui/react"
+import { Skeleton, Flex, SkeletonText } from "@chakra-ui/react"
 
 const Loading = () => {
   return (

@@ -4,7 +4,6 @@ import Nav from './Components/Nav'
 import { ReactQueryDevtools} from 'react-query/devtools'
 import {
   Container,
-  Flex
 } from "@chakra-ui/react"
 
 
@@ -12,18 +11,20 @@ import {
 
 import Providers from './Components/Providers'
 import Loading from './Components/Loading'
+import BalancedThought from './Components/BalancedThought'
 
 const Signup = lazy(() => import('./Components/Signup'))
 const Login = lazy(() => import('./Components/LoginForm'))
-const MoodSlider = lazy(() => import('./Components/EmotionSlider'))
+const MoodSlider = lazy(() => import('./Components/FeelingQuestion'))
 const TextFieldQuestion = lazy(() => import('./Components/TextFieldQuestion'))
 const ThoughtQuestion = lazy(() => import ('./Components/ThoughtQuestion'))
+console.log(process.env.PUBLIC_URL)
 
 export const App = () => (
   
   <Providers>
-    <Router>
-      <Container p={2} centerContent height='87vh'>
+    <Router basename={process.env.PUBLIC_URL}>
+      <Container p={2} centerContent height='80vh' width="100%">
         <Nav/>
         <Suspense fallback={<Loading/>}>
           <Routes>
@@ -35,6 +36,7 @@ export const App = () => (
             <Route path="/evidenceagainst" element={<TextFieldQuestion key={"rerender"} />} />
             <Route path="/thoughts" element={<ThoughtQuestion/>} />
             <Route path="/signup" element={<Signup/>} />
+            <Route path="/balanced" element={<BalancedThought/>} />
           </Routes>
         </Suspense>
       </Container>

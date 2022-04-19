@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { Mood } from "../Components/FeelingSlider"
+import { Mood } from "../Components/types"
 
 
 

@@ -9,22 +9,18 @@ import {
 import { useLocation } from "react-router-dom"
 import { useState } from "react"
 import UseThemeColors from '../Hooks/useThemeColors'
-
-
-
+interface Props {
+  label?: string,
+  onSubmit?: () => void
+}
 
 const TextFieldQuestion: React.FC = () => {
   const {foregroundColor} = UseThemeColors()
   const [fieldState, setFieldState] = useState<string>("")
-  const [label, onSubmit] = useThoughtRecord({answer: fieldState})
-  
+  const [label, onSubmit] = useThoughtRecord({answer: fieldState})  
   const onChange:  React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     setFieldState(event.target.value)
   }
-  
-
-  
-
   return (
     
     <>
@@ -51,7 +47,7 @@ const TextFieldQuestion: React.FC = () => {
           m={2}
            
           bg={foregroundColor} 
-          h={'85%'}  
+          h={'80%'}  
           w={"full"}
           rounded={"xl"} 
           size="lg"

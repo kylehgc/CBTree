@@ -19,6 +19,9 @@ const theme: SystemStyleObject = extendTheme({
       })
     },
     Button: {
+      baseStyle: {
+        rounded: "2xl"
+      },
       variants: {
         "submit": (props: ThemeComponentProps) => ({
           minHeight: 10,
