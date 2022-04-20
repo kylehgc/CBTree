@@ -3,12 +3,13 @@ from os import getenv
 from deta import Deta
 from datetime import datetime, timedelta
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from models.user import User
 from jose import JWTError, jwt
 
 from passlib.context import CryptContext
+date = datetime.now()
 
 deta = Deta()
 db = deta.Base("monkey")
@@ -36,17 +37,27 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     return encoded_jwt
 
 
+async def get_user(username: EmailStr):
+    user = db.fetch({"username": username})
+    if user.count > 0:
+        return user.items[0]
+    return False
+
 class Token(BaseModel):
     access_token: str
     token_type: str
 
 
 class TokenData(BaseModel):
-    username: Optional[str] = None
+    key: Optional[str] = None
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
+credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
 
 class UserInDB(User):
     password: str
@@ -55,26 +66,20 @@ class UserInDB(User):
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-
-async def get_current_user(token: str = Depends(oauth2_scheme)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+def get_user_key(token: str = Depends(oauth2_scheme)):
     try:
-        
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        print(payload)
-        username: str = payload.get("sub")
-        print(username)
-        if username is None:
+        key: str = payload.get("key")
+        if key is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
+        token_data = TokenData(key=key)
     except JWTError:
         raise credentials_exception
-    from routers.user import get_user
-    user = await get_user(username=token_data.username)
+    return token_data.key
+
+async def get_current_user(token: str = Depends(oauth2_scheme)):
+    key = get_user_key(token)
+    user: str | None = db.get(key)
     if user is None:
         raise credentials_exception
     return user
@@ -87,7 +92,6 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 
 
 async def authenticate_user(username: str, password: str):
-    from routers.user import get_user
     user = await get_user(username)
     if not user:
         return False
@@ -96,7 +100,7 @@ async def authenticate_user(username: str, password: str):
     return user
 
 
-@router.post("/token", response_model=Token)
+@router.post("/auth/token", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = await authenticate_user(form_data.username, form_data.password)
     print(user)
@@ -113,13 +117,4 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
-
-@router.get("/items/")
-async def read_items(token: str = Depends(oauth2_scheme)):
-    return {"token": token}
-
-
-@router.get("/users/me/items/")
-async def read_own_items(current_user: User = Depends(get_current_active_user)):
-    return [{"item_id": "Foo", "owner": current_user.username}]
 

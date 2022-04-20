@@ -1,8 +1,10 @@
-from typing import Optional
-from pydantic import BaseModel, NameEmail
-
+from typing import Optional, List
+from pydantic import BaseModel, EmailStr, NameEmail
 
 class User(BaseModel):
-    email: Optional[NameEmail] = None
-    full_name: Optional[str] = None
-    disabled: Optional[bool] = None
+    username: EmailStr
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    password: str
+    active_thought_record: Optional[str] = None
+    thoughtRecords = []
