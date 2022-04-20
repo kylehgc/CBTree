@@ -6,5 +6,5 @@ class User(BaseModel):
     firstName: Optional[str] = None
     lastName: Optional[str] = None
     password: str
-    active_thought_record: Optional[str] = None
+    activeThoughtRecord: Optional[str] = None
     thoughtRecords = []

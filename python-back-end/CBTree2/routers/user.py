@@ -20,6 +20,8 @@ class User_Data(BaseModel):
     username: EmailStr
     firstName: Optional[str] = None
     lastName: Optional[str] = None
+    activeThoughtRecord: Optional[str] = None
+    thoughtRecords = []
 
 class New_User_Data(User_Data):
     password: str
@@ -34,12 +36,15 @@ async def get_user(username: EmailStr):
         return user.items[0]
     return False
 
-@router.get("/users/me", response_model=User_Data)
+@router.get("/user/", response_model=User_Data)
 async def read_users_me(current_user: User = Depends(get_current_user)):
+    print(current_user)
     return_data: User_Data = {
         "username": current_user["username"],
         "firstName": current_user["firstName"],
         "lastName": current_user["lastName"],
+        "thoughtRecords": current_user["thoughtRecords"],
+        "activeThoughtRecord": current_user["activeThoughtRecord"]
     }
     return return_data
     

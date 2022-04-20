@@ -1,4 +1,3 @@
-from re import S
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import Optional, List
 from pydantic import BaseModel, EmailStr
@@ -76,7 +75,7 @@ async def new_thought_record(user_key: str = Depends(get_user_key)):
     print(thought_record["key"])
     print(user_key)
     db.update({
-         "active_thought_record":thought_record["key"], 
+         "activeThoughtRecord":thought_record["key"], 
          "thoughtRecords": db.util.append(thought_record["key"])}
      , user_key)
     return thought_record
