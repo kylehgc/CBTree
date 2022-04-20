@@ -1,6 +1,5 @@
 import { extendTheme, ThemeComponentProps } from "@chakra-ui/react";
 import { mode, SystemStyleObject } from '@chakra-ui/theme-tools'
-import UseThemeColors from "../Hooks/useThemeColors";
 
 
 const theme: SystemStyleObject = extendTheme({

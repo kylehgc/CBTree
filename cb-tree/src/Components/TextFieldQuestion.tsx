@@ -1,23 +1,20 @@
 
-import useThoughtRecord, {ThoughtRecordState} from '../Hooks/UseThoughtRecord'
+import useThoughtRecord from '../Hooks/UseThoughtRecord'
 
 import {
   Textarea,
   Button,
   VStack,
 } from '@chakra-ui/react'
-import { useLocation } from "react-router-dom"
+
 import { useState } from "react"
 import UseThemeColors from '../Hooks/useThemeColors'
-interface Props {
-  label?: string,
-  onSubmit?: () => void
-}
+
 
 const TextFieldQuestion: React.FC = () => {
   const {foregroundColor} = UseThemeColors()
   const [fieldState, setFieldState] = useState<string>("")
-  const [label, onSubmit] = useThoughtRecord({answer: fieldState})  
+  const [label, onSubmit] = useThoughtRecord()  
   const onChange:  React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     setFieldState(event.target.value)
   }
@@ -39,7 +36,7 @@ const TextFieldQuestion: React.FC = () => {
         pt={2} 
       >        
         <Textarea 
-          placeholder={"We're testing right now"} 
+          placeholder={label} 
           onChange={onChange}
           value={fieldState}
           _placeholder={{color: 'blackAlpha.800', fontSize: "3xl"}}

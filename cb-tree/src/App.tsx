@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import {lazy, Suspense} from 'react'
 import Nav from './Components/Nav'
-import { ReactQueryDevtools} from 'react-query/devtools'
+
 import {
   Container,
 } from "@chakra-ui/react"
@@ -18,7 +18,7 @@ const Login = lazy(() => import('./Components/LoginForm'))
 const MoodSlider = lazy(() => import('./Components/FeelingQuestion'))
 const TextFieldQuestion = lazy(() => import('./Components/TextFieldQuestion'))
 const ThoughtQuestion = lazy(() => import ('./Components/ThoughtQuestion'))
-console.log(process.env.PUBLIC_URL)
+
 
 export const App = () => (
   

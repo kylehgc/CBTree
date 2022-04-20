@@ -1,5 +1,4 @@
 import {
-  Flex,
   Box,
   Stack,
   Link,
@@ -30,7 +29,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate()
   useEffect(() => {
     if(currentUser) {
-      navigate("/situationQuestion")
+      navigate("/situationquestion")
     }
   }, [currentUser,navigate])
 

@@ -10,7 +10,7 @@ const ThoughtQuestion = () => {
   const thoughtData = partialThoughtData.map(thought => ({...thought, value: thought.label}))
   const [thoughts, setThoughts] = useState<Mood[]>([])
   const [selected, SetSelected] = useState<string>("")
-  const [label, onSubmit] = UseThoughtRecord({moods:thoughts,hotThought:selected})
+  const [label, onSubmit] = UseThoughtRecord()
   const [doneThoughts, setDoneThoughts] = useState<Boolean>(false)
   
   const onSelect = (value: string) => {

@@ -10,7 +10,7 @@ interface Props {
 }
 const FeelingQuestion: React.FC<Props> = ({defaultMoods = []}) => {
   const [moods, setMoods] = useState<Mood[]>(defaultMoods)
-  const [label,onSubmit] = UseThoughtRecord({moods})
+  const [label,onSubmit] = UseThoughtRecord()
 
   return (
     <>

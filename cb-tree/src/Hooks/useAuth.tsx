@@ -1,7 +1,6 @@
 
 import { useToast } from "@chakra-ui/react"
-import React,{ createContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { createContext, useEffect, useState,useContext } from "react"
 import { getUserEndPoint } from "../utils/api"
 
 export interface Token {
@@ -27,7 +26,7 @@ const isAnToken = (obj: any): obj is Token => {
   return obj.token_type === 'bearer' && 'access_token' in obj
 }
 
-const authContext = React.createContext({} as AuthContext)
+const authContext = createContext({} as AuthContext)
 
 const useAuth = () => {
   
@@ -35,6 +34,16 @@ const useAuth = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const toast = useToast()
 
+  const logout = () => {
+    localStorage.removeItem("userToken")
+    setCurrentUser(null)
+    toast({
+      status: "success",
+      description: "Logged out..."
+    })
+    
+    
+  }
   const getUser = async (token: Token) => {
     const response = await fetch(getUserEndPoint, {
       headers: {
@@ -64,6 +73,7 @@ const useAuth = () => {
         logout()
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]) 
 
   
@@ -74,16 +84,6 @@ const useAuth = () => {
     getUser(token)
   }
   
-  const logout = () => {
-    localStorage.removeItem("userToken")
-    setCurrentUser(null)
-    toast({
-      status: "success",
-      description: "Logged out..."
-    })
-    
-    
-  }
   
   
   return {
@@ -100,7 +100,7 @@ export const AuthProvider:React.FC = ({ children }) => {
 }
 
 export default function AuthConsumer() {
-  return React.useContext(authContext);
+  return useContext(authContext);
 }
 
 

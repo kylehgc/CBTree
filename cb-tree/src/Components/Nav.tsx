@@ -1,5 +1,5 @@
 import logo from '../media/logo.png'
-import {Avatar, Link, Button, Center,Text, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, useColorMode, useColorModeValue, HStack, IconButton} from '@chakra-ui/react'
+import {Avatar, Link, Button, Center,Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, useColorMode,  HStack, IconButton} from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import UseThemeColors from '../Hooks/useThemeColors';
 import useAuth from '../Hooks/useAuth'
@@ -14,7 +14,7 @@ export default function Nav() {
   const {currentUser, logout} = useAuth()
   const [displayName, setDisplayName] = useState<string | null>(null)
   const navigate = useNavigate() 
-
+  console.log(currentUser)
   useEffect(() => {
     if(currentUser?.username) {
       if(currentUser?.firstName){

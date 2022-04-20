@@ -5,8 +5,8 @@ type Endpoints = {
 }
 
 const endpoints: Endpoints = {
-  getUser: new URL(`${BASEURL}users/me`),
-  login: new URL(`${BASEURL}token`),
+  getUser: new URL(`${BASEURL}user`),
+  login: new URL(`${BASEURL}auth/token`),
   signup: new URL(`${BASEURL}user`)
 }
 export const getUserEndPoint = endpoints.getUser.href
