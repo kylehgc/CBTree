@@ -5,7 +5,7 @@ import {
 import {CloseIcon} from '@chakra-ui/icons'
 import { Mood } from "./types"
 import { SetStateAction } from "react"
-
+import React from 'react' 
 interface ButtonProps {
   deleteHandler: React.MouseEventHandler<HTMLButtonElement>
 }

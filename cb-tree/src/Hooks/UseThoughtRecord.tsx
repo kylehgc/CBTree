@@ -1,22 +1,16 @@
+import { useToast } from "@chakra-ui/react"
 import { useState } from "react"
-import { useForm, UseFormRegister } from "react-hook-form"
 import { useLocation, useNavigate } from "react-router-dom"
 import { Mood } from "../Components/types"
+import {useThoughtRecordApi} from './useThoughtRecordApi'
 
-
-const questionTypes =  [
-  "/situationquestion" ,
-  "/mood",
-  "/thoughts",
-  "/evidencefor",
-  "/evidenceagainst",
-  "/alternativethought",
-  "/rerateMoods",
-  "/Submit"
-] as const
+interface UseThoughtRecordReturn {
+  label: string,
+  onSubmit: (data: FormValues) => void, 
+  isLoading: boolean}
 
 const question = [
-  "/situationquestion" ,
+  "/situationquestion",
   "/mood",
   "/thoughts",
   "/evidencefor",
@@ -26,7 +20,9 @@ const question = [
   "/Submit"
 ] as const
 
-const data = {
+export type QuestionType = typeof question[number]
+
+const thoughtRecordData = {
   "/situationquestion": {label:"What is the Situation?", type: "Text"},
   "/mood": {label:"Add any emotions you felt and rate them", type: "Mood"},
   "/thoughts": {label:"List any thoughts and rate your Belief", type: "Thoughts"},
@@ -37,24 +33,13 @@ const data = {
   "/Submit": {label:"something", type:"Submit"}
 } 
 
-interface Moods {
-  Moods: Mood[]
-}
 interface Thoughts {
   thoughts: Mood[],
   hotThought: string
 }
-
-interface TextFieldValues {
-  value: string
-}
-
-
-type formValues = TextFieldValues | Moods | Thoughts  
-
-
+export type FormValues = String | Mood[] | Thoughts  
 export interface ThoughtRecord {
-  timeCreated?: number,
+  timeCreated: number,
   moods?: Mood[],
   thoughts?: Thoughts 
   answer?: string,
@@ -63,45 +48,40 @@ export interface ThoughtRecord {
   evidenceFor?: string,
   evidenceAgainst?: string
   alternativeThoughts?: Mood[]
-} 
-const getRegisterValues = (register: UseFormRegister<formValues>, pathName: typeof question[number]) => {
-  const type = data[pathName].type
-  if(type === "text") {
-    return [register(
-      "value", {required: true, minLength:{value: 1, message: "Too short"}} )]
-  }
-  if(type === "Mood") {
-    return [register("Moods")]
-  }
-  if(type === "thoughts") {
-    const register_thoughts = register("thoughts")
-    const register_hotThought = register("hotThought")
-    return [register_thoughts, register_hotThought] as const
-  }
-  if(type === "Submit") {
-    return [register("value")]
-  }
-  throw Error
-}
-const isQuestion = (pathname: any): pathname is typeof question[number] => {
+}  
+const isQuestion = (pathname: any): pathname is QuestionType => {
   return(question.includes(pathname))
 }
-
-const UseThoughtRecord = (): [string,() => void] | never => {
+const UseThoughtRecord = (): UseThoughtRecordReturn | never => {
   const [isLoading, setIsLoading] = useState(false)
+  const toast = useToast()
   const navigate = useNavigate()
-  const pathName = useLocation().pathname
-  const {register, handleSubmit, formState: {isSubmitting}} = useForm<formValues>()
-
-  if(!isQuestion(pathName)) {
+  const {pathname} = useLocation()
+  if(!isQuestion(pathname)) {
     throw Error
   }
-  const label = data[pathName].label
+  const {updateThoughtRecord, thoughtRecord} = useThoughtRecordApi(pathname)
   const submitGenerator = () => {
-    const NextLinkIndex = question.indexOf(pathName) + 1
-    return () => navigate(question[NextLinkIndex])
+    const NextLinkIndex = question.indexOf(pathname) + 1
+    return async (data: FormValues) => {
+      setIsLoading(true)
+      try {
+        await updateThoughtRecord(data)
+        setIsLoading(false)
+        navigate(question[NextLinkIndex])
+      } catch {
+        toast({
+          status: 'error', 
+          description: 'problem with update'
+        })
+      }
+    }
   }
-  return [label, submitGenerator()]
+  const label = thoughtRecordData[pathname].label
+  return {
+    label: label, 
+    onSubmit: submitGenerator(), 
+    isLoading: isLoading
+  }
 }
-
 export default UseThoughtRecord

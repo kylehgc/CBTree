@@ -1,7 +1,8 @@
 
 import { useToast } from "@chakra-ui/react"
 import { createContext, useEffect, useState,useContext } from "react"
-import { getUserEndPoint } from "../utils/api"
+import { getAuthHeader, getUserEndPoint, thoughtRecordEndPoint } from "../utils/api"
+
 
 export interface Token {
   access_token: string,
@@ -10,7 +11,9 @@ export interface Token {
 
 
 
-interface User {
+export interface User {
+  activeThoughtRecord: string | null,
+  thoughtRecords: string[],
   username: string,
   firstName?: string
   lastName?: string
@@ -19,10 +22,11 @@ interface User {
 interface AuthContext {
   login: (token: Token) => void
   logout: () => void,
-  currentUser: User | null
+  currentUser: User | null,
+  getUser: (token: Token) => void,
 }
 
-const isAnToken = (obj: any): obj is Token => {
+export const isAnToken = (obj: any): obj is Token => {
   return obj.token_type === 'bearer' && 'access_token' in obj
 }
 
@@ -33,7 +37,7 @@ const useAuth = () => {
   const [token, setToken] = useState<Token>()
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const toast = useToast()
-
+  
   const logout = () => {
     localStorage.removeItem("userToken")
     setCurrentUser(null)
@@ -58,47 +62,44 @@ const useAuth = () => {
         logout()
       }
     }
-    
-
-    
   }
-  useEffect (() => {
-    const storageTokenString = localStorage.getItem("userToken")
-    if(storageTokenString !== null) {
-      const storageToken = JSON.parse(storageTokenString)
-      if(isAnToken(storageToken)) {
-       
-        getUser(storageToken)
-      } else {
-        logout()
-      }
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]) 
-
+  
   
   const login = async (token:Token) => {
-    
     setToken(token)
     localStorage.setItem("userToken", JSON.stringify(token))
-    getUser(token)
+    await getUser(token)
   }
+
+  const storageTokenString = localStorage.getItem("userToken")
+  if(storageTokenString !== null) {
+    const storageToken = JSON.parse(storageTokenString)
+    if(isAnToken(storageToken)) {
+      if(!token) {
+        setToken(storageToken)
+      }
+      if(!currentUser) {
+        getUser(storageToken)
+      }
+    }}
   
+   
+
   
   
   return {
     currentUser,
     login,
-    logout
+    logout,
+    getUser
   }
 }
 
 export const AuthProvider:React.FC = ({ children }) => {
   const auth = useAuth();
-  
+  console.log(auth)
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
-
 export default function AuthConsumer() {
   return useContext(authContext);
 }

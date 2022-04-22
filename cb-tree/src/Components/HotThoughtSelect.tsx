@@ -17,6 +17,7 @@ const HotThoughtSelect: React.FC<HotThoughtProps> = ({thoughts, onSelect, select
         {thoughts.map(thought => {
           return (  
             <Center 
+              key={thought}
               p={2}
               rounded={"2xl"} 
               fontSize={14}

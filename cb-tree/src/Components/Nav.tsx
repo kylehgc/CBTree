@@ -14,7 +14,6 @@ export default function Nav() {
   const {currentUser, logout} = useAuth()
   const [displayName, setDisplayName] = useState<string | null>(null)
   const navigate = useNavigate() 
-  console.log(currentUser)
   useEffect(() => {
     if(currentUser?.username) {
       if(currentUser?.firstName){

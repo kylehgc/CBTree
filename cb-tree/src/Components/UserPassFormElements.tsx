@@ -1,5 +1,6 @@
 import { FormControl, FormLabel, Input, FormErrorMessage } from "@chakra-ui/react"
 import {FieldError, UseFormRegister} from 'react-hook-form'
+import React from 'react'
 
 interface FormValues {
   username: string,

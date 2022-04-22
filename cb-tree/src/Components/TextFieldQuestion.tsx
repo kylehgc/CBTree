@@ -14,15 +14,12 @@ import UseThemeColors from '../Hooks/useThemeColors'
 const TextFieldQuestion: React.FC = () => {
   const {foregroundColor} = UseThemeColors()
   const [fieldState, setFieldState] = useState<string>("")
-  const [label, onSubmit] = useThoughtRecord()  
+  const {label, onSubmit, isLoading} = useThoughtRecord()  
   const onChange:  React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     setFieldState(event.target.value)
   }
   return (
-    
-    <>
-      
-      
+    <>    
       <VStack 
         rounded={'3xl'} 
         w={"full"} minH={"100%"} 
@@ -42,14 +39,21 @@ const TextFieldQuestion: React.FC = () => {
           _placeholder={{color: 'blackAlpha.800', fontSize: "3xl"}}
           p={4} 
           m={2}
-           
           bg={foregroundColor} 
           h={'80%'}  
           w={"full"}
           rounded={"xl"} 
           size="lg"
         />
-        <Button onClick={onSubmit} variant="submit">Submit</Button> 
+        <Button isLoading={isLoading}
+          bg={foregroundColor}
+          _disabled={{_hover: {
+            "bg": "white"}}}
+          
+          
+          loadingText={"Submitting"}
+          onClick={() => onSubmit(fieldState)} 
+          variant="submit">Submit</Button> 
       </VStack>
         
       

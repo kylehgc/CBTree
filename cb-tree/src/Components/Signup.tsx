@@ -1,4 +1,5 @@
 import {
+  Flex,
   Box,
   FormControl,
   FormLabel,
@@ -8,6 +9,7 @@ import {
   Button,
   Heading,
   Text,
+  useColorModeValue,
   Link,
   useToast,
   FormErrorMessage,
@@ -15,7 +17,7 @@ import {
 import {Link as ReactRouterLink, useNavigate} from 'react-router-dom'
 
 import { useEffect } from 'react';
-import { signupEndPoint } from '../utils/api';
+import { getUserEndPoint, signupEndPoint } from '../utils/api';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import UserPassFormElements from './UserPassFormElements';
 import useThemeColors from '../Hooks/useThemeColors'

@@ -1,14 +1,31 @@
+import { isAnToken, Token } from "../Hooks/useAuth"
+
 const BASEURL = "https://7astgo.deta.dev/"
 
 type Endpoints = {
   [key: string]: URL
 }
 
-const endpoints: Endpoints = {
+export const getToken = () => {
+  const storageTokenString = localStorage.getItem("userToken")
+  if(storageTokenString !== null) {
+    const storageToken = JSON.parse(storageTokenString)
+    if(isAnToken(storageToken)) {
+      return storageToken
+    } else return null
+  }}
+
+const endpointsUrl: Endpoints = {
   getUser: new URL(`${BASEURL}user`),
   login: new URL(`${BASEURL}auth/token`),
-  signup: new URL(`${BASEURL}user`)
+  signup: new URL(`${BASEURL}user`),
+  thoughtRecord: new URL(`${BASEURL}thoughtrecord`)
 }
-export const getUserEndPoint = endpoints.getUser.href
-export const loginEndpoint = endpoints.login.href
-export const signupEndPoint = endpoints.signup.href
+
+export const getAuthHeader = (token: Token) => {
+  return `${token.token_type} ${token.access_token}`
+}
+export const getUserEndPoint = endpointsUrl.getUser.href
+export const loginEndpoint = endpointsUrl.login.href
+export const signupEndPoint = endpointsUrl.signup.href
+export const thoughtRecordEndPoint = endpointsUrl.thoughtRecord.href 

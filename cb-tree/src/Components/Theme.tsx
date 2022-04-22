@@ -25,6 +25,9 @@ const theme: SystemStyleObject = extendTheme({
         "submit": (props: ThemeComponentProps) => ({
           minHeight: 10,
           w: "60%",
+          disabled: {opacity: 0.5},
+          _hover:  {
+            bg:mode("theme.foreground","theme.foregroundDark")(props)},
           bg: mode("theme.foreground","theme.foregroundDark")(props),
           rounded: "2xl",
           alignSelf: "center"})
@@ -34,7 +37,7 @@ const theme: SystemStyleObject = extendTheme({
       }),
       "solid":(props: ThemeComponentProps) => ({
         bg: mode("theme.foreground","theme.foregroundDark")(props),
-        rounded: "3xl"
+        rounded: "2xl"
       })
     }
     
