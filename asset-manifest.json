@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/CBTree/static/js/main.f7baf8b6.js",
+    "main.js": "/CBTree/static/js/main.bcaba969.js",
     "static/js/31.f5d6890b.chunk.js": "/CBTree/static/js/31.f5d6890b.chunk.js",
-    "static/js/870.4f090695.chunk.js": "/CBTree/static/js/870.4f090695.chunk.js",
+    "static/js/870.3471b9a1.chunk.js": "/CBTree/static/js/870.3471b9a1.chunk.js",
     "static/js/621.976e3d58.chunk.js": "/CBTree/static/js/621.976e3d58.chunk.js",
     "static/js/764.a169156d.chunk.js": "/CBTree/static/js/764.a169156d.chunk.js",
     "static/js/423.e6e8e4b8.chunk.js": "/CBTree/static/js/423.e6e8e4b8.chunk.js",
@@ -11,9 +11,9 @@
     "static/js/207.4fd4fa81.chunk.js": "/CBTree/static/js/207.4fd4fa81.chunk.js",
     "static/media/logo.png": "/CBTree/static/media/logo.6a908c0765dff80fec6b.png",
     "index.html": "/CBTree/index.html",
-    "main.f7baf8b6.js.map": "/CBTree/static/js/main.f7baf8b6.js.map",
+    "main.bcaba969.js.map": "/CBTree/static/js/main.bcaba969.js.map",
     "31.f5d6890b.chunk.js.map": "/CBTree/static/js/31.f5d6890b.chunk.js.map",
-    "870.4f090695.chunk.js.map": "/CBTree/static/js/870.4f090695.chunk.js.map",
+    "870.3471b9a1.chunk.js.map": "/CBTree/static/js/870.3471b9a1.chunk.js.map",
     "621.976e3d58.chunk.js.map": "/CBTree/static/js/621.976e3d58.chunk.js.map",
     "764.a169156d.chunk.js.map": "/CBTree/static/js/764.a169156d.chunk.js.map",
     "423.e6e8e4b8.chunk.js.map": "/CBTree/static/js/423.e6e8e4b8.chunk.js.map",
@@ -22,6 +22,6 @@
     "207.4fd4fa81.chunk.js.map": "/CBTree/static/js/207.4fd4fa81.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.f7baf8b6.js"
+    "static/js/main.bcaba969.js"
   ]
 }
