@@ -33,7 +33,6 @@ export default function Nav() {
     <Center flexDir={{base: "row"}}  m={2}> 
       <Image w={{base:"50%", lg: "25%"}}  p={2} pt={4} ml={0} src={logo}/>
       <HStack 
-       
         mr={{lg:4}}
         spacing={{base:6, lg: 4}} 
         justifyContent={{base: "center", lg:"end"}}
@@ -43,7 +42,6 @@ export default function Nav() {
         pb={{lg:2}} 
         w={"100%"}
       >
-        
         <IconButton
           aria-label="Light and dark Switch"
           color={foregroundColor}
@@ -92,7 +90,6 @@ export default function Nav() {
           <Link fontSize={15} color={foregroundColor} to={`/`} as={RouterLink}> 
             Login 
           </Link>}
-
       </HStack>
     </Center>
   );

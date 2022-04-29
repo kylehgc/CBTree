@@ -39,7 +39,7 @@ export default function SignupCard() {
 
   useEffect(() => {
     if(currentUser) {
-      navigate("/situationQuestion")
+      navigate("/situationquestion")
     }
   }, [currentUser,navigate])
   const onSubmit: SubmitHandler<FormValues> = async (value) => {

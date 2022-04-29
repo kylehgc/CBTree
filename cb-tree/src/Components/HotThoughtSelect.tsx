@@ -13,7 +13,7 @@ const HotThoughtSelect: React.FC<HotThoughtProps> = ({thoughts, onSelect, select
   return (
     <>
       <Heading mt={4} mx={4} textAlign={"center"}> Choose the Hot Thought </Heading>
-      <Center p={4} flexDirection={"column"} mx={2} w={"100%"} minHeight={"60%"} justifyContent={"space-evenly"}>
+      <Center p={4} flexDirection={"column"} mx={2} w={"100%"} minHeight={"50vh"} justifyContent={"space-evenly"}>
         {thoughts.map(thought => {
           return (  
             <Center 
@@ -22,7 +22,7 @@ const HotThoughtSelect: React.FC<HotThoughtProps> = ({thoughts, onSelect, select
               rounded={"2xl"} 
               fontSize={14}
               color={selected === thought ? foregroundColor : "inherit"} 
-              minH={"20%"} 
+              minH={"10vh"} 
               width={"90%"} 
               bg={selected === thought ? "red.400" : foregroundColor} 
               onClick={()=> onSelect(thought)}>

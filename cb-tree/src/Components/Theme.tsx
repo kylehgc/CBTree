@@ -19,15 +19,13 @@ const theme: SystemStyleObject = extendTheme({
     },
     Button: {
       baseStyle: {
-        rounded: "2xl"
+        rounded: "2xl",
       },
       variants: {
         "submit": (props: ThemeComponentProps) => ({
           minHeight: 10,
           w: "60%",
-          disabled: {opacity: 0.5},
-          _hover:  {
-            bg:mode("theme.foreground","theme.foregroundDark")(props)},
+          _loading: {bg: "white"},
           bg: mode("theme.foreground","theme.foregroundDark")(props),
           rounded: "2xl",
           alignSelf: "center"})
@@ -45,7 +43,7 @@ const theme: SystemStyleObject = extendTheme({
   styles: {
     global: (props: ThemeComponentProps) => ({
       body: {
-        height: "100vh",
+        minHeight: "100vh",
         bg: mode('teal.400', "black")(props)
         
       }

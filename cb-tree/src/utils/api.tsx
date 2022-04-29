@@ -13,7 +13,8 @@ export const getToken = () => {
     if(isAnToken(storageToken)) {
       return storageToken
     } else return null
-  }}
+  } return null
+}
 
 const endpointsUrl: Endpoints = {
   getUser: new URL(`${BASEURL}user`),
@@ -22,8 +23,12 @@ const endpointsUrl: Endpoints = {
   thoughtRecord: new URL(`${BASEURL}thoughtrecord`)
 }
 
-export const getAuthHeader = (token: Token) => {
-  return `${token.token_type} ${token.access_token}`
+export const getAuthHeader = () => {
+  const token = getToken()
+  if(token) {
+    return {headers: {Authorization: `${token.token_type} ${token.access_token}`}}
+  }
+  throw Error("no valid token")
 }
 export const getUserEndPoint = endpointsUrl.getUser.href
 export const loginEndpoint = endpointsUrl.login.href

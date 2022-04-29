@@ -42,7 +42,7 @@ const AccordionElement: React.FC<PopoverButtonProps> = ({label, popoverText}) =>
         </Box>
         <AccordionIcon />
       </AccordionButton>
-      <AccordionPanel pb={4}>
+      <AccordionPanel p={4}>
         {popoverText}
       </AccordionPanel>
     </AccordionItem>

@@ -1,7 +1,8 @@
 
 import { useToast } from "@chakra-ui/react"
-import { createContext, useEffect, useState,useContext } from "react"
-import { getAuthHeader, getUserEndPoint, thoughtRecordEndPoint } from "../utils/api"
+import { createContext, useEffect, useState,useContext, useCallback } from "react"
+import { useNavigate } from "react-router-dom"
+import { getUserEndPoint, } from "../utils/api"
 
 
 export interface Token {
@@ -19,11 +20,12 @@ export interface User {
   lastName?: string
 }
 
+
+
 interface AuthContext {
   login: (token: Token) => void
   logout: () => void,
-  currentUser: User | null,
-  getUser: (token: Token) => void,
+  currentUser: User | null
 }
 
 export const isAnToken = (obj: any): obj is Token => {
@@ -33,71 +35,65 @@ export const isAnToken = (obj: any): obj is Token => {
 const authContext = createContext({} as AuthContext)
 
 const useAuth = () => {
-  
-  const [token, setToken] = useState<Token>()
   const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const navigate = useNavigate() 
   const toast = useToast()
-  
-  const logout = () => {
+
+  const logout = useCallback(() => {
     localStorage.removeItem("userToken")
     setCurrentUser(null)
     toast({
       status: "success",
       description: "Logged out..."
     })
-    
-    
-  }
-  const getUser = async (token: Token) => {
-    const response = await fetch(getUserEndPoint, {
-      headers: {
-        Authorization: `${token.token_type} ${token.access_token}`
-      }
-    })
-    if(response.ok) {
-      const user = await response.json()
-      setCurrentUser(user)
-    } else {
-      if(response.status === 401 || 403) {
-        logout()
+    navigate("/")
+  },[navigate, toast]) 
+  
+  const getUser = useCallback(async (token: Token) => {
+    if(!currentUser) {
+      const response = await fetch(getUserEndPoint, {
+        headers: {
+          Authorization: `${token.token_type} ${token.access_token}`
+        }
+      })
+      if(response.ok) {
+        const user = await response.json()
+        if(!currentUser) {
+          setCurrentUser(user)
+        }
+      } else {
+        if(response.status === 401 || 403) {
+          logout()
+          
+        }
       }
     }
-  }
+  },[currentUser, logout, navigate])
   
+  useEffect(() => {
+    if(!currentUser) {
+      const storageTokenString = localStorage.getItem("userToken")
+      if(storageTokenString !== null) {
+        const storageToken = JSON.parse(storageTokenString)
+        if(isAnToken(storageToken)) {
+          getUser(storageToken)
+        }
+      }}
+  },[currentUser, getUser])
   
-  const login = async (token:Token) => {
-    setToken(token)
+  const login = useCallback((token:Token) => {
     localStorage.setItem("userToken", JSON.stringify(token))
-    await getUser(token)
-  }
+    getUser(token)
+  },[getUser])
 
-  const storageTokenString = localStorage.getItem("userToken")
-  if(storageTokenString !== null) {
-    const storageToken = JSON.parse(storageTokenString)
-    if(isAnToken(storageToken)) {
-      if(!token) {
-        setToken(storageToken)
-      }
-      if(!currentUser) {
-        getUser(storageToken)
-      }
-    }}
-  
-   
-
-  
-  
   return {
     currentUser,
     login,
-    logout,
-    getUser
+    logout
   }
 }
-
 export const AuthProvider:React.FC = ({ children }) => {
   const auth = useAuth();
-  console.log(auth)
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 export default function AuthConsumer() {

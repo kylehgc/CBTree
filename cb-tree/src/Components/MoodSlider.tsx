@@ -1,11 +1,13 @@
 import { 
   Tooltip,
   Box, 
-  Slider, Text, IconButton, HStack, SliderFilledTrack, SliderThumb, SliderTrack, VStack} from "@chakra-ui/react"
+  Slider, Text, IconButton, HStack, SliderFilledTrack, SliderThumb, SliderTrack, VStack, Center, Fade} from "@chakra-ui/react"
 import {CloseIcon} from '@chakra-ui/icons'
 import { Mood } from "./types"
-import { SetStateAction } from "react"
+import { SetStateAction, useState } from "react"
 import React from 'react' 
+import UseThemeColors from "../Hooks/useThemeColors"
+import UseThoughtRecord from "../Hooks/UseThoughtRecord"
 interface ButtonProps {
   deleteHandler: React.MouseEventHandler<HTMLButtonElement>
 }
@@ -13,7 +15,7 @@ interface MoodEntryProps {
   mood: string,
   moodRating: number,
   sliderChange: (value: number) => void,
-  deleteHandler: () => void
+  deleteHandler: () => void,
 }
 
 const sliderColor = (value: number):string => {
@@ -28,7 +30,6 @@ const sliderColor = (value: number):string => {
   }
   return "red.800"
 }
-
 interface SliderProps {
   moods: Mood[],
   setMoods: (value: SetStateAction<Mood[]>) => void
@@ -47,7 +48,7 @@ const MoodSlider:React.FC<SliderProps> = ({moods, setMoods}) => {
     }))
   }
   return (
-    <VStack w={"100%"} spacing={-1}>
+    <Center flexDirection={"column"} w={"100%"} mt={0} mb={0} >
       {moods.map(({mood,moodRating}) => 
         <MoodEntry 
           mood={mood} 
@@ -58,40 +59,51 @@ const MoodSlider:React.FC<SliderProps> = ({moods, setMoods}) => {
         />
       )
       }
-    </VStack>
+    </Center>
   )
 }
-
 const MoodEntry: React.FC<MoodEntryProps> =
   ( {deleteHandler,mood, moodRating, sliderChange}: MoodEntryProps ) => {
+    const {currentQuestion} = UseThoughtRecord() 
+    const [isDeleting, setIsDeleting] = useState(false)
+    const animateThenDelete = (deleteHandler: () => void) => {
+      setIsDeleting(true)
+      setTimeout(deleteHandler, 500)
+    }
+    const {foregroundColor} = UseThemeColors()
     return (
       <>
-        <Box w={{base:"full", lg:"50%"}} alignSelf={"center"}>
-          <HStack mx={3} pl={2} my={4} minH={17} bg={"white"} justifyContent={"center"}>
-            <VStack ml={2} spacing={1} p={1} w={"100%"}>
-              <Text w={"100%"} textAlign={"left"}>
-                {mood} 
-              </Text>
-              <Slider colorScheme={"teal"} ml={2} mb={2} onChange={(value) => sliderChange(value)} value={moodRating}>
-                <SliderTrack>
-                  <SliderFilledTrack />
-                </SliderTrack>
-                <Tooltip
-                  hasArrow
-                  fontSize={"sm"}
-                  bg={sliderColor(moodRating)}
-                  color='white'
-                  placement='right'
-                  isOpen
-                  label={`${moodRating}%`}
-                > 
-                  <SliderThumb bg="teal.400"/>
-                </Tooltip>
-              </Slider>
-            </VStack>
-            {<DeleteButton deleteHandler={deleteHandler}/>}
-          </HStack>
-        </Box>
+        <Fade in={!isDeleting} transition={{enter: {duration: .5}, exit: {duration:.5}}}
+          style={{flexDirection: "column" , alignItems:"center", display:"flex", height:"auto",width:"100%"}} > 
+          <Box w={{base:"full", lg:"50%"}} my={3} alignSelf={"center"}>
+            <HStack rounded={"2xl"} mx={3} pl={2} minH={20} pr={1} bg={foregroundColor} justifyContent={"center"}>
+              <VStack ml={2} spacing={2} p={1} w={"100%"}>
+                <Text w={"100%"} textAlign={"left"}>
+                  {mood} 
+                </Text>
+                <Slider colorScheme={"teal"} ml={2} mr={1} mb={2} onChange={(value) => sliderChange(value)} value={moodRating}>
+                  <SliderTrack>
+                    <SliderFilledTrack />
+                  </SliderTrack>
+                  <Tooltip
+                    hasArrow
+                    fontSize={"sm"}
+                    bg={sliderColor(moodRating)}
+                    color='white'
+                    placement='right'
+                    isOpen={!isDeleting}
+                    label={`${moodRating}%`}
+                  > 
+                    <SliderThumb bg="teal.400"/>
+                  </Tooltip>
+                </Slider>
+              </VStack>
+              {currentQuestion !== "reratemoods" ? 
+                <DeleteButton deleteHandler={() => animateThenDelete(deleteHandler)} /> : null}
+             
+            </HStack>
+          </Box>
+        </Fade>
       </>
     )
   }
