@@ -1,19 +1,29 @@
 {
   "files": {
-    "main.js": "/CBTree/static/js/main.15e66c52.js",
+    "main.css": "/CBTree/static/css/main.a549ab81.css",
+    "main.js": "/CBTree/static/js/main.15c0b608.js",
     "static/js/31.f5d6890b.chunk.js": "/CBTree/static/js/31.f5d6890b.chunk.js",
-    "static/js/870.1cdae8e7.chunk.js": "/CBTree/static/js/870.1cdae8e7.chunk.js",
+    "static/js/870.56e32c1f.chunk.js": "/CBTree/static/js/870.56e32c1f.chunk.js",
     "static/js/621.1167332f.chunk.js": "/CBTree/static/js/621.1167332f.chunk.js",
     "static/js/764.36f2e83e.chunk.js": "/CBTree/static/js/764.36f2e83e.chunk.js",
     "static/js/423.1efc687d.chunk.js": "/CBTree/static/js/423.1efc687d.chunk.js",
     "static/js/377.3fd9407b.chunk.js": "/CBTree/static/js/377.3fd9407b.chunk.js",
     "static/js/278.980d6a41.chunk.js": "/CBTree/static/js/278.980d6a41.chunk.js",
     "static/js/290.c89933d5.chunk.js": "/CBTree/static/js/290.c89933d5.chunk.js",
+    "static/media/inter-all-400-normal.woff": "/CBTree/static/media/inter-all-400-normal.e71ac35377dd87cb4d4b.woff",
     "static/media/logo.png": "/CBTree/static/media/logo.6a908c0765dff80fec6b.png",
+    "static/media/inter-latin-ext-400-normal.woff2": "/CBTree/static/media/inter-latin-ext-400-normal.325ea6d33179f07ec7db.woff2",
+    "static/media/inter-latin-400-normal.woff2": "/CBTree/static/media/inter-latin-400-normal.c96fe5ff771f9e7b53ab.woff2",
+    "static/media/inter-cyrillic-ext-400-normal.woff2": "/CBTree/static/media/inter-cyrillic-ext-400-normal.4543e27a05aa2ba75c44.woff2",
+    "static/media/inter-greek-400-normal.woff2": "/CBTree/static/media/inter-greek-400-normal.94fd6d5b2b3cd70f2516.woff2",
+    "static/media/inter-cyrillic-400-normal.woff2": "/CBTree/static/media/inter-cyrillic-400-normal.514f4123b1effd5ed0d8.woff2",
+    "static/media/inter-greek-ext-400-normal.woff2": "/CBTree/static/media/inter-greek-ext-400-normal.18e3b17c2aceabafdd3c.woff2",
+    "static/media/inter-vietnamese-400-normal.woff2": "/CBTree/static/media/inter-vietnamese-400-normal.a1bc9a8f426924c5dea8.woff2",
     "index.html": "/CBTree/index.html",
-    "main.15e66c52.js.map": "/CBTree/static/js/main.15e66c52.js.map",
+    "main.a549ab81.css.map": "/CBTree/static/css/main.a549ab81.css.map",
+    "main.15c0b608.js.map": "/CBTree/static/js/main.15c0b608.js.map",
     "31.f5d6890b.chunk.js.map": "/CBTree/static/js/31.f5d6890b.chunk.js.map",
-    "870.1cdae8e7.chunk.js.map": "/CBTree/static/js/870.1cdae8e7.chunk.js.map",
+    "870.56e32c1f.chunk.js.map": "/CBTree/static/js/870.56e32c1f.chunk.js.map",
     "621.1167332f.chunk.js.map": "/CBTree/static/js/621.1167332f.chunk.js.map",
     "764.36f2e83e.chunk.js.map": "/CBTree/static/js/764.36f2e83e.chunk.js.map",
     "423.1efc687d.chunk.js.map": "/CBTree/static/js/423.1efc687d.chunk.js.map",
@@ -22,6 +32,7 @@
     "290.c89933d5.chunk.js.map": "/CBTree/static/js/290.c89933d5.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.15e66c52.js"
+    "static/css/main.a549ab81.css",
+    "static/js/main.15c0b608.js"
   ]
 }
