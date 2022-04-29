@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.js": "/CBTree/static/js/main.86f1b001.js",
+    "main.js": "/CBTree/static/js/main.5b04c0aa.js",
     "static/js/31.f5d6890b.chunk.js": "/CBTree/static/js/31.f5d6890b.chunk.js",
     "static/js/870.fcdff39d.chunk.js": "/CBTree/static/js/870.fcdff39d.chunk.js",
-    "static/js/714.c4a3a071.chunk.js": "/CBTree/static/js/714.c4a3a071.chunk.js",
+    "static/js/714.79df782a.chunk.js": "/CBTree/static/js/714.79df782a.chunk.js",
     "static/js/764.7a126421.chunk.js": "/CBTree/static/js/764.7a126421.chunk.js",
     "static/js/423.549efc8b.chunk.js": "/CBTree/static/js/423.549efc8b.chunk.js",
     "static/js/377.3fd9407b.chunk.js": "/CBTree/static/js/377.3fd9407b.chunk.js",
@@ -11,10 +11,10 @@
     "static/js/207.4fd4fa81.chunk.js": "/CBTree/static/js/207.4fd4fa81.chunk.js",
     "static/media/logo.png": "/CBTree/static/media/logo.6a908c0765dff80fec6b.png",
     "index.html": "/CBTree/index.html",
-    "main.86f1b001.js.map": "/CBTree/static/js/main.86f1b001.js.map",
+    "main.5b04c0aa.js.map": "/CBTree/static/js/main.5b04c0aa.js.map",
     "31.f5d6890b.chunk.js.map": "/CBTree/static/js/31.f5d6890b.chunk.js.map",
     "870.fcdff39d.chunk.js.map": "/CBTree/static/js/870.fcdff39d.chunk.js.map",
-    "714.c4a3a071.chunk.js.map": "/CBTree/static/js/714.c4a3a071.chunk.js.map",
+    "714.79df782a.chunk.js.map": "/CBTree/static/js/714.79df782a.chunk.js.map",
     "764.7a126421.chunk.js.map": "/CBTree/static/js/764.7a126421.chunk.js.map",
     "423.549efc8b.chunk.js.map": "/CBTree/static/js/423.549efc8b.chunk.js.map",
     "377.3fd9407b.chunk.js.map": "/CBTree/static/js/377.3fd9407b.chunk.js.map",
@@ -22,6 +22,6 @@
     "207.4fd4fa81.chunk.js.map": "/CBTree/static/js/207.4fd4fa81.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.86f1b001.js"
+    "static/js/main.5b04c0aa.js"
   ]
 }
