@@ -1,57 +1,87 @@
-import { Button, useColorModeValue, Center, Heading, HStack, IconButton, VStack } from '@chakra-ui/react'
-import React, { Dispatch, SetStateAction, useState } from 'react'
-import {RiEmotionFill, RiEmotionNormalFill, RiEmotionHappyFill, RiEmotionUnhappyFill} from 'react-icons/ri'
-import UseThemeColors from '../Hooks/useThemeColors'
+import { Button, Center, Heading, HStack, VStack } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import EmotionButton, { Emotion } from './EmotionButton'
 import LoadingTextField from './LoadingTextField'
 import useThoughtRecord from '../Hooks/UseThoughtRecord'
-import {  } from '@chakra-ui/react'
+import {
+	faFaceMeh,
+	faFaceFrownOpen,
+	faFaceGrin,
+	faFaceSmile,
+} from '@fortawesome/free-solid-svg-icons'
 
-export const emotions: Emotion[] = 
-  [ {icon: RiEmotionUnhappyFill, emotionColor: "purple.900", emotionName: "Awful"},
-    {icon: RiEmotionNormalFill, emotionColor: "blue.700", emotionName:"Meh"},
-    {icon: RiEmotionHappyFill, emotionColor: "green.300", emotionName: "Good" },
-    {icon: RiEmotionFill, emotionColor: "yellow.300", emotionName: "Awesome"}
-    
-  ]
+export const emotions: Emotion[] = [
+	{ icon: faFaceFrownOpen, emotionColor: '#322659', emotionName: 'Awful' },
+	{ icon: faFaceMeh, emotionColor: '#2C5282', emotionName: 'Meh' },
+	{ icon: faFaceSmile, emotionColor: '#68D391', emotionName: 'Good' },
+	{ icon: faFaceGrin, emotionColor: '#F6E05E', emotionName: 'Awesome' },
+]
 
 const getEmotionColorByName = (emotionName: string) => {
-  return emotions.filter(emotion => emotion.emotionName === emotionName)[0]?.emotionColor
+	return emotions.filter((emotion) => emotion.emotionName === emotionName)[0]
+		?.emotionColor
 }
 
 const EmotionPicker: React.FC = () => {
-  const [selected, setSelected] = useState<string>("")
-  const emotionColor = getEmotionColorByName(selected)
-  const {label, isSubmitting, onSubmit, thoughtRecord} = useThoughtRecord() 
-  
-  
-  if(!thoughtRecord) {
-    return <LoadingTextField/>
-  }
-  return (
-    <>
-      <Center rounded={"75px"} border={selected ? "15px solid" : "none"} borderColor={emotionColor} w={{lg: "100vw"}} p={4} height={"full"} minHeight={"90%"} flexDir={"column"}> 
-        <Heading position={"fixed"} top={"25vh"}> {label} </Heading>
-        <HStack height={"50%"} w={"100%"} spacing={8}> 
-          {emotions.map(emotion => 
-            <EmotionButton key={emotion.emotionName} emotion={emotion} selected={selected} setSelected={setSelected} />
-          )}
-        
-        </HStack>
-        <VStack p={2} w={"full"} height={"15vh"} spacing={12}>
-          {selected
-            ? 
-            <>
-              <Heading color={emotionColor}>  {selected} </Heading>
-              <Button isLoading={isSubmitting} onClick={() => onSubmit(selected)} w={"60%"} minH={"60px"} bg={"white"} > Submit </Button>
-            </>
-            : null
-          }
-        </VStack>
-       
-      </Center>
-    </>
-  )
+	const [selected, setSelected] = useState<string>('')
+	const emotionColor = getEmotionColorByName(selected)
+	const { label, isSubmitting, onSubmit, thoughtRecord } = useThoughtRecord()
+
+	if (!thoughtRecord) {
+		return <LoadingTextField />
+	}
+
+	return (
+		<>
+			<Center
+				rounded={'75px'}
+				border={selected ? '15px solid' : 'none'}
+				borderColor={emotionColor}
+				m={0}
+				mx={-20}
+				w={{ base: 'auto', lg: '100vw' }}
+				p={2}
+				height={'150vh'}
+				flexDir={'column'}
+			>
+				<Heading position={'fixed'} top={40} p={0}>
+					{label}
+				</Heading>
+				<HStack
+					height={'50%'}
+					p={2}
+					w={{ base: '100%', lg: '50%' }}
+					spacing={{ base: 8, lg: 'auto' }}
+				>
+					{emotions.map(({ emotionName }) => (
+						<EmotionButton
+							key={emotionName}
+							emotionName={emotionName}
+							selected={selected}
+							setSelected={setSelected}
+						/>
+					))}
+				</HStack>
+				<VStack p={2} w={'full'} height={'10vh'} spacing={6}>
+					{selected ? (
+						<>
+							<Heading color={emotionColor}> {selected} </Heading>
+							<Button
+								m={2}
+								isLoading={isSubmitting}
+								onClick={() => onSubmit(selected)}
+								w={'60%'}
+								minH={'40px'}
+								bg={'white'}
+							>
+								Submit
+							</Button>
+						</>
+					) : null}
+				</VStack>
+			</Center>
+		</>
+	)
 }
 
 export default EmotionPicker
