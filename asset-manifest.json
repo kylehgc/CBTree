@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/CBTree/static/css/main.a549ab81.css",
-    "main.js": "/CBTree/static/js/main.b2d24de8.js",
-    "static/js/439.8585996d.chunk.js": "/CBTree/static/js/439.8585996d.chunk.js",
-    "static/js/397.1480c18a.chunk.js": "/CBTree/static/js/397.1480c18a.chunk.js",
+    "main.js": "/CBTree/static/js/main.3b5e47f6.js",
+    "static/js/439.1afaae4a.chunk.js": "/CBTree/static/js/439.1afaae4a.chunk.js",
+    "static/js/397.ceff9207.chunk.js": "/CBTree/static/js/397.ceff9207.chunk.js",
     "static/js/519.7b05362c.chunk.js": "/CBTree/static/js/519.7b05362c.chunk.js",
-    "static/js/31.f5d6890b.chunk.js": "/CBTree/static/js/31.f5d6890b.chunk.js",
+    "static/js/31.ddfed718.chunk.js": "/CBTree/static/js/31.ddfed718.chunk.js",
     "static/js/870.77fedb3d.chunk.js": "/CBTree/static/js/870.77fedb3d.chunk.js",
     "static/js/621.68baf04c.chunk.js": "/CBTree/static/js/621.68baf04c.chunk.js",
     "static/js/764.83076470.chunk.js": "/CBTree/static/js/764.83076470.chunk.js",
@@ -29,11 +29,11 @@
     "static/media/inter-vietnamese-400-normal.woff2": "/CBTree/static/media/inter-vietnamese-400-normal.a1bc9a8f426924c5dea8.woff2",
     "index.html": "/CBTree/index.html",
     "main.a549ab81.css.map": "/CBTree/static/css/main.a549ab81.css.map",
-    "main.b2d24de8.js.map": "/CBTree/static/js/main.b2d24de8.js.map",
-    "439.8585996d.chunk.js.map": "/CBTree/static/js/439.8585996d.chunk.js.map",
-    "397.1480c18a.chunk.js.map": "/CBTree/static/js/397.1480c18a.chunk.js.map",
+    "main.3b5e47f6.js.map": "/CBTree/static/js/main.3b5e47f6.js.map",
+    "439.1afaae4a.chunk.js.map": "/CBTree/static/js/439.1afaae4a.chunk.js.map",
+    "397.ceff9207.chunk.js.map": "/CBTree/static/js/397.ceff9207.chunk.js.map",
     "519.7b05362c.chunk.js.map": "/CBTree/static/js/519.7b05362c.chunk.js.map",
-    "31.f5d6890b.chunk.js.map": "/CBTree/static/js/31.f5d6890b.chunk.js.map",
+    "31.ddfed718.chunk.js.map": "/CBTree/static/js/31.ddfed718.chunk.js.map",
     "870.77fedb3d.chunk.js.map": "/CBTree/static/js/870.77fedb3d.chunk.js.map",
     "621.68baf04c.chunk.js.map": "/CBTree/static/js/621.68baf04c.chunk.js.map",
     "764.83076470.chunk.js.map": "/CBTree/static/js/764.83076470.chunk.js.map",
@@ -49,6 +49,6 @@
   },
   "entrypoints": [
     "static/css/main.a549ab81.css",
-    "static/js/main.b2d24de8.js"
+    "static/js/main.3b5e47f6.js"
   ]
 }
