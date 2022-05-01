@@ -66,7 +66,7 @@ const ThoughtRecordDisplay = () => {
 
   return (
     <>
-      <VStack overflow={"scroll"} m={0} spacing={10} width={"100%"}>
+      <VStack m={0} overflow={{base:"auto", lg:"visible"}} spacing={10} width={{base:"100%",lg:"70%"}}>
         <EmotionDisplay label="Emotion" emotionName={thoughtRecord.emotion} />
         <Accordion allowToggle w={"100%"}>
           <AccordionElement label="The Situation" popoverText={thoughtRecord.situationquestion}/> 

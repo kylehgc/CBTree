@@ -9,11 +9,11 @@ interface PopoverButtonProps {
 const AccordionElement: React.FC<PopoverButtonProps> = ({label, popoverText}) => {
   const {foregroundColor} = UseThemeColors()
   return (
-    <AccordionItem  my={2} ml={5} w={"90%"}
+    <AccordionItem alignSelf={"center"} my={2} ml={{base: 5,lg:0}} w={{base: "90%", lg:"100%"}  }
       bg={foregroundColor} 
     >
       <Heading color={"black"}>
-        <AccordionButton>
+        <AccordionButton >
           <Box flex='1' textAlign='left'>
             {label}
           </Box>

@@ -13,7 +13,7 @@ const HotThoughtDisplay: React.FC<Props> = ({hotThought}) => {
       </Badge>
       <Center bg={"red.500"} p={2} color={foregroundColor}
         alignSelf={"center"} w={"90%"} textAlign={"center"} 
-        minH={"80px"} rounded={"2xl"}
+        minH={{base:"80px",lg:"20vh"}} rounded={"2xl"}
       >
         {hotThought}
       </Center>

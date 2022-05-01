@@ -40,22 +40,22 @@ const AlternativeThought: React.FC = () => {
     return <LoadingTextField/>
   }
   return (
-    <VStack overflow={"visible"} mt={1} spacing={8} p={1} h="full" w="full">
+    <VStack overflow={"visible"} mt={1} spacing={8} p={1} h="full" w={{base:"full", lg:"full"}}>
       <Heading m={0} textAlign={"center"}> Write a Balanced Thought </Heading> 
       <SlideFade in={!isSubmitting} 
-        style={{flexDirection: "column", height:"full", width:"95vw", display:"flex"}}
+        style={{flexDirection: "column", height:"full", width:"95%", display:"flex"}}
         transition={{enter: {duration:0.5}, exit: {duration:0.5, delay: .5}}}
         offsetY={0} offsetX={100}>
         <HotThoughtDisplay hotThought={hotThought} />
       </SlideFade>
       <SlideFade in={!isSubmitting} 
-        style={{flexDirection: "column", height:"full", width:"95vw", display:"flex"}}
+        style={{flexDirection: "column", height:"full", width:"95%", display:"flex"}}
         transition={{enter: {duration:0.5, delay: 0.3}, exit: {duration:0.5, delay: 0.3}}}
         offsetY={0} offsetX={-100}>
         <ArgumentButtons argumentsText={argumentsText}/>
       </SlideFade>
       <SlideFade in={!isSubmitting} 
-        style={{flexDirection: "column", alignContent:"center", height:"full", width:"95vw", display:"flex"}}
+        style={{flexDirection: "column", alignContent:"center", height:"full", width:"95%", display:"flex"}}
         transition={{enter: {duration:0.5, delay: 0.5}, exit: {duration:0.5}}}
         offsetY={0} offsetX={100}>
         <Input
