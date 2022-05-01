@@ -57,6 +57,7 @@ const ThoughtQuestion = () => {
       {thoughts.length > 0 ?
         <SlideFade offsetY={50} transition={{enter: {delay: 0.4, duration: 0.5}, exit:{delay: 0.3, duration: 0.5}}} style={{flexDirection: "column" , alignItems:"center", display:"flex", minHeight:"auto",width:"100%"}} in={!isSubmitting}>
           <Button 
+            mb={2}
             minH={10}
             w="60%"
             mt={8}

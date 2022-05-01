@@ -31,9 +31,10 @@ export default function Nav() {
   }
   return (
     <Center flexDir={{base: "row"}}  m={2}> 
-      <Image w={{base:"50%", lg: "25%"}}  p={2} pt={4} ml={0} src={logo}/>
+      <Image w={{base:"50%", lg: "40%"}} p={2} pt={4} ml={0} fit={"fill"} src={logo}/>
       <HStack 
-        mr={{lg:4}}
+        mr={{lg:7}}
+        mt={{lg:4}}
         spacing={{base:6, lg: 4}} 
         justifyContent={{base: "center", lg:"end"}}
         bg={backgroundColor} 
@@ -47,8 +48,8 @@ export default function Nav() {
           color={foregroundColor}
           bg={backgroundColor}
           size="lg"
-          _hover={{bg: backgroundColor}}
-          _active={{bg: backgroundColor}}
+          _hover={{background: backgroundColor}}
+          _active={{background: backgroundColor}}
           icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           onClick={toggleColorMode}/>
         {displayName ? 

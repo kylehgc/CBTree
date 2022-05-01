@@ -1,5 +1,5 @@
 
-import {Center, Heading, VStack, Badge, Input, Button, SlideFade} from '@chakra-ui/react'
+import {Box, Heading, VStack, Badge, Input, Button, SlideFade} from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import useThoughtRecord from '../Hooks/UseThoughtRecord'
 import useThemeColors from '../Hooks/useThemeColors'
@@ -7,16 +7,17 @@ import ArgumentButtons from './ArgumentAccordion'
 import MoodSlider from './MoodSlider'
 import { Mood } from './types'
 import LoadingTextField from './LoadingTextField'
+import HotThoughtDisplay from './HotThoughtDisplay'
 
-const BalancedThought: React.FC = () => {
+const AlternativeThought: React.FC = () => {
   const {foregroundColor} = useThemeColors()
   const [balancedThought, setBalancedThought] = useState<string>("")
   const [moods, setMoods] = useState<Mood[]>([])
   const {onSubmit, thoughtRecord, isSubmitting} = useThoughtRecord() 
   
   useEffect (() => {
-    if(thoughtRecord?.alternativeThoughts) {
-      setMoods(thoughtRecord.alternativeThoughts)
+    if(thoughtRecord?.alternativethought) {
+      setMoods(thoughtRecord.alternativethought)
     }
   },[thoughtRecord,setMoods])
 
@@ -39,24 +40,13 @@ const BalancedThought: React.FC = () => {
     return <LoadingTextField/>
   }
   return (
-    
-    <VStack mt={1} spacing={8} p={1} h="full" w="full">
+    <VStack overflow={"visible"} mt={1} spacing={8} p={1} h="full" w="full">
       <Heading m={0} textAlign={"center"}> Write a Balanced Thought </Heading> 
       <SlideFade in={!isSubmitting} 
         style={{flexDirection: "column", height:"full", width:"95vw", display:"flex"}}
         transition={{enter: {duration:0.5}, exit: {duration:0.5, delay: .5}}}
         offsetY={0} offsetX={100}>
-        <VStack w={"full"} spacing={-1}>
-          <Badge alignSelf={"end"} my={2} mr={6} colorScheme="red" variant={"solid"}>
-           Hot Thought
-          </Badge>
-          <Center bg={"red.400"} p={2} color={foregroundColor}
-            alignSelf={"center"} w={"90%"} textAlign={"center"} 
-            minH={"80px"} rounded={"2xl"}
-          >
-            {hotThought}
-          </Center>
-        </VStack>
+        <HotThoughtDisplay hotThought={hotThought} />
       </SlideFade>
       <SlideFade in={!isSubmitting} 
         style={{flexDirection: "column", height:"full", width:"95vw", display:"flex"}}
@@ -79,7 +69,7 @@ const BalancedThought: React.FC = () => {
           w={"90%"} 
           _placeholder={{color:"blackAlpha.700", textAlign: "center"}}
           placeholder='What are some Balanced Thoughts?'/>
-        <Button onClick={() => addMood(balancedThought)}  alignSelf={"center"} 
+        <Button onClick={() => addMood(balancedThought)} bg={foregroundColor} alignSelf={"center"} 
           w={"60%"} minH={10} mb={4} mt={7}
         > 
         Add Thought 
@@ -95,8 +85,9 @@ const BalancedThought: React.FC = () => {
         loadingText={"Submitting"}
         onClick={() => onSubmit(moods)} 
       > Submit </Button> : null}
+      <Box h={"10vh"} />
     </VStack>
   )
 }
 
-export default BalancedThought
+export default AlternativeThought

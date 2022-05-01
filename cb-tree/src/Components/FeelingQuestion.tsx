@@ -12,7 +12,6 @@ interface Props {
 }
 export const isMood = (value: any): value is Mood[] => {
   if(Array.isArray(value) && value.length > 0 ) {
-    console.log(value[0])
     return "mood" in value[0]
   }
   return false
@@ -46,15 +45,18 @@ const FeelingQuestion: React.FC<Props> = () => {
   return (
     <>
       <SelectQuestion
+      
         isSubmitting={isSubmitting}
         moods={moods} 
         setMoods={setMoods} 
         selectOptions={feelings} 
         label={label}
+        
       />
       {moods.length > 0 ? 
         <Button 
           mt={8}
+          mb={2}
           minH={10}
           w="60%"
           isLoading={isSubmitting}

@@ -45,15 +45,15 @@ const SelectQuestion: React.FC<RecordProps> = ({isSubmitting, moods,setMoods, se
           transition={{enter: {delay: 0.2, duration: .5}, exit: {delay: 0.4, duration: .5}}}
           style={{flexDirection: "column" , alignItems:"center", display:"flex", height:"auto",width:"100%"}} 
           in={!isSubmitting} > 
-          <Box p={2} bg={foregroundColor} w={"92%"} mt={6} mb={2} mx={7} >
-            <FormLabel mb={2} fontSize={14}> {label} </FormLabel>
+          <Box p={2} w={"92%"} mt={6} mb={2} mx={7} >
+            <FormLabel mb={2} color={"white"} fontSize={14}> {label}  </FormLabel>
             <CreatableSelect
               size='md'
               onChange={handleChange}
               options={selectOptions}
             />
           </Box>
-          <Button alignSelf={'center'} onClick={() => addMood(selectedMood)} w={"60%"} minH={10} my={6}> Add </Button>
+          <Button alignSelf={'center'} bg={"white"} onClick={() => addMood(selectedMood)} w={"60%"} minH={10} my={6}> Add </Button>
         </SlideFade>
         : <Heading> {label} </Heading>}
       

@@ -19,15 +19,15 @@ const UserPassFormElements: React.FC<IProps> = ({errors, register}: IProps) => {
   return (
     <>
       <FormControl isRequired isInvalid={!!errors?.username} id="email">
-        <FormLabel>Email address</FormLabel>
-        <Input type="text" placeholder="Email" {...register(
+        <FormLabel color={"black"}>Email address</FormLabel>
+        <Input color={"black"} type="text" placeholder="Email" {...register(
           "username", {required: true, pattern:{
             value: /^\S+@\S+$/i, message: "Not a valid email address"}})}  />
         <FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
       </FormControl>
       <FormControl isInvalid={!!errors?.password?.message} id="password">
-        <FormLabel>Password</FormLabel>
-        <Input type="password" placeholder="password" {
+        <FormLabel color={"black"}>Password</FormLabel>
+        <Input color={"black"} type="password" placeholder="password" {
           ...register("password", {
             required: true, maxLength:{
               value: 10,

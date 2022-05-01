@@ -18,15 +18,15 @@ interface MoodEntryProps {
   deleteHandler: () => void,
 }
 
-const sliderColor = (value: number):string => {
+export const sliderColor = (value: number):string => {
   if(value < 25) {
     return "green.400"
   }
   if(value < 50) {
-    return "yellow.300"
+    return "yellow.600"
   }
   if(value < 75) {
-    return "red.500"
+    return "orange.400"
   }
   return "red.800"
 }
@@ -81,12 +81,13 @@ const MoodEntry: React.FC<MoodEntryProps> =
                 <Text w={"100%"} textAlign={"left"}>
                   {mood} 
                 </Text>
-                <Slider colorScheme={"teal"} ml={2} mr={1} mb={2} onChange={(value) => sliderChange(value)} value={moodRating}>
+                <Slider colorScheme={sliderColor(moodRating).slice(0,-4)} ml={2} mr={1} mb={2} onChange={(value) => sliderChange(value)} value={moodRating}>
                   <SliderTrack>
                     <SliderFilledTrack />
                   </SliderTrack>
                   <Tooltip
                     hasArrow
+                    zIndex={-9999}
                     fontSize={"sm"}
                     bg={sliderColor(moodRating)}
                     color='white'
@@ -110,6 +111,7 @@ const MoodEntry: React.FC<MoodEntryProps> =
 const DeleteButton : React.FC<ButtonProps> = ({deleteHandler}) => {
   return (
     <IconButton 
+      color={"black"}
       aria-label='Delete Mood' 
       variant='ghost'
       size={"lg"}

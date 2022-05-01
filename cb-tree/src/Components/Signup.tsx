@@ -14,7 +14,7 @@ import {
   useToast,
   FormErrorMessage,
 } from '@chakra-ui/react';
-import {Link as ReactRouterLink, useNavigate} from 'react-router-dom'
+import {Link as ReactRouterLink, useLocation, useNavigate} from 'react-router-dom'
 
 import { useEffect } from 'react';
 import { getUserEndPoint, signupEndPoint } from '../utils/api';
@@ -29,19 +29,25 @@ interface FormValues {
   username: string,
   password: string
 }
-
+type LocationState = {
+  state: {
+    path?: string
+  } 
+}
 export default function SignupCard() {
   const {foregroundColor, backgroundColor} = useThemeColors()
   const toast = useToast()
   const {register, handleSubmit, formState: {errors , isSubmitting}} = useForm<FormValues>()
   const {login, currentUser} = useAuth()
   const navigate = useNavigate()
+  const {state} = useLocation() as LocationState
 
+  
   useEffect(() => {
     if(currentUser) {
-      navigate("/situationquestion")
+      navigate(state?.path || "/emotion")
     }
-  }, [currentUser,navigate])
+  }, [currentUser, navigate, state?.path])
   const onSubmit: SubmitHandler<FormValues> = async (value) => {
     try {
       const response = await fetch(signupEndPoint, {
@@ -57,7 +63,8 @@ export default function SignupCard() {
       if(response.ok) {
 
         const token = await response.json()
-        login(token)
+        await login(token)
+        navigate('/emotion')
       } else {
         if(response.status === 400) {
           toast({
@@ -91,8 +98,8 @@ export default function SignupCard() {
             <HStack>
               <Box>
                 <FormControl isInvalid={!!errors?.firstName?.message}>
-                  <FormLabel>First Name</FormLabel>
-                  <Input type="text"  {
+                  <FormLabel color={"black"}>First Name</FormLabel>
+                  <Input color={"black"} type="text"  {
                     ...register("firstName", {maxLength:{
                       value: 20,
                       message:"Your name is too long"},
@@ -104,8 +111,8 @@ export default function SignupCard() {
               </Box>
               <Box>
                 <FormControl isInvalid={!!errors?.lastName?.message}>
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text"  {
+                  <FormLabel color={"black"}>Last Name</FormLabel>
+                  <Input color={"black"} type="text"  {
                     ...register("lastName", {maxLength:{
                       value: 20,
                       message:"Your name is too long"},

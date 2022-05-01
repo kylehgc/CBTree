@@ -46,8 +46,8 @@ const useAuth = () => {
       status: "success",
       description: "Logged out..."
     })
-    navigate("/")
-  },[navigate, toast]) 
+    
+  },[toast]) 
   
   const getUser = useCallback(async (token: Token) => {
     if(!currentUser) {
@@ -68,7 +68,7 @@ const useAuth = () => {
         }
       }
     }
-  },[currentUser, logout, navigate])
+  },[currentUser, logout])
   
   useEffect(() => {
     if(!currentUser) {

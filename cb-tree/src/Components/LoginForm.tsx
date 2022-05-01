@@ -38,7 +38,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if(currentUser) {
-      navigate(state?.path || "/situationquestion")
+      navigate(state?.path || "/emotion")
     }
   }, [currentUser, navigate, state?.path])
 
@@ -98,6 +98,7 @@ const Login: React.FC = () => {
                 isLoading={isSubmitting}
                 loadingText={"Submitting"}
                 variant={"loginSubmit"}
+                textColor={"white"}
                 bg={backgroundColor}
                 _hover={{
                   bg: 'blue.500',

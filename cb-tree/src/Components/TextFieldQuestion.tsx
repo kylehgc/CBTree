@@ -58,6 +58,7 @@ const TextFieldQuestion: React.FC = () => {
           placeholder={label} 
           onChange={onChange}
           value={fieldState}
+          color={"black"}
           _placeholder={{color: 'blackAlpha.800', fontSize: "3xl"}}
           p={4} 
           bg={foregroundColor} 

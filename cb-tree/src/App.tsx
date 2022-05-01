@@ -6,14 +6,12 @@ import Nav from './Components/Nav'
 import {
   Container,
 } from "@chakra-ui/react"
-
-
-
-
 import Providers from './Components/Providers'
-import BalancedThought from './Components/BalancedThought'
 import LoadingTextField from './Components/LoadingTextField'
 
+const EmotionPicker = lazy(() => import('./Components/EmotionPicker'))
+const ThoughtRecord = lazy(() => import('./Components/ThoughtRecord'))
+const AlternativeThought = lazy(() => import('./Components/AlternativeThought'))
 const Signup = lazy(() => import('./Components/Signup'))
 const Login = lazy(() => import('./Components/LoginForm'))
 const FeelingQuestion = lazy(() => import('./Components/FeelingQuestion'))
@@ -26,12 +24,14 @@ export const App = () => (
   // <Router basename={process.env.PUBLIC_URL}>
   <Router>
     <Providers>
-
-      <Container p={2} centerContent height='85vh' minHeight='80vh' width="100%">
+      <Container p={2} centerContent height='85vh' width="100%">
         <Nav/>
         <Suspense fallback={<LoadingTextField/>}>
           <Routes>
+            <Route path="/emotion" element={<RequireAuth><EmotionPicker/></RequireAuth>} />
             <Route path="/" element={<Login/>} />
+            <Route path="/rerateemotion" element={<RequireAuth><EmotionPicker/></RequireAuth>} />
+            <Route path="/thoughtrecord" element={<RequireAuth><ThoughtRecord/> </RequireAuth>}/>
             <Route path="/situationquestion" element={<RequireAuth><TextFieldQuestion/> </RequireAuth> }/>
             <Route path="/mood" element={<RequireAuth><FeelingQuestion /></RequireAuth>} />
             <Route path="/evidencefor" element={<RequireAuth><TextFieldQuestion/></RequireAuth>} />
@@ -39,7 +39,7 @@ export const App = () => (
             <Route path="/thoughts" element={<RequireAuth><ThoughtQuestion/></RequireAuth>} />
             <Route path="/reratemoods" element={<RequireAuth> <FeelingQuestion/> </RequireAuth>}/>
             <Route path="/signup" element={<Signup/>} />
-            <Route path="/alternativethought" element={<RequireAuth><BalancedThought/></RequireAuth>} />
+            <Route path="/alternativethought" element={<RequireAuth><AlternativeThought/></RequireAuth>} />
           </Routes>
         </Suspense>
       </Container>

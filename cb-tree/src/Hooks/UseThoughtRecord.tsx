@@ -13,27 +13,29 @@ interface UseThoughtRecordReturn {
   thoughtRecord: ThoughtRecord | undefined}
 
 const question = [
+  "/emotion",
   "/situationquestion",
   "/mood",
   "/thoughts",
   "/evidencefor",
   "/evidenceagainst",
   "/alternativethought",
-  "/reratemoods",
-  "/Submit"
+  "/rerateemotion",
+  "/thoughtrecord"
 ] as const
 
 export type QuestionType = typeof question[number]
 
 const thoughtRecordData = {
+  "/emotion": {label:"How do you feel?", type:"Emotion"},
   "/situationquestion": {label:"What is the Situation?", type: "Text"},
   "/mood": {label:"Add any emotions you felt and rate them", type: "Mood"},
   "/thoughts": {label:"List any thoughts and rate your Belief", type: "Thoughts"},
   "/evidencefor":{label: "What is the Evidence for", type: "Text"},
   "/evidenceagainst": {label:"What is the Evidence Against", type: "Text"},
   "/alternativethought":{label: "", type: "Text"},
-  "/reratemoods": {label:"Rerate Your Moods",type:"Mood"},
-  "/Submit": {label:"something", type:"Submit"}
+  "/rerateemotion": {label:"How Do you feel now?",type:"Emotion"},
+  "/thoughtrecord": {label:"something", type:"Submit"}
 } 
 
 export type FormValues = String | Mood[] | Thoughts  
@@ -43,20 +45,18 @@ const isQuestion = (pathname: any): pathname is QuestionType => {
 }
 
 const UseThoughtRecord = (): UseThoughtRecordReturn | never => {
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const toast = useToast()
   const navigate = useNavigate()
   const {pathname, state} = useLocation()
   const [thoughtRecord, setThoughtRecord] = useState<ThoughtRecord>()
-  const {updateThoughtRecord, getActiveThoughtRecord} = useThoughtRecordApi()
+  const {updateThoughtRecord, getActiveThoughtRecord, isSubmitting} = useThoughtRecordApi()
   const token = getToken()
   if(!token) {
     throw Error
   } 
-  if(!isQuestion(pathname)) {
-    throw Error
-  }
+ 
   useEffect(() => {
+    
     const getThoughtRecord = async () => {
       if(!thoughtRecord) {
         if(isThoughtRecord(state)) {
@@ -66,28 +66,37 @@ const UseThoughtRecord = (): UseThoughtRecordReturn | never => {
         }
       }
     }
-    getThoughtRecord()
-  },[getActiveThoughtRecord, state, thoughtRecord, token])
+    if(!isSubmitting) {
+      getThoughtRecord()
+    }
+  },[getActiveThoughtRecord, isSubmitting, state, thoughtRecord, token])
   
   const onSubmit = async (data: FormValues) => {
-    const updateKey = pathname.slice(1)
-    const activeThoughtRecord: string = isThoughtRecord(thoughtRecord) ? thoughtRecord.key : "" 
-    const NextLinkIndex = question.indexOf(pathname) + 1
-    setIsSubmitting(true)
-    try {
-      await updateThoughtRecord(data, activeThoughtRecord, token, updateKey)
-      setIsSubmitting(false)
-      navigate(question[NextLinkIndex])
-    } catch {
-      toast({
-        status: 'error', 
-        description: 'problem with update'
-      })
-    }
+    if(isQuestion(pathname)) {
+      const updateKey = pathname.slice(1)
+      const activeThoughtRecord: string = isThoughtRecord(thoughtRecord) ? thoughtRecord.key : "" 
+      const NextLinkIndex = question.indexOf(pathname) + 1
+      
+     
+      try {
+        const updatedRecord = await updateThoughtRecord(data, activeThoughtRecord, token, updateKey)
+        
+        navigate(question[NextLinkIndex],{state: {...updatedRecord}})
+      } catch {
+        toast({
+          status: 'error', 
+          description: 'problem with update'
+        })
+      }
+    }}
+  let label: string = "" 
+  let currentQuestion: string = ""
+  if(isQuestion(pathname)) {
+    
+    label = thoughtRecordData[pathname].label
+    currentQuestion = pathname.slice(1)
   }
-
-  const label = thoughtRecordData[pathname].label
-  const currentQuestion = pathname.slice(1)
+  
   return {
     label: label, 
     onSubmit: onSubmit, 
