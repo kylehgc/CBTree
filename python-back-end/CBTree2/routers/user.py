@@ -67,3 +67,9 @@ async def new_user(new_user: New_User_Data):
         access_token = create_access_token(encode_data)
         return {"access_token": access_token, "token_type": "bearer"}
         
+@router.post("/user/thoughtrecord")
+async def finish_current_thought_record(
+    current_user: User = Depends(get_current_user)):
+        updates = {"activeThoughtRecord": None}
+        db.update(updates, current_user["key"])
+        return db.get(current_user["key"])
