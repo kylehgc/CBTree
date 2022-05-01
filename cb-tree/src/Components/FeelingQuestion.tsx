@@ -44,14 +44,13 @@ const FeelingQuestion: React.FC<Props> = () => {
   }
   return (
     <>
-      <SelectQuestion
-      
+      <SelectQuestion 
+
         isSubmitting={isSubmitting}
         moods={moods} 
         setMoods={setMoods} 
         selectOptions={feelings} 
         label={label}
-        
       />
       {moods.length > 0 ? 
         <Button 

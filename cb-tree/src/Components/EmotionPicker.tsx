@@ -30,7 +30,7 @@ const EmotionPicker: React.FC = () => {
   }
   return (
     <>
-      <Center rounded={"75px"} border={selected ? "15px solid" : "none"} borderColor={emotionColor}  p={4} height={"full"} minHeight={"90%"} flexDir={"column"}> 
+      <Center rounded={"75px"} border={selected ? "15px solid" : "none"} borderColor={emotionColor} w={{lg: "100vw"}} p={4} height={"full"} minHeight={"90%"} flexDir={"column"}> 
         <Heading position={"fixed"} top={"25vh"}> {label} </Heading>
         <HStack height={"50%"} w={"100%"} spacing={8}> 
           {emotions.map(emotion => 

@@ -34,7 +34,6 @@ const Login: React.FC = () => {
   const {register, handleSubmit, formState: {errors , isSubmitting}} = useForm<FormValues>()
   const navigate = useNavigate()
   const {state} = useLocation() as LocationState
-  const token = getToken() 
 
   useEffect(() => {
     if(currentUser) {
@@ -70,7 +69,7 @@ const Login: React.FC = () => {
       }
     }
   }
-  if(token) {
+  if(currentUser) {
     return <LoadingTextField/>
   }
   return (
