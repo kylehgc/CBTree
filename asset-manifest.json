@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/CBTree/static/css/main.a549ab81.css",
-    "main.js": "/CBTree/static/js/main.56258fd9.js",
+    "main.js": "/CBTree/static/js/main.f761f63c.js",
     "static/js/439.a71c0749.chunk.js": "/CBTree/static/js/439.a71c0749.chunk.js",
-    "static/js/862.4972b108.chunk.js": "/CBTree/static/js/862.4972b108.chunk.js",
-    "static/js/519.91cd7537.chunk.js": "/CBTree/static/js/519.91cd7537.chunk.js",
+    "static/js/862.49f37f12.chunk.js": "/CBTree/static/js/862.49f37f12.chunk.js",
+    "static/js/519.8c5eaa54.chunk.js": "/CBTree/static/js/519.8c5eaa54.chunk.js",
     "static/js/31.297aa63a.chunk.js": "/CBTree/static/js/31.297aa63a.chunk.js",
     "static/js/870.193ecd8e.chunk.js": "/CBTree/static/js/870.193ecd8e.chunk.js",
     "static/js/621.78b011f3.chunk.js": "/CBTree/static/js/621.78b011f3.chunk.js",
@@ -29,10 +29,10 @@
     "static/media/inter-vietnamese-400-normal.woff2": "/CBTree/static/media/inter-vietnamese-400-normal.a1bc9a8f426924c5dea8.woff2",
     "index.html": "/CBTree/index.html",
     "main.a549ab81.css.map": "/CBTree/static/css/main.a549ab81.css.map",
-    "main.56258fd9.js.map": "/CBTree/static/js/main.56258fd9.js.map",
+    "main.f761f63c.js.map": "/CBTree/static/js/main.f761f63c.js.map",
     "439.a71c0749.chunk.js.map": "/CBTree/static/js/439.a71c0749.chunk.js.map",
-    "862.4972b108.chunk.js.map": "/CBTree/static/js/862.4972b108.chunk.js.map",
-    "519.91cd7537.chunk.js.map": "/CBTree/static/js/519.91cd7537.chunk.js.map",
+    "862.49f37f12.chunk.js.map": "/CBTree/static/js/862.49f37f12.chunk.js.map",
+    "519.8c5eaa54.chunk.js.map": "/CBTree/static/js/519.8c5eaa54.chunk.js.map",
     "31.297aa63a.chunk.js.map": "/CBTree/static/js/31.297aa63a.chunk.js.map",
     "870.193ecd8e.chunk.js.map": "/CBTree/static/js/870.193ecd8e.chunk.js.map",
     "621.78b011f3.chunk.js.map": "/CBTree/static/js/621.78b011f3.chunk.js.map",
@@ -49,6 +49,6 @@
   },
   "entrypoints": [
     "static/css/main.a549ab81.css",
-    "static/js/main.56258fd9.js"
+    "static/js/main.f761f63c.js"
   ]
 }
