@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CBTree/static/css/main.a549ab81.css",
-    "main.js": "/CBTree/static/js/main.240e6dac.js",
+    "main.js": "/CBTree/static/js/main.feea6e27.js",
     "static/js/424.c00eedb4.chunk.js": "/CBTree/static/js/424.c00eedb4.chunk.js",
     "static/js/519.75817c1e.chunk.js": "/CBTree/static/js/519.75817c1e.chunk.js",
     "static/js/31.d889fd8d.chunk.js": "/CBTree/static/js/31.d889fd8d.chunk.js",
@@ -11,7 +11,7 @@
     "static/js/423.f881f7bc.chunk.js": "/CBTree/static/js/423.f881f7bc.chunk.js",
     "static/js/377.3fd9407b.chunk.js": "/CBTree/static/js/377.3fd9407b.chunk.js",
     "static/js/383.c085ea71.chunk.js": "/CBTree/static/js/383.c085ea71.chunk.js",
-    "static/js/678.14061541.chunk.js": "/CBTree/static/js/678.14061541.chunk.js",
+    "static/js/678.0749853b.chunk.js": "/CBTree/static/js/678.0749853b.chunk.js",
     "static/js/134.95928c1f.chunk.js": "/CBTree/static/js/134.95928c1f.chunk.js",
     "static/media/inter-all-400-normal.woff": "/CBTree/static/media/inter-all-400-normal.e71ac35377dd87cb4d4b.woff",
     "static/media/logo.png": "/CBTree/static/media/logo.6a908c0765dff80fec6b.png",
@@ -24,7 +24,7 @@
     "static/media/inter-vietnamese-400-normal.woff2": "/CBTree/static/media/inter-vietnamese-400-normal.a1bc9a8f426924c5dea8.woff2",
     "index.html": "/CBTree/index.html",
     "main.a549ab81.css.map": "/CBTree/static/css/main.a549ab81.css.map",
-    "main.240e6dac.js.map": "/CBTree/static/js/main.240e6dac.js.map",
+    "main.feea6e27.js.map": "/CBTree/static/js/main.feea6e27.js.map",
     "424.c00eedb4.chunk.js.map": "/CBTree/static/js/424.c00eedb4.chunk.js.map",
     "519.75817c1e.chunk.js.map": "/CBTree/static/js/519.75817c1e.chunk.js.map",
     "31.d889fd8d.chunk.js.map": "/CBTree/static/js/31.d889fd8d.chunk.js.map",
@@ -34,11 +34,11 @@
     "423.f881f7bc.chunk.js.map": "/CBTree/static/js/423.f881f7bc.chunk.js.map",
     "377.3fd9407b.chunk.js.map": "/CBTree/static/js/377.3fd9407b.chunk.js.map",
     "383.c085ea71.chunk.js.map": "/CBTree/static/js/383.c085ea71.chunk.js.map",
-    "678.14061541.chunk.js.map": "/CBTree/static/js/678.14061541.chunk.js.map",
+    "678.0749853b.chunk.js.map": "/CBTree/static/js/678.0749853b.chunk.js.map",
     "134.95928c1f.chunk.js.map": "/CBTree/static/js/134.95928c1f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a549ab81.css",
-    "static/js/main.240e6dac.js"
+    "static/js/main.feea6e27.js"
   ]
 }
