@@ -1,11 +1,15 @@
 from database import db
+from os import getenv
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 from deta import Deta
 from models.user import User
-from routers.auth import get_current_user
+from routers.auth import get_current_user, pwd_context, get_user
 from passlib.context import CryptContext
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
 
 database_exception = HTTPException(
     status.HTTP_503_SERVICE_UNAVAILABLE, detail="Error trying to access Database"
@@ -16,6 +20,7 @@ user_exception = HTTPException(
 )
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 class User_Data(BaseModel):
     username: EmailStr
     firstName: Optional[str] = None
@@ -23,12 +28,13 @@ class User_Data(BaseModel):
     activeThoughtRecord: Optional[str] = None
     thoughtRecords = []
 
+
 class New_User_Data(User_Data):
     password: str
-    
 
 
 router = APIRouter()
+
 
 async def get_user(username: EmailStr):
     user = db.fetch({"username": username})
@@ -36,18 +42,51 @@ async def get_user(username: EmailStr):
         return user.items[0]
     return False
 
+
+@router.post("/user/reset/", status_code=202)
+async def reset_password(user_name: EmailStr):
+    user = await get_user(user_name)
+    if user:
+        reset_item = db.put(user_name, expire_in=600)
+        await send_reset_email(reset_item['key'],user_name)
+        return "email reset successful"
+    else: raise HTTPException(status_code=400, detail="User doesn't exist")
+
 @router.get("/user/", response_model=User_Data)
 async def read_users_me(current_user: User = Depends(get_current_user)):
-    print(current_user)
     return_data: User_Data = {
         "username": current_user["username"],
         "firstName": current_user["firstName"],
         "lastName": current_user["lastName"],
         "thoughtRecords": current_user["thoughtRecords"],
-        "activeThoughtRecord": current_user["activeThoughtRecord"]
+        "activeThoughtRecord": current_user["activeThoughtRecord"],
     }
     return return_data
-    
+
+async def send_reset_email(key: str, user_email: EmailStr):
+    username=getenv('GMAIL_EMAIL_ACCOUNT')
+    password=getenv('GMAIL_APP_PASSWORD')
+    print(password)
+    print(username)
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = "Test email"
+    msg['From'] = username
+    msg['to'] = "kylehgc@gmail.com"
+    html = (f"<p>Hello, "  
+ f"There was a request to change your password!"
+f"If you did not make this request then please ignore this email."
+f"Otherwise, please click this link to change your password:</p> ")
+
+    email_body = MIMEText(html, 'html')
+    msg.attach(email_body)
+    server = smtplib.SMTP('smtp.gmail.com', 587) 
+    server.ehlo()
+    server.starttls()
+    server.login(username,password)  
+    server.sendmail(msg['from'],user_email, msg.as_string())  
+    server.quit()
+
+
 @router.post("/user/")
 async def new_user(new_user: New_User_Data):
     new_user_dict = new_user.dict()
@@ -56,20 +95,22 @@ async def new_user(new_user: New_User_Data):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="User Already Exists",
-            headers={"WWW-Authenticate": "Bearer"})
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     else:
         hashed_password = pwd_context.hash(new_user_dict["password"])
-        new_user_dict["password"] = hashed_password 
+        new_user_dict["password"] = hashed_password
         new_user = User(**new_user_dict)
         user = db.put(new_user.dict())
         from routers.auth import create_access_token
+
         encode_data = {"sub": user["username"], "key": user["key"]}
         access_token = create_access_token(encode_data)
         return {"access_token": access_token, "token_type": "bearer"}
-        
+
+
 @router.post("/user/thoughtrecord")
-async def finish_current_thought_record(
-    current_user: User = Depends(get_current_user)):
-        updates = {"activeThoughtRecord": None}
-        db.update(updates, current_user["key"])
-        return db.get(current_user["key"])
+async def finish_current_thought_record(current_user: User = Depends(get_current_user)):
+    updates = {"activeThoughtRecord": None}
+    db.update(updates, current_user["key"])
+    return db.get(current_user["key"])
