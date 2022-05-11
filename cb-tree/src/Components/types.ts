@@ -79,6 +79,22 @@ export const isFullThoughtRecord = (record: any): record is FullThoughtRecord =>
   return true
 }
 
+export const isToken = (obj: any): obj is Token => {
+  return obj.token_type === 'bearer' && 'access_token' in obj
+}
+
+export interface Token {
+  access_token: string
+  token_type: 'bearer'
+}
+
+export interface User {
+  activeThoughtRecord: string | null
+  thoughtRecords: string[]
+  username: string
+  firstName?: string
+  lastName?: string
+}
 export type FullThoughtRecord = Required<ThoughtRecord>
 
 export interface ThoughtRecord {

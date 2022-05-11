@@ -55,6 +55,7 @@
 		]
 	},
 	"devDependencies": {
-		"gh-pages": "^3.2.3"
+		"gh-pages": "^3.2.3",
+		"webpack-bundle-analyzer": "^4.5.0"
 	}
 }

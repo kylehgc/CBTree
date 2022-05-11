@@ -76,7 +76,6 @@ const SelectQuestion: React.FC<RecordProps> = ({
 					</Box>
 					<Button
 						alignSelf={'center'}
-						bg={'white'}
 						onClick={() => addMood(selectedMood)}
 						w={'60%'}
 						minH={10}

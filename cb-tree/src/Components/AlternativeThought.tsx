@@ -5,6 +5,7 @@ import {
 	Input,
 	Button,
 	SlideFade,
+	LightMode,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import useThoughtRecord from '../Hooks/UseThoughtRecord'
@@ -16,7 +17,7 @@ import LoadingTextField from './LoadingTextField'
 import HotThoughtDisplay from './HotThoughtDisplay'
 
 const AlternativeThought: React.FC = () => {
-	const { foregroundColor } = useThemeColors()
+	const { foregroundColor, textColor } = useThemeColors()
 	const [balancedThought, setBalancedThought] = useState<string>('')
 	const [moods, setMoods] = useState<Mood[]>([])
 	const { onSubmit, thoughtRecord, isSubmitting, isValidQuestion } =
@@ -115,18 +116,21 @@ const AlternativeThought: React.FC = () => {
 				offsetY={0}
 				offsetX={100}
 			>
-				<Input
-					onChange={handleOnChange}
-					value={balancedThought}
-					size="lg"
-					p={1}
-					alignSelf={'center'}
-					variant="outlined"
-					bg={foregroundColor}
-					w={'90%'}
-					_placeholder={{ color: 'blackAlpha.700', textAlign: 'center' }}
-					placeholder="What are some Balanced Thoughts?"
-				/>
+				<LightMode>
+					<Input
+						color={textColor}
+						onChange={handleOnChange}
+						value={balancedThought}
+						size="lg"
+						p={1}
+						alignSelf={'center'}
+						variant="outlined"
+						bg={foregroundColor}
+						w={'90%'}
+						_placeholder={{ color: textColor, textAlign: 'center' }}
+						placeholder="What are some Balanced Thoughts?"
+					/>
+				</LightMode>
 				<Button
 					onClick={() => addMood(balancedThought)}
 					bg={foregroundColor}
@@ -150,8 +154,7 @@ const AlternativeThought: React.FC = () => {
 					loadingText={'Submitting'}
 					onClick={() => onSubmit(moods)}
 				>
-					{' '}
-					Submit{' '}
+					Submit
 				</Button>
 			) : null}
 			<Box h={'10vh'} />

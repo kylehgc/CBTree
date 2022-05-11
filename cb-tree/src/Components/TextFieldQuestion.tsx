@@ -1,6 +1,12 @@
 import useThoughtRecord from '../Hooks/UseThoughtRecord'
 
-import { Textarea, Button, VStack, SlideFade } from '@chakra-ui/react'
+import {
+	Textarea,
+	Button,
+	VStack,
+	SlideFade,
+	useColorModeValue,
+} from '@chakra-ui/react'
 
 import { useEffect, useState } from 'react'
 import UseThemeColors from '../Hooks/useThemeColors'
@@ -8,6 +14,7 @@ import { isKeyOfThoughtRecord } from './types'
 import LoadingTextField from './LoadingTextField'
 
 const TextFieldQuestion: React.FC = () => {
+	const placeholderColor = useColorModeValue('black', 'white')
 	const { foregroundColor } = UseThemeColors()
 	const [fieldState, setFieldState] = useState<string>('')
 	const {
@@ -21,15 +28,15 @@ const TextFieldQuestion: React.FC = () => {
 
 	useEffect(() => {
 		if (thoughtRecord) {
-			if (isKeyOfThoughtRecord(currentQuestion, thoughtRecord) && !fieldState) {
+			if (isKeyOfThoughtRecord(currentQuestion, thoughtRecord)) {
 				const value = thoughtRecord[currentQuestion]
 				if (typeof value === 'string') {
 					setFieldState(value)
 				}
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentQuestion, thoughtRecord])
+
 	const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
 		setFieldState(event.target.value)
 	}
@@ -38,10 +45,10 @@ const TextFieldQuestion: React.FC = () => {
 	}
 	return (
 		<VStack
-			spacing={0}
+			spacing={2}
 			rounded={'3xl'}
 			w={'full'}
-			minH={'100%'}
+			h={'70vh'}
 			flexDirection="column"
 			mt={6}
 			alignContent="center"
@@ -60,7 +67,7 @@ const TextFieldQuestion: React.FC = () => {
 				style={{
 					display: 'flex',
 					flexDirection: 'column',
-					height: '90%',
+					height: '70vh',
 					width: '100%',
 				}}
 				in={!isSubmitting}
@@ -69,8 +76,10 @@ const TextFieldQuestion: React.FC = () => {
 					placeholder={label}
 					onChange={onChange}
 					value={fieldState}
-					color={'black'}
-					_placeholder={{ color: 'blackAlpha.800', fontSize: '3xl' }}
+					_placeholder={{
+						color: placeholderColor,
+						fontSize: '3xl',
+					}}
 					p={4}
 					bg={foregroundColor}
 					h={'90%'}
@@ -95,13 +104,10 @@ const TextFieldQuestion: React.FC = () => {
 				}}
 			>
 				<Button
-					height={10}
-					w="70%"
+					variant={'submit'}
 					disabled={fieldState.length < 1}
-					mt={0}
 					alignSelf={'center'}
 					isLoading={isSubmitting}
-					background={foregroundColor}
 					loadingText={'Submitting'}
 					onClick={() => onSubmit(fieldState)}
 				>

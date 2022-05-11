@@ -1,5 +1,5 @@
-import { Button, Center, Heading, HStack, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Button, Flex, Center, Heading, HStack, VStack } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import EmotionButton, { Emotion } from './EmotionButton'
 import LoadingTextField from './LoadingTextField'
 import useThoughtRecord from '../Hooks/UseThoughtRecord'
@@ -9,6 +9,7 @@ import {
 	faFaceGrin,
 	faFaceSmile,
 } from '@fortawesome/free-solid-svg-icons'
+import { isKeyOfThoughtRecord } from './types'
 
 export const emotions: Emotion[] = [
 	{ icon: faFaceFrownOpen, emotionColor: '#322659', emotionName: 'Awful' },
@@ -25,61 +26,75 @@ const getEmotionColorByName = (emotionName: string) => {
 const EmotionPicker: React.FC = () => {
 	const [selected, setSelected] = useState<string>('')
 	const emotionColor = getEmotionColorByName(selected)
-	const { label, isSubmitting, onSubmit, thoughtRecord } = useThoughtRecord()
+	const { label, isSubmitting, onSubmit, currentQuestion, thoughtRecord } =
+		useThoughtRecord()
+
+	useEffect(() => {
+		if (thoughtRecord) {
+			if (isKeyOfThoughtRecord(currentQuestion, thoughtRecord)) {
+				const value = thoughtRecord[currentQuestion]
+				if (typeof value === 'string') {
+					setSelected(value)
+				}
+			}
+		}
+	}, [currentQuestion, thoughtRecord])
 
 	if (!thoughtRecord) {
 		return <LoadingTextField />
 	}
-
 	return (
 		<>
-			<Center
-				rounded={'75px'}
-				border={selected ? '15px solid' : 'none'}
-				borderColor={emotionColor}
-				m={0}
-				mx={-20}
-				w={{ base: 'auto', lg: '100vw' }}
-				p={2}
-				height={'150vh'}
-				flexDir={'column'}
-			>
-				<Heading position={'fixed'} top={40} p={0}>
-					{label}
-				</Heading>
-				<HStack
-					height={'50%'}
+			<Flex p={4}>
+				<Center
+					mt={4}
+					rounded={'75px'}
+					border={selected ? '15px solid' : 'none'}
+					borderColor={emotionColor}
+					m={0}
+					mx={-20}
+					w={{ base: 'auto', md: '100vw' }}
 					p={2}
-					w={{ base: '100%', lg: '50%' }}
-					spacing={{ base: 8, lg: 'auto' }}
+					height={'70vh'}
+					flexDir={'column'}
 				>
-					{emotions.map(({ emotionName }) => (
-						<EmotionButton
-							key={emotionName}
-							emotionName={emotionName}
-							selected={selected}
-							setSelected={setSelected}
-						/>
-					))}
-				</HStack>
-				<VStack p={2} w={'full'} height={'10vh'} spacing={6}>
-					{selected ? (
-						<>
-							<Heading color={emotionColor}> {selected} </Heading>
-							<Button
-								m={2}
-								isLoading={isSubmitting}
-								onClick={() => onSubmit(selected)}
-								w={'60%'}
-								minH={'40px'}
-								bg={'white'}
-							>
-								Submit
-							</Button>
-						</>
-					) : null}
-				</VStack>
-			</Center>
+					<Heading position={'fixed'} top={52} p={0}>
+						{label}
+					</Heading>
+					<HStack
+						height={'50%'}
+						p={2}
+						w={{ base: '100%', lg: '80%' }}
+						spacing={{ base: 9, md: 'auto' }}
+					>
+						{emotions.map(({ emotionName }) => (
+							<EmotionButton
+								key={emotionName}
+								emotionName={emotionName}
+								selected={selected}
+								setSelected={setSelected}
+							/>
+						))}
+					</HStack>
+					<VStack p={2} w={'full'} height={'10vh'} spacing={6}>
+						{selected ? (
+							<>
+								<Heading color={emotionColor}> {selected} </Heading>
+								<Button
+									m={2}
+									variant={'submit'}
+									isLoading={isSubmitting}
+									onClick={() => onSubmit(selected)}
+									w={'60%'}
+									minH={'40px'}
+								>
+									Submit
+								</Button>
+							</>
+						) : null}
+					</VStack>
+				</Center>
+			</Flex>
 		</>
 	)
 }

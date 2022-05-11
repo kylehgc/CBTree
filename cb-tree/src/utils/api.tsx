@@ -1,6 +1,6 @@
-import { isToken } from '../Hooks/useAuth'
+import { isToken } from '../Components/types'
 
-const BASEURL = 'https://7astgo.deta.dev/'
+const BASEURL = 'https://ciy1es.deta.dev/'
 
 type Endpoints = {
 	[key: string]: URL

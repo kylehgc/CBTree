@@ -1,6 +1,15 @@
-import { Box, Stack, Link, Button, Heading, useToast } from '@chakra-ui/react'
+import {
+	Box,
+	Stack,
+	Link,
+	Button,
+	Heading,
+	useToast,
+	useColorMode,
+	useColorModeValue,
+} from '@chakra-ui/react'
 
-import useAuth, { Token } from '../Hooks/useAuth'
+import useAuth from '../Hooks/useAuth'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { loginEndpoint } from '../utils/api'
 import UserPassFormElements from './UserPassFormElements'
@@ -8,6 +17,7 @@ import UseThemeColors from '../Hooks/useThemeColors'
 import { useEffect } from 'react'
 import { useNavigate, Link as BrowserLink, useLocation } from 'react-router-dom'
 import LoadingTextField from './LoadingTextField'
+import { Token } from './types'
 
 interface FormValues {
 	username: string
@@ -22,7 +32,7 @@ type LocationState = {
 const Login: React.FC = () => {
 	const toast = useToast()
 	const { login, currentUser } = useAuth()
-	const { foregroundColor, backgroundColor } = UseThemeColors()
+	const { foregroundColor, backgroundColor, linkColor } = UseThemeColors()
 	const {
 		register,
 		handleSubmit,
@@ -64,7 +74,8 @@ const Login: React.FC = () => {
 			}
 		}
 	}
-	if (currentUser) {
+	console.log(currentUser)
+	if (currentUser === null) {
 		return <LoadingTextField />
 	}
 	return (
@@ -74,44 +85,41 @@ const Login: React.FC = () => {
 			</Stack>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Box rounded={'lg'} bg={foregroundColor} boxShadow={'lg'} p={8}>
-					<Stack spacing={4}>
-						<UserPassFormElements register={register} errors={errors} />
-						<Stack spacing={8}>
-							<Stack
-								direction={{ base: 'column', sm: 'row' }}
-								align={'start'}
-								spacing={4}
-								justify={'space-between'}
-							>
-								<Link color={'blue.400'}>Forgot password?</Link>
-							</Stack>
-							<Button
-								type={'submit'}
-								isLoading={isSubmitting}
-								loadingText={'Submitting'}
-								variant={'loginSubmit'}
-								textColor={'white'}
-								bg={backgroundColor}
-								_hover={{
-									bg: 'blue.500',
-								}}
-							>
-								Sign in
-							</Button>
-							<Link
-								as={BrowserLink}
-								to="/signup"
-								textAlign={'center'}
-								color={'blue.400'}
-							>
-								New User? Sign up here!
+					<UserPassFormElements register={register} errors={errors} />
+					<Stack spacing={8}>
+						<Stack
+							direction={{ base: 'column', sm: 'row' }}
+							align={'start'}
+							spacing={4}
+							justify={'space-between'}
+						>
+							<Link as={BrowserLink} color={linkColor} to={'/forgotpassword'}>
+								Forgot password?
 							</Link>
 						</Stack>
+						<Button
+							type={'submit'}
+							isLoading={isSubmitting}
+							loadingText={'Submitting'}
+							variant={'loginSubmit'}
+							textColor={'white'}
+							bg={backgroundColor}
+							sx={{ _hover: { _disabled: { bg: backgroundColor } } }}
+						>
+							Sign in
+						</Button>
+						<Link
+							as={BrowserLink}
+							to="/signup"
+							textAlign={'center'}
+							color={linkColor}
+						>
+							New User? Sign up here!
+						</Link>
 					</Stack>
 				</Box>
 			</form>
 		</Stack>
 	)
 }
-
 export default Login

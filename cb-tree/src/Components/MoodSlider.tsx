@@ -99,14 +99,14 @@ const MoodEntry: React.FC<MoodEntryProps> = ({
 					width: '100%',
 				}}
 			>
-				<Box w={{ base: 'full', lg: '50%' }} my={3} alignSelf={'center'}>
+				<Box w={{ base: 'full', lg: '80%' }} my={3} alignSelf={'center'}>
 					<HStack
 						rounded={'2xl'}
 						mx={3}
+						bg={foregroundColor}
 						pl={2}
 						minH={20}
 						pr={1}
-						bg={foregroundColor}
 						justifyContent={'center'}
 					>
 						<VStack ml={2} spacing={2} p={1} w={'100%'}>
@@ -155,7 +155,7 @@ const DeleteButton: React.FC<ButtonProps> = ({ deleteHandler }) => {
 			color={'black'}
 			aria-label="Delete Mood"
 			variant="ghost"
-			size={'lg'}
+			size={'sm'}
 			icon={<CloseIcon />}
 			onClick={deleteHandler}
 		/>

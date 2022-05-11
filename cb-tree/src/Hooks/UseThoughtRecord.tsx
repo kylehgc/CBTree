@@ -12,7 +12,7 @@ import {
 	FormValues,
 } from '../Components/types'
 import { getToken } from '../utils/api'
-import { useThoughtRecordApi } from './useThoughtRecordApi'
+import useThoughtRecordApi from './useThoughtRecordApi'
 
 interface UseThoughtRecordReturn {
 	label: string
@@ -87,7 +87,7 @@ const UseThoughtRecord = (): UseThoughtRecordReturn | never => {
 			if (pathname === '/submit') {
 				try {
 					await saveThoughtRecord()
-					navigate('/')
+					navigate('/profile')
 				} catch (error) {
 					if (error instanceof Error) {
 						toast({

@@ -11,44 +11,60 @@ const theme: SystemStyleObject = extendTheme({
 			background: 'teal.500',
 			backgroundDark: '#011627',
 			foreground: 'white',
-			foregroundDark: 'white',
+			foregroundDark: 'gray.400',
 		},
 	},
 	components: {
-		Text: {
-			baseStyle: (props: ThemeComponentProps) => ({
-				color: 'black',
-			}),
+		Table: {
+			variants: {
+				striped: (props: ThemeComponentProps) => ({
+					...props,
+					th: {
+						color: mode('white', 'gray.400')(props),
+					},
+					caption: {
+						color: mode('white', 'gray.400')(props),
+					},
+				}),
+			},
 		},
-		FormLabel: {
-			color: 'black',
-		},
+
 		Heading: {
 			baseStyle: (props: ThemeComponentProps) => ({
 				color: mode('theme.foreground', 'theme.foregroundDark')(props),
 			}),
 		},
 		Button: {
-			baseStyle: {
-				color: 'black',
+			baseStyle: (props: ThemeComponentProps) => ({
+				_hover: {
+					_disabled: {
+						bg: mode('white', 'gray.400')(props),
+					},
+				},
+				bg: mode('gray.100', 'white')(props),
 				rounded: '2xl',
-			},
+			}),
 			variants: {
 				submit: (props: ThemeComponentProps) => ({
-					color: 'black',
+					background: mode('gray.100', 'whiteAlpha.400')(props),
+					color: mode('black', 'white')(props),
 					minHeight: 10,
 					w: '60%',
-					_loading: { bg: 'white' },
-					bg: mode('theme.foreground', 'theme.foregroundDark')(props),
 					rounded: '2xl',
 					alignSelf: 'center',
 				}),
 			},
 			loginSubmit: (props: ThemeComponentProps) => ({
 				bg: mode('theme.background', 'theme.backGroundDark')(props),
+				_hover: {
+					_disabled: {
+						bg: mode('white', 'gray.400')(props),
+					},
+				},
 			}),
 			solid: (props: ThemeComponentProps) => ({
 				bg: mode('theme.foreground', 'theme.foregroundDark')(props),
+				color: mode('black', 'white')(props),
 				rounded: '2xl',
 			}),
 		},

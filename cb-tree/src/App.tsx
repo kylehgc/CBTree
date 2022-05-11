@@ -6,7 +6,11 @@ import Nav from './Components/Nav'
 import { Container } from '@chakra-ui/react'
 import Providers from './Components/Providers'
 import LoadingTextField from './Components/LoadingTextField'
+import Profile from './Components/Profile'
+import ThoughtRecordExplination from './Components/ThoughtRecordExplination'
 
+const PasswordReset = lazy(() => import('./Components/PasswordReset'))
+const ForgotPassword = lazy(() => import('./Components/ForgotPassword'))
 const EmotionPicker = lazy(() => import('./Components/EmotionPicker'))
 const SubmitThoughtRecord = lazy(
 	() => import('./Components/SubmitThoughtRecord'),
@@ -16,16 +20,28 @@ const Signup = lazy(() => import('./Components/Signup'))
 const Login = lazy(() => import('./Components/LoginForm'))
 const FeelingQuestion = lazy(() => import('./Components/FeelingQuestion'))
 const TextFieldQuestion = lazy(() => import('./Components/TextFieldQuestion'))
+
 const ThoughtQuestion = lazy(() => import('./Components/ThoughtQuestion'))
 
 export const App = () => (
 	// <Router basename={process.env.PUBLIC_URL}>
 	<Router>
 		<Providers>
-			<Container p={2} centerContent height="87vh" width="100vw">
+			<Container p={2} centerContent minH={'80vh'} width="100vw">
 				<Nav />
 				<Suspense fallback={<LoadingTextField />}>
 					<Routes>
+						<Route path="/about" element={<ThoughtRecordExplination />} />
+						<Route
+							path="/profile"
+							element={
+								<RequireAuth>
+									<Profile />
+								</RequireAuth>
+							}
+						/>
+						<Route path="/reset/:resetKey" element={<PasswordReset />} />
+						<Route path="/forgotpassword" element={<ForgotPassword />} />
 						<Route
 							path="/emotion"
 							element={
@@ -75,11 +91,12 @@ export const App = () => (
 								</RequireAuth>
 							}
 						/>
+
 						<Route
 							path="/evidenceagainst"
 							element={
 								<RequireAuth>
-									<TextFieldQuestion />
+									<TextFieldQuestion key="rerender" />
 								</RequireAuth>
 							}
 						/>

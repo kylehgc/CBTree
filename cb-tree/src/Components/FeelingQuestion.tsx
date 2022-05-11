@@ -1,18 +1,18 @@
-import { Button } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
-import feelings from "../Data/feelings.json"
-import UseThemeColors from "../Hooks/useThemeColors"
-import UseThoughtRecord from "../Hooks/UseThoughtRecord"
-import LoadingTextField from "./LoadingTextField"
-import SelectQuestion from "./SelectQuestion"
-import { isKeyOfThoughtRecord, Mood } from "./types"
+import { Button } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+import feelings from '../Data/feelings.json'
+import UseThemeColors from '../Hooks/useThemeColors'
+import UseThoughtRecord from '../Hooks/UseThoughtRecord'
+import LoadingTextField from './LoadingTextField'
+import SelectQuestion from './SelectQuestion'
+import { isKeyOfThoughtRecord, Mood } from './types'
 
 interface Props {
 	defaultMoods?: Mood[]
 }
 export const isMood = (value: any): value is Mood[] => {
 	if (Array.isArray(value) && value.length > 0) {
-		return "mood" in value[0]
+		return 'mood' in value[0]
 	}
 	return false
 }
@@ -23,7 +23,7 @@ const FeelingQuestion: React.FC<Props> = () => {
 		UseThoughtRecord()
 
 	useEffect(() => {
-		if (currentQuestion === "reratemoods") {
+		if (currentQuestion === 'reratemoods') {
 			if (thoughtRecord?.mood) {
 				setMoods(thoughtRecord.mood)
 			}
@@ -62,8 +62,7 @@ const FeelingQuestion: React.FC<Props> = () => {
 					minH={10}
 					w="60%"
 					isLoading={isSubmitting}
-					bg={foregroundColor}
-					loadingText={"Submitting"}
+					loadingText={'Submitting'}
 					onClick={() => onSubmit(moods)}
 				>
 					Submit

@@ -96,9 +96,8 @@ export default function SignupCard() {
 						<HStack>
 							<Box>
 								<FormControl isInvalid={!!errors?.firstName?.message}>
-									<FormLabel color={'black'}>First Name</FormLabel>
+									<FormLabel>First Name</FormLabel>
 									<Input
-										color={'black'}
 										type="text"
 										{...register('firstName', {
 											maxLength: {
@@ -118,9 +117,8 @@ export default function SignupCard() {
 							</Box>
 							<Box>
 								<FormControl isInvalid={!!errors?.lastName?.message}>
-									<FormLabel color={'black'}>Last Name</FormLabel>
+									<FormLabel>Last Name</FormLabel>
 									<Input
-										color={'black'}
 										type="text"
 										{...register('lastName', {
 											maxLength: {
@@ -143,11 +141,11 @@ export default function SignupCard() {
 						<Stack spacing={10} pt={2}>
 							<Button
 								type="submit"
+								color="white"
 								isLoading={isSubmitting}
 								loadingText="Submitting"
 								size="lg"
 								bg={backgroundColor}
-								color={foregroundColor}
 								_hover={{
 									bg: 'blue.500',
 								}}
@@ -157,7 +155,7 @@ export default function SignupCard() {
 						</Stack>
 						<Stack pt={6}>
 							<Text align={'center'}>
-								Already a user?
+								Already a user?{' '}
 								<Link as={ReactRouterLink} to={'/'} color={'blue.400'}>
 									Login
 								</Link>

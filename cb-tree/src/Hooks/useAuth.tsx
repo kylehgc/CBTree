@@ -6,38 +6,25 @@ import {
 	useContext,
 	useCallback,
 } from 'react'
+import { isToken, Token, User } from '../Components/types'
 import { userEndPoint } from '../utils/api'
 import { getAuthHeader } from '../utils/api'
-export interface Token {
-	access_token: string
-	token_type: 'bearer'
-}
-
-export interface User {
-	activeThoughtRecord: string | null
-	thoughtRecords: string[]
-	username: string
-	firstName?: string
-	lastName?: string
-}
 
 interface AuthContext {
 	login: (token: Token) => void
 	logout: () => void
-	currentUser: User | null
+	currentUser: User | null | false
 }
 
-export const isToken = (obj: any): obj is Token => {
-	return obj.token_type === 'bearer' && 'access_token' in obj
-}
 const authContext = createContext({} as AuthContext)
 
 const useAuth = () => {
-	const [currentUser, setCurrentUser] = useState<User | null>(null)
+	const [currentUser, setCurrentUser] = useState<User | null | false>(null)
 	const toast = useToast()
+
 	const logout = useCallback(() => {
 		localStorage.removeItem('userToken')
-		setCurrentUser(null)
+		setCurrentUser(false)
 		toast({
 			status: 'success',
 			description: 'Logged out...',
@@ -66,13 +53,15 @@ const useAuth = () => {
 	)
 
 	useEffect(() => {
-		if (!currentUser) {
+		if (currentUser === null) {
 			const storageTokenString = localStorage.getItem('userToken')
 			if (storageTokenString !== null) {
 				const storageToken = JSON.parse(storageTokenString)
 				if (isToken(storageToken)) {
 					getUser(storageToken)
 				}
+			} else {
+				setCurrentUser(false)
 			}
 		}
 	}, [currentUser, getUser])

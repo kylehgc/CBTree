@@ -30,7 +30,8 @@ const EmotionButton: React.FC<EmotionButtonProps> = ({
 	const iconColor = useColorModeValue('black', 'white')
 	const buttonSize = useBreakpointValue<string>({
 		base: '3x',
-		lg: '5x',
+		md: '5x',
+		lg: '9x',
 	}) as ButtonSizes
 
 	const getIconColor = (emotionName: string) => {
@@ -49,6 +50,7 @@ const EmotionButton: React.FC<EmotionButtonProps> = ({
 		}
 	}
 	const displayColor = getIconColor(emotionName)
+
 	return (
 		<>
 			<FontAwesomeIcon

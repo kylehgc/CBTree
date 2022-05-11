@@ -16,8 +16,7 @@ const HotThoughtSelect: React.FC<HotThoughtProps> = ({
 	return (
 		<>
 			<Heading mt={4} mx={4} textAlign={'center'}>
-				{' '}
-				Choose the Hot Thought{' '}
+				Choose the Hot Thought
 			</Heading>
 			<Center
 				p={4}
@@ -34,7 +33,7 @@ const HotThoughtSelect: React.FC<HotThoughtProps> = ({
 							p={2}
 							rounded={'2xl'}
 							fontSize={14}
-							color={selected === thought ? foregroundColor : 'black'}
+							color={selected === thought ? 'white' : 'inital'}
 							minH={'10vh'}
 							width={'90%'}
 							bg={selected === thought ? 'red.500' : foregroundColor}

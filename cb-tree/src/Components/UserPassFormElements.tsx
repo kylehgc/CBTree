@@ -27,11 +27,10 @@ const UserPassFormElements: React.FC<IProps> = ({
 	return (
 		<>
 			<FormControl isRequired isInvalid={!!errors?.username} id="email">
-				<FormLabel color={'black'}>Email address</FormLabel>
+				<FormLabel>Email address</FormLabel>
 				<Input
 					_hover={{ borderColor: 'gray.300' }}
 					borderColor={'gray.300'}
-					color={'black'}
 					type="text"
 					placeholder="Email"
 					{...register('username', {
@@ -45,7 +44,7 @@ const UserPassFormElements: React.FC<IProps> = ({
 				<FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
 			</FormControl>
 			<FormControl isInvalid={!!errors?.password?.message} id="password">
-				<FormLabel color={'black'}>Password</FormLabel>
+				<FormLabel>Password</FormLabel>
 				<Input
 					borderColor={'gray.300'}
 					color={'black'}

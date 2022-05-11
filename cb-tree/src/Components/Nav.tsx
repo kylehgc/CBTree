@@ -1,33 +1,28 @@
 import logo from '../media/logo.png'
 import {
-	Avatar,
 	Link,
-	Button,
 	Center,
 	Image,
-	Menu,
-	MenuButton,
-	MenuDivider,
-	MenuItem,
-	MenuList,
 	useColorMode,
 	HStack,
 	IconButton,
 } from '@chakra-ui/react'
+
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import UseThemeColors from '../Hooks/useThemeColors'
 import useAuth from '../Hooks/useAuth'
-import { useEffect, useState } from 'react'
-import { Link as ReactRouterLink, useNavigate } from 'react-router-dom'
+import { Suspense, useEffect, useState } from 'react'
+import { Link as ReactRouterLink } from 'react-router-dom'
+import React from 'react'
 
 export default function Nav() {
 	const { backgroundColor, foregroundColor } = UseThemeColors()
 	const { colorMode, toggleColorMode } = useColorMode()
-	const { currentUser, logout } = useAuth()
+	const { currentUser } = useAuth()
 	const [displayName, setDisplayName] = useState<string | null>(null)
-	const navigate = useNavigate()
+	const LoggedInNav = React.lazy(() => import('./LoggedInNav'))
 	useEffect(() => {
-		if (currentUser?.username) {
+		if (currentUser) {
 			if (currentUser?.firstName) {
 				setDisplayName(currentUser.firstName)
 			} else {
@@ -36,11 +31,8 @@ export default function Nav() {
 		} else {
 			setDisplayName(null)
 		}
-	}, [currentUser?.firstName, currentUser?.username])
-	const handleLogout = () => {
-		logout()
-		navigate('/')
-	}
+	}, [currentUser])
+
 	return (
 		<Center flexDir={{ base: 'row' }} m={2}>
 			<Image
@@ -69,53 +61,17 @@ export default function Nav() {
 					size="lg"
 					_hover={{ background: backgroundColor }}
 					_active={{ background: backgroundColor }}
-					icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+					icon={
+						colorMode === 'light' ? <MoonIcon /> : <SunIcon color={'white'} />
+					}
 					onClick={toggleColorMode}
 				/>
 				{displayName ? (
-					<Menu>
-						<MenuButton
-							maxW={'10%'}
-							as={Button}
-							rounded={'full'}
-							variant={'link'}
-							cursor={'pointer'}
-							minW={0}
-						>
-							<Avatar
-								name={displayName}
-								size="md"
-								color={backgroundColor}
-								bg={foregroundColor}
-							/>
-						</MenuButton>
-						<MenuList alignItems={'center'} zIndex={'overlay'}>
-							<br />
-							<Center>
-								<Avatar
-									size={'2xl'}
-									bg={backgroundColor}
-									color={foregroundColor}
-									name={displayName}
-								/>
-							</Center>
-							<br />
-							<Center>
-								<p>{displayName}</p>
-							</Center>
-							<br />
-							<MenuDivider />
-							<MenuItem>New Thought Record</MenuItem>
-							<MenuItem onClick={handleLogout}>Logout</MenuItem>
-						</MenuList>
-					</Menu>
+					<Suspense fallback={null}>
+						<LoggedInNav displayName={displayName} />
+					</Suspense>
 				) : (
-					<Link
-						fontSize={15}
-						color={foregroundColor}
-						to={'/'}
-						as={ReactRouterLink}
-					>
+					<Link fontSize={15} color={'white'} to={'/'} as={ReactRouterLink}>
 						Login
 					</Link>
 				)}

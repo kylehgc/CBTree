@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react'
+import { Button, Heading } from '@chakra-ui/react'
 import UseThoughtRecord from '../Hooks/UseThoughtRecord'
 import LoadingTextField from './LoadingTextField'
 import ThoughtRecordDisplay from './ThoughtRecordDisplay'
@@ -11,6 +11,7 @@ const SubmitThoughtRecord: React.FC = () => {
 	}
 	return (
 		<>
+			<Heading my={4}>Your Thought Record</Heading>
 			<ThoughtRecordDisplay thoughtRecord={thoughtRecord} />
 			<Button
 				mt={2}
@@ -18,7 +19,7 @@ const SubmitThoughtRecord: React.FC = () => {
 				isLoading={isSubmitting}
 				onClick={() => onSubmit(thoughtRecord)}
 			>
-				Finish Thought Record
+				Submit
 			</Button>
 		</>
 	)

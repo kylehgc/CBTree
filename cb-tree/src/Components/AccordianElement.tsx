@@ -5,8 +5,7 @@ import {
 	AccordionIcon,
 	AccordionPanel,
 	Heading,
-} from "@chakra-ui/react"
-import UseThemeColors from "../Hooks/useThemeColors"
+} from '@chakra-ui/react'
 
 interface PopoverButtonProps {
 	label: string
@@ -17,16 +16,14 @@ const AccordionElement: React.FC<PopoverButtonProps> = ({
 	label,
 	popoverText,
 }) => {
-	const { foregroundColor } = UseThemeColors()
 	return (
 		<AccordionItem
-			alignSelf={"center"}
+			alignSelf={'center'}
 			my={2}
 			ml={{ base: 5, lg: 0 }}
-			w={{ base: "90%", lg: "100%" }}
-			bg={foregroundColor}
+			w={{ base: '90%', lg: '100%' }}
 		>
-			<Heading color={"black"}>
+			<Heading>
 				<AccordionButton>
 					<Box flex="1" textAlign="left">
 						{label}
@@ -34,7 +31,9 @@ const AccordionElement: React.FC<PopoverButtonProps> = ({
 					<AccordionIcon />
 				</AccordionButton>
 			</Heading>
-			<AccordionPanel p={4}>{popoverText}</AccordionPanel>
+			<AccordionPanel color="white" p={4}>
+				{popoverText}
+			</AccordionPanel>
 		</AccordionItem>
 	)
 }

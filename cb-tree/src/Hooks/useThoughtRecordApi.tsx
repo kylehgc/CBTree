@@ -4,12 +4,17 @@ import {
 	getAuthHeader,
 	userEndPoint,
 } from '../utils/api'
-import useAuth, { Token } from './useAuth'
-import { FormValues, ThoughtRecord, isThoughtRecord } from '../Components/types'
+import useAuth from './useAuth'
+import {
+	FormValues,
+	ThoughtRecord,
+	isThoughtRecord,
+	Token,
+} from '../Components/types'
 /* returns a function that takes in the current path and active thought record 
 to update and a piece of state that shows if the data is currently being fetched */
 
-export const useThoughtRecordApi = () => {
+const useThoughtRecordApi = () => {
 	const { logout } = useAuth()
 	const authHeader = getAuthHeader()
 	const [isSubmitting, setIsSubmitting] = useState(false)
@@ -50,10 +55,17 @@ export const useThoughtRecordApi = () => {
 		}
 	}
 
+	const getAllThoughtRecords = async () => {
+		const options: RequestInit = {
+			...authHeader,
+		}
+		return await handleFetch(`${thoughtRecordEndPoint}/all`, options)
+	}
+
 	const saveThoughtRecord = async () => {
 		const saveOptions: RequestInit = {
 			headers: {
-				...getAuthHeader().headers,
+				...authHeader.headers,
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},
@@ -62,7 +74,16 @@ export const useThoughtRecordApi = () => {
 
 		return await handleFetch(`${userEndPoint}/thoughtrecord`, saveOptions)
 	}
-
+	const deleteThoughtRecord = async (thoughtRecord: string) => {
+		const deleteOptions: RequestInit = {
+			...authHeader,
+			method: 'DELETE',
+		}
+		return await handleFetch(
+			`${thoughtRecordEndPoint}/${thoughtRecord}`,
+			deleteOptions,
+		)
+	}
 	const updateThoughtRecord = async (
 		data: FormValues,
 		activeThoughtRecord: string,
@@ -83,6 +104,8 @@ export const useThoughtRecordApi = () => {
 		)
 	}
 	return {
+		deleteThoughtRecord,
+		getAllThoughtRecords,
 		updateThoughtRecord,
 		getActiveThoughtRecord,
 		getNewThoughtRecord,
@@ -90,3 +113,5 @@ export const useThoughtRecordApi = () => {
 		saveThoughtRecord,
 	}
 }
+
+export default useThoughtRecordApi
