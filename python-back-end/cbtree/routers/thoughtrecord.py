@@ -48,6 +48,9 @@ async def get_all_thought_records(user: User = Depends(get_current_user)):
     records = map(lambda record: db.get(record), record_ids)
     return list(records)
     
+
+
+
 @router.get("/thoughtrecord/{thought_id}", response_model=Thought_Record)
 async def get_thoughtrecord_by_id(
     thought_id: str, user: User = Depends(get_current_user)
@@ -70,6 +73,14 @@ async def get_thoughtrecord_by_id(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
+@router.post("/thoughtrecord/edit/{thought_id}", response_model=Thought_Record)
+async def set_active_thoughtrecord_by_id(
+    thought_record: Thought_Record = Depends(get_thoughtrecord_by_id),
+    user: User = Depends(get_current_user)
+    ):
+    user_key = user['key']
+    db.update({"activeThoughtRecord":thought_record["key"]},user_key)
+    return thought_record
 
 @router.get("/thoughtrecord", response_model=Thought_Record)
 async def get_active_thought_record(user: User = Depends(get_current_user)):
