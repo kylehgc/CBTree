@@ -1,7 +1,4 @@
-import { useToast } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-import { ThoughtRecord } from './types'
-import ThoughtRecordTable from './ThoughtRecordTable'
+import ThoughtRecordTable from './ThoughtRecordDisplay/ThoughtRecordTable'
 
 const Profile = () => {
 	return (

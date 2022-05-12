@@ -13,11 +13,11 @@ import {
 	Fade,
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
-import { Mood } from './types'
+import { Mood } from '../../types'
 import { SetStateAction, useState } from 'react'
 import React from 'react'
-import UseThemeColors from '../Hooks/useThemeColors'
-import UseThoughtRecord from '../Hooks/UseThoughtRecord'
+import UseThemeColors from '../../Hooks/useThemeColors'
+import UseThoughtRecord from '../../Hooks/UseThoughtRecord'
 interface ButtonProps {
 	deleteHandler: React.MouseEventHandler<HTMLButtonElement>
 }

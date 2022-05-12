@@ -1,6 +1,6 @@
 import { Button, Flex, Heading, Input, Text, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { userEndPoint } from '../utils/api'
+import { userEndPoint } from '../../Utils/api'
 
 const ForgotPassword: React.FC = () => {
 	const [emailAddress, setEmailAddress] = useState('')

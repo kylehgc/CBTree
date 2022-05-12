@@ -1,11 +1,10 @@
 import { Button } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import feelings from '../Data/feelings.json'
-import UseThemeColors from '../Hooks/useThemeColors'
-import UseThoughtRecord from '../Hooks/UseThoughtRecord'
-import LoadingTextField from './LoadingTextField'
+import feelings from '../../Data/feelings.json'
+import UseThoughtRecord from '../../Hooks/UseThoughtRecord'
+import LoadingTextField from '../Loading/LoadingTextField'
 import SelectQuestion from './SelectQuestion'
-import { isKeyOfThoughtRecord, Mood } from './types'
+import { isKeyOfThoughtRecord, Mood } from '../../types'
 
 interface Props {
 	defaultMoods?: Mood[]
@@ -18,7 +17,6 @@ export const isMood = (value: any): value is Mood[] => {
 }
 const FeelingQuestion: React.FC<Props> = () => {
 	const [moods, setMoods] = useState<Mood[]>([])
-	const { foregroundColor } = UseThemeColors()
 	const { label, onSubmit, thoughtRecord, currentQuestion, isSubmitting } =
 		UseThoughtRecord()
 
@@ -31,17 +29,13 @@ const FeelingQuestion: React.FC<Props> = () => {
 	}, [currentQuestion, setMoods, thoughtRecord])
 	useEffect(() => {
 		if (thoughtRecord) {
-			if (
-				isKeyOfThoughtRecord(currentQuestion, thoughtRecord) &&
-				moods.length === 0
-			) {
+			if (isKeyOfThoughtRecord(currentQuestion, thoughtRecord)) {
 				const thoughtRecordMood = thoughtRecord[currentQuestion]
 				if (isMood(thoughtRecordMood)) {
 					setMoods(thoughtRecordMood)
 				}
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentQuestion, thoughtRecord])
 	if (!thoughtRecord) {
 		return <LoadingTextField />

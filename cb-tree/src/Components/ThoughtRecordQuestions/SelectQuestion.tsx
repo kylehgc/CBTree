@@ -2,9 +2,9 @@ import { CreatableSelect, ActionMeta } from 'chakra-react-select'
 import { Dispatch, SetStateAction } from 'react'
 import { Button, Box, FormLabel, Heading, SlideFade } from '@chakra-ui/react'
 import { useState } from 'react'
-import { Mood } from './types'
+import { Mood } from '../../types'
 import MoodList from './MoodSlider'
-import useThoughtRecord from '../Hooks/UseThoughtRecord'
+import useThoughtRecord from '../../Hooks/UseThoughtRecord'
 
 type Option = {
 	value: string

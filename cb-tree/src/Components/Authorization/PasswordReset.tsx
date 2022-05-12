@@ -1,7 +1,7 @@
 import { Button, Heading, Input, useToast, VStack } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { userEndPoint } from '../utils/api'
+import { userEndPoint } from '../../Utils/api'
 
 const PasswordReset: React.FC = () => {
 	const { resetKey } = useParams()

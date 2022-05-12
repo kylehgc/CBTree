@@ -1,27 +1,41 @@
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
-import RequireAuth from './Components/RequireAuth'
-import Nav from './Components/Nav'
+import RequireAuth from './Components/Authorization/RequireAuth'
+import Nav from './Components/Nav/Nav'
 
 import { Container } from '@chakra-ui/react'
 import Providers from './Components/Providers'
-import LoadingTextField from './Components/LoadingTextField'
+import LoadingTextField from './Components/Loading/LoadingTextField'
 import Profile from './Components/Profile'
 import ThoughtRecordExplination from './Components/ThoughtRecordExplination'
 
-const PasswordReset = lazy(() => import('./Components/PasswordReset'))
-const ForgotPassword = lazy(() => import('./Components/ForgotPassword'))
-const EmotionPicker = lazy(() => import('./Components/EmotionPicker'))
-const SubmitThoughtRecord = lazy(
-	() => import('./Components/SubmitThoughtRecord'),
+const PasswordReset = lazy(
+	() => import('./Components/Authorization/PasswordReset'),
 )
-const AlternativeThought = lazy(() => import('./Components/AlternativeThought'))
-const Signup = lazy(() => import('./Components/Signup'))
-const Login = lazy(() => import('./Components/LoginForm'))
-const FeelingQuestion = lazy(() => import('./Components/FeelingQuestion'))
-const TextFieldQuestion = lazy(() => import('./Components/TextFieldQuestion'))
+const ForgotPassword = lazy(
+	() => import('./Components/Authorization/ForgotPassword'),
+)
+const EmotionPicker = lazy(
+	() => import('./Components/ThoughtRecordQuestions/EmotionPicker'),
+)
+const SubmitThoughtRecord = lazy(
+	() => import('./Components/ThoughtRecordQuestions/SubmitThoughtRecord'),
+)
+const AlternativeThought = lazy(
+	() => import('./Components/ThoughtRecordQuestions/AlternativeThought'),
+)
+const Signup = lazy(() => import('./Components/Authorization/Signup'))
+const Login = lazy(() => import('./Components/Authorization/LoginForm'))
+const FeelingQuestion = lazy(
+	() => import('./Components/ThoughtRecordQuestions/FeelingQuestion'),
+)
+const TextFieldQuestion = lazy(
+	() => import('./Components/ThoughtRecordQuestions/TextFieldQuestion'),
+)
 
-const ThoughtQuestion = lazy(() => import('./Components/ThoughtQuestion'))
+const ThoughtQuestion = lazy(
+	() => import('./Components/ThoughtRecordQuestions/ThoughtQuestion'),
+)
 
 export const App = () => (
 	// <Router basename={process.env.PUBLIC_URL}>

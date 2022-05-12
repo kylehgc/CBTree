@@ -7,11 +7,12 @@ import {
 	Center,
 	MenuDivider,
 	MenuItem,
+	Link,
 } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
-import useAuth from '../Hooks/useAuth'
-import UseThemeColors from '../Hooks/useThemeColors'
-import useThoughtRecordApi from '../Hooks/useThoughtRecordApi'
+import { useNavigate, Link as BrowserLink } from 'react-router-dom'
+import useAuth from '../../Hooks/useAuth'
+import UseThemeColors from '../../Hooks/useThemeColors'
+import useThoughtRecordApi from '../../Hooks/useThoughtRecordApi'
 
 interface Props {
 	displayName: string
@@ -66,6 +67,11 @@ const LoggedInNav: React.FC<Props> = ({ displayName }) => {
 				</Center>
 				<br />
 				<MenuDivider />
+				<MenuItem>
+					<Link as={BrowserLink} to={'/profile'}>
+						Your Thought Records
+					</Link>{' '}
+				</MenuItem>
 				<MenuItem onClick={handleNewThoughtRecord}>New Thought Record</MenuItem>
 				<MenuItem onClick={handleLogout}>Logout</MenuItem>
 			</MenuList>

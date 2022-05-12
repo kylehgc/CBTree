@@ -1,4 +1,4 @@
-import useThoughtRecord from '../Hooks/UseThoughtRecord'
+import useThoughtRecord from '../../Hooks/UseThoughtRecord'
 
 import {
 	Textarea,
@@ -9,9 +9,9 @@ import {
 } from '@chakra-ui/react'
 
 import { useEffect, useState } from 'react'
-import UseThemeColors from '../Hooks/useThemeColors'
-import { isKeyOfThoughtRecord } from './types'
-import LoadingTextField from './LoadingTextField'
+import UseThemeColors from '../../Hooks/useThemeColors'
+import { isKeyOfThoughtRecord } from '../../types'
+import LoadingTextField from '../Loading/LoadingTextField'
 
 const TextFieldQuestion: React.FC = () => {
 	const placeholderColor = useColorModeValue('black', 'white')

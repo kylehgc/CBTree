@@ -9,10 +9,11 @@ import {
 	useBreakpointValue,
 	PopoverContent,
 } from '@chakra-ui/react'
-import { ThoughtRecord } from './types'
+import { ThoughtRecord } from '../../types'
 import ThoughtRecordDisplay from './ThoughtRecordDisplay'
-import UseThemeColors from '../Hooks/useThemeColors'
-import useThoughtRecordApi from '../Hooks/useThoughtRecordApi'
+import UseThemeColors from '../../Hooks/useThemeColors'
+import useThoughtRecordApi from '../../Hooks/useThoughtRecordApi'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
 	thoughtRecord: ThoughtRecord | undefined
@@ -31,9 +32,18 @@ const ThoughtRecordModal: React.FC<Props> = ({
 	thoughtRecord,
 	setThoughtRecords,
 }) => {
-	const { deleteThoughtRecord, getAllThoughtRecords, isSubmitting } =
-		useThoughtRecordApi()
+	const {
+		deleteThoughtRecord,
+		getAllThoughtRecords,
+		editThoughtRecord,
+		isSubmitting,
+	} = useThoughtRecordApi()
+	const navigate = useNavigate()
 
+	const handleEdit = async (thoughtRecordId: string) => {
+		const thoughtRecord = await editThoughtRecord(thoughtRecordId)
+		navigate('/emotion', { state: { ...thoughtRecord } })
+	}
 	const handleDelete = async (thoughtRecordId: string) => {
 		await deleteThoughtRecord(thoughtRecordId)
 		const thoughtRecords = await getAllThoughtRecords()
@@ -51,16 +61,27 @@ const ThoughtRecordModal: React.FC<Props> = ({
 				<ModalOverlay backdropFilter="blur(5px)" />
 				<ModalContent bg={backgroundColor} p={4}>
 					<HStack m={2} spacing={'auto'}>
-						<Button w={{ base: '40%', lg: '30%' }} minH={'full'}>
+						<Button
+							onClick={() => handleEdit(thoughtRecord.key)}
+							isLoading={isSubmitting}
+							w={{ base: '40%', lg: '30%' }}
+							minH={'full'}
+						>
 							Edit
 						</Button>
-						<Popover placement="auto">
+						<Popover placement="bottom">
 							<PopoverTrigger>
 								<Button isLoading={isSubmitting} w={{ base: '40%', lg: '30%' }}>
 									Delete
 								</Button>
 							</PopoverTrigger>
-							<PopoverContent alignItems={'center'} p={2} textAlign={'justify'}>
+							<PopoverContent
+								m={2}
+								w={'65%'}
+								alignItems={'center'}
+								p={2}
+								textAlign={'center'}
+							>
 								Are you sure you want to delete this record? It can't be undone
 								<Button
 									isLoading={isSubmitting}

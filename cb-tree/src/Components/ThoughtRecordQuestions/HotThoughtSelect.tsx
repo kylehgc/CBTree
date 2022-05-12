@@ -1,5 +1,5 @@
 import { Center, Heading } from '@chakra-ui/react'
-import UseThemeColors from '../Hooks/useThemeColors'
+import UseThemeColors from '../../Hooks/useThemeColors'
 
 interface HotThoughtProps {
 	thoughts: string[]

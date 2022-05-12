@@ -1,11 +1,9 @@
 import { Badge, Center, VStack } from '@chakra-ui/react'
-import useThemeColors from '../Hooks/useThemeColors'
 interface Props {
 	hotThought: string
 }
 
 const HotThoughtDisplay: React.FC<Props> = ({ hotThought }) => {
-	const { foregroundColor } = useThemeColors()
 	return (
 		<VStack w={'full'} spacing={-1}>
 			<Badge

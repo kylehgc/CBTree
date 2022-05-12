@@ -1,7 +1,7 @@
 import { Button, Heading } from '@chakra-ui/react'
-import UseThoughtRecord from '../Hooks/UseThoughtRecord'
-import LoadingTextField from './LoadingTextField'
-import ThoughtRecordDisplay from './ThoughtRecordDisplay'
+import UseThoughtRecord from '../../Hooks/UseThoughtRecord'
+import LoadingTextField from '../Loading/LoadingTextField'
+import ThoughtRecordDisplay from '../ThoughtRecordDisplay/ThoughtRecordDisplay'
 
 const SubmitThoughtRecord: React.FC = () => {
 	const { thoughtRecord, onSubmit, isSubmitting, isValidQuestion } =

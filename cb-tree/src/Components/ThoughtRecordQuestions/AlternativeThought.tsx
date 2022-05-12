@@ -8,13 +8,13 @@ import {
 	LightMode,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import useThoughtRecord from '../Hooks/UseThoughtRecord'
-import useThemeColors from '../Hooks/useThemeColors'
+import useThoughtRecord from '../../Hooks/UseThoughtRecord'
+import useThemeColors from '../../Hooks/useThemeColors'
 import ArgumentButtons from './ArgumentAccordion'
 import MoodSlider from './MoodSlider'
-import { Mood } from './types'
-import LoadingTextField from './LoadingTextField'
-import HotThoughtDisplay from './HotThoughtDisplay'
+import { Mood } from '../../types'
+import LoadingTextField from '../Loading/LoadingTextField'
+import HotThoughtDisplay from '../ThoughtRecordDisplay/HotThoughtDisplay'
 
 const AlternativeThought: React.FC = () => {
 	const { foregroundColor, textColor } = useThemeColors()

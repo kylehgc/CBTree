@@ -1,8 +1,7 @@
 import { Heading, VStack } from '@chakra-ui/react'
 import { SizeProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { SizeProps } from 'chakra-react-select'
-import { emotions } from './EmotionPicker'
+import { emotions } from '../ThoughtRecordQuestions/EmotionPicker'
 
 interface EmotionDisplayProps {
 	emotionName: string

@@ -3,18 +3,30 @@ import {
 	thoughtRecordEndPoint,
 	getAuthHeader,
 	userEndPoint,
-} from '../utils/api'
+} from '../Utils/api'
 import useAuth from './useAuth'
-import {
-	FormValues,
-	ThoughtRecord,
-	isThoughtRecord,
-	Token,
-} from '../Components/types'
+import { FormValues, ThoughtRecord, isThoughtRecord, User } from '../types'
 /* returns a function that takes in the current path and active thought record 
 to update and a piece of state that shows if the data is currently being fetched */
 
-const useThoughtRecordApi = () => {
+type FetchThoughtRecord = () => Promise<ThoughtRecord>
+
+interface useThoughtRecordReturn {
+	deleteThoughtRecord: (thoughtRecord: string) => Promise<string>
+	getActiveThoughtRecord: FetchThoughtRecord
+	getNewThoughtRecord: FetchThoughtRecord
+	getAllThoughtRecords: () => Promise<ThoughtRecord[]>
+	updateThoughtRecord: (
+		data: FormValues,
+		activeThoughtRecord: string,
+		updateKey: string,
+	) => Promise<ThoughtRecord>
+	saveThoughtRecord: () => Promise<User>
+	editThoughtRecord: (thoughtRecordId: string) => Promise<ThoughtRecord>
+	isSubmitting: boolean
+}
+
+const useThoughtRecordApi = (): useThoughtRecordReturn => {
 	const { logout } = useAuth()
 	const authHeader = getAuthHeader()
 	const [isSubmitting, setIsSubmitting] = useState(false)
@@ -35,9 +47,7 @@ const useThoughtRecordApi = () => {
 		} else throw Error(response.statusText)
 	}
 
-	const getActiveThoughtRecord = async (
-		token: Token,
-	): Promise<ThoughtRecord> => {
+	const getActiveThoughtRecord = async (): Promise<ThoughtRecord> => {
 		const data = await handleFetch(thoughtRecordEndPoint, authHeader)
 		if (isThoughtRecord(data)) {
 			return data
@@ -55,14 +65,14 @@ const useThoughtRecordApi = () => {
 		}
 	}
 
-	const getAllThoughtRecords = async () => {
+	const getAllThoughtRecords = async (): Promise<ThoughtRecord[]> => {
 		const options: RequestInit = {
 			...authHeader,
 		}
 		return await handleFetch(`${thoughtRecordEndPoint}/all`, options)
 	}
 
-	const saveThoughtRecord = async () => {
+	const saveThoughtRecord = async (): Promise<User> => {
 		const saveOptions: RequestInit = {
 			headers: {
 				...authHeader.headers,
@@ -74,7 +84,9 @@ const useThoughtRecordApi = () => {
 
 		return await handleFetch(`${userEndPoint}/thoughtrecord`, saveOptions)
 	}
-	const deleteThoughtRecord = async (thoughtRecord: string) => {
+	const deleteThoughtRecord = async (
+		thoughtRecord: string,
+	): Promise<string> => {
 		const deleteOptions: RequestInit = {
 			...authHeader,
 			method: 'DELETE',
@@ -84,11 +96,26 @@ const useThoughtRecordApi = () => {
 			deleteOptions,
 		)
 	}
+
+	const editThoughtRecord = async (thoughtRecordId: string) => {
+		const editOptions: RequestInit = {
+			...authHeader,
+			method: 'POST',
+		}
+		const thoughtRecord = await handleFetch(
+			`${thoughtRecordEndPoint}/edit/${thoughtRecordId}`,
+			editOptions,
+		)
+		if (isThoughtRecord(thoughtRecord)) {
+			return thoughtRecord
+		}
+		throw Error('Invalid return')
+	}
 	const updateThoughtRecord = async (
 		data: FormValues,
 		activeThoughtRecord: string,
 		updateKey: string,
-	) => {
+	): Promise<ThoughtRecord> => {
 		const updateOptions: RequestInit = {
 			headers: {
 				Accept: 'application/json',
@@ -111,6 +138,7 @@ const useThoughtRecordApi = () => {
 		getNewThoughtRecord,
 		isSubmitting,
 		saveThoughtRecord,
+		editThoughtRecord,
 	}
 }
 

@@ -1,4 +1,4 @@
-import logo from '../media/logo.png'
+import logo from '../../media/logo.png'
 import {
 	Link,
 	Center,
@@ -9,8 +9,8 @@ import {
 } from '@chakra-ui/react'
 
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import UseThemeColors from '../Hooks/useThemeColors'
-import useAuth from '../Hooks/useAuth'
+import UseThemeColors from '../../Hooks/useThemeColors'
+import useAuth from '../../Hooks/useAuth'
 import { Suspense, useEffect, useState } from 'react'
 import { Link as ReactRouterLink } from 'react-router-dom'
 import React from 'react'

@@ -1,4 +1,4 @@
-import { isToken } from '../Components/types'
+import { isToken } from '../types'
 
 const BASEURL = 'https://ciy1es.deta.dev/'
 

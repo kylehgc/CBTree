@@ -10,8 +10,7 @@ import {
 	thoughtRecordData,
 	isQuestion,
 	FormValues,
-} from '../Components/types'
-import { getToken } from '../utils/api'
+} from '../types'
 import useThoughtRecordApi from './useThoughtRecordApi'
 
 interface UseThoughtRecordReturn {
@@ -50,10 +49,6 @@ const UseThoughtRecord = (): UseThoughtRecordReturn | never => {
 		saveThoughtRecord,
 	} = useThoughtRecordApi()
 
-	const token = getToken()
-	if (!token) {
-		throw Error
-	}
 	useEffect(() => {
 		if (!isValidQuestion && isQuestion(pathname)) {
 			if (thoughtRecord) {
@@ -73,14 +68,14 @@ const UseThoughtRecord = (): UseThoughtRecordReturn | never => {
 				if (isThoughtRecord(state)) {
 					setThoughtRecord(state)
 				} else {
-					setThoughtRecord(await getActiveThoughtRecord(token))
+					setThoughtRecord(await getActiveThoughtRecord())
 				}
 			}
 		}
 		if (!isSubmitting) {
 			getThoughtRecord()
 		}
-	}, [getActiveThoughtRecord, isSubmitting, state, thoughtRecord, token])
+	}, [getActiveThoughtRecord, isSubmitting, state, thoughtRecord])
 
 	const onSubmit = async (data: FormValues) => {
 		if (isQuestion(pathname)) {

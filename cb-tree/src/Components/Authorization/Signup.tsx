@@ -19,11 +19,11 @@ import {
 	useNavigate,
 } from 'react-router-dom'
 import { useEffect } from 'react'
-import { signupEndPoint } from '../utils/api'
+import { signupEndPoint } from '../../Utils/api'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import UserPassFormElements from './UserPassFormElements'
-import useThemeColors from '../Hooks/useThemeColors'
-import useAuth from '../Hooks/useAuth'
+import useThemeColors from '../../Hooks/useThemeColors'
+import useAuth from '../../Hooks/useAuth'
 
 interface FormValues {
 	firstName?: string

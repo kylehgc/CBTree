@@ -20,10 +20,10 @@ const theme: SystemStyleObject = extendTheme({
 				striped: (props: ThemeComponentProps) => ({
 					...props,
 					th: {
-						color: mode('white', 'gray.400')(props),
+						color: mode('white', 'white')(props),
 					},
 					caption: {
-						color: mode('white', 'gray.400')(props),
+						color: mode('white', 'white')(props),
 					},
 				}),
 			},

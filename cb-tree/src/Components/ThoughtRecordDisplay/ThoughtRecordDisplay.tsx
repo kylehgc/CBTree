@@ -9,16 +9,16 @@ import {
 	Heading,
 	VStack,
 } from '@chakra-ui/react'
-import LoadingTextField from './LoadingTextField'
+import LoadingTextField from '../Loading/LoadingTextField'
 import EmotionDisplay from './EmotionDisplay'
-import { Mood, isFullThoughtRecord, ThoughtRecord } from './types'
-import UseThemeColors from '../Hooks/useThemeColors'
-import { sliderColor } from './MoodSlider'
+import { Mood, ThoughtRecord } from '../../types'
+import UseThemeColors from '../../Hooks/useThemeColors'
+import { sliderColor } from '../ThoughtRecordQuestions/MoodSlider'
 import { Accordion } from '@chakra-ui/react'
 import { RiNodeTree } from 'react-icons/ri'
-import AccordionElement from './AccordianElement'
+import AccordionElement from '../ThoughtRecordQuestions/AccordianElement'
 import HotThoughtDisplay from './HotThoughtDisplay'
-import ArgumentAccordion from './ArgumentAccordion'
+import ArgumentAccordion from '../ThoughtRecordQuestions/ArgumentAccordion'
 
 interface MoodDisplayProps {
 	moods: Mood[]

@@ -1,15 +1,15 @@
 import { Button, Flex, Center, Heading, HStack, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import EmotionButton, { Emotion } from './EmotionButton'
-import LoadingTextField from './LoadingTextField'
-import useThoughtRecord from '../Hooks/UseThoughtRecord'
+import LoadingTextField from '../Loading/LoadingTextField'
+import useThoughtRecord from '../../Hooks/UseThoughtRecord'
 import {
 	faFaceMeh,
 	faFaceFrownOpen,
 	faFaceGrin,
 	faFaceSmile,
 } from '@fortawesome/free-solid-svg-icons'
-import { isKeyOfThoughtRecord } from './types'
+import { isKeyOfThoughtRecord } from '../../types'
 
 export const emotions: Emotion[] = [
 	{ icon: faFaceFrownOpen, emotionColor: '#322659', emotionName: 'Awful' },

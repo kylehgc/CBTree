@@ -1,23 +1,13 @@
-import {
-	Box,
-	Stack,
-	Link,
-	Button,
-	Heading,
-	useToast,
-	useColorMode,
-	useColorModeValue,
-} from '@chakra-ui/react'
-
-import useAuth from '../Hooks/useAuth'
+import { Box, Stack, Link, Button, Heading, useToast } from '@chakra-ui/react'
+import useAuth from '../../Hooks/useAuth'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { loginEndpoint } from '../utils/api'
+import { loginEndpoint } from '../../Utils/api'
 import UserPassFormElements from './UserPassFormElements'
-import UseThemeColors from '../Hooks/useThemeColors'
+import UseThemeColors from '../../Hooks/useThemeColors'
 import { useEffect } from 'react'
 import { useNavigate, Link as BrowserLink, useLocation } from 'react-router-dom'
-import LoadingTextField from './LoadingTextField'
-import { Token } from './types'
+import LoadingTextField from '../Loading/LoadingTextField'
+import { Token } from '../../types'
 
 interface FormValues {
 	username: string

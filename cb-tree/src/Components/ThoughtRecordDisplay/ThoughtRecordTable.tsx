@@ -13,10 +13,10 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import EmotionDisplay from './EmotionDisplay'
-import { ThoughtRecord } from './types'
+import { ThoughtRecord } from '../../types'
 import ThoughtRecordModal from './ThoughtRecordModal'
-import useThoughtRecordApi from '../Hooks/useThoughtRecordApi'
-import LoadingTextField from './LoadingTextField'
+import useThoughtRecordApi from '../../Hooks/useThoughtRecordApi'
+import LoadingTextField from '../Loading/LoadingTextField'
 interface props {}
 
 const getFormattedDate = (time: number) => {

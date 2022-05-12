@@ -6,9 +6,9 @@ import {
 	useContext,
 	useCallback,
 } from 'react'
-import { isToken, Token, User } from '../Components/types'
-import { userEndPoint } from '../utils/api'
-import { getAuthHeader } from '../utils/api'
+import { isToken, Token, User } from '../types'
+import { userEndPoint } from '../Utils/api'
+import { getAuthHeader } from '../Utils/api'
 
 interface AuthContext {
 	login: (token: Token) => void
