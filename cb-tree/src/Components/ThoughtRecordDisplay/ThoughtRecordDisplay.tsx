@@ -1,6 +1,7 @@
 import {
 	Flex,
 	Progress,
+	ScaleFade,
 	LightMode,
 	List,
 	ListItem,
@@ -100,55 +101,60 @@ const ThoughtRecordDisplay: React.FC<ThoughtRecordDisplayProps> = ({
 	}
 	return (
 		<>
-			<VStack
-				m={0}
-				bg={backgroundColor}
-				overflow={{ base: 'auto', lg: 'visible' }}
-				spacing={10}
-				width={{ base: '100%', lg: '100%' }}
-			>
-				{thoughtRecord.emotion && (
-					<EmotionDisplay label="Emotion" emotionName={thoughtRecord.emotion} />
-				)}
-				{thoughtRecord.situationquestion && (
-					<Accordion allowToggle w={'100%'}>
-						<AccordionElement
-							label="The Situation"
-							popoverText={thoughtRecord.situationquestion}
+			<ScaleFade in delay={{ enter: 0.3 }}>
+				<VStack
+					m={0}
+					bg={backgroundColor}
+					overflow={{ base: 'auto', lg: 'visible' }}
+					spacing={10}
+					width={{ base: '100%', lg: '100%' }}
+				>
+					{thoughtRecord.emotion && (
+						<EmotionDisplay
+							label="Emotion"
+							emotionName={thoughtRecord.emotion}
 						/>
-					</Accordion>
-				)}
+					)}
+					{thoughtRecord.situationquestion && (
+						<Accordion allowToggle w={'100%'}>
+							<AccordionElement
+								label="The Situation"
+								popoverText={thoughtRecord.situationquestion}
+							/>
+						</Accordion>
+					)}
 
-				{thoughtRecord.mood && (
-					<MoodDisplay moods={thoughtRecord.mood} label={'Moods'} />
-				)}
+					{thoughtRecord.mood && (
+						<MoodDisplay moods={thoughtRecord.mood} label={'Moods'} />
+					)}
 
-				{thoughtRecord.thoughts && (
-					<MoodDisplay
-						moods={thoughtRecord.thoughts.thoughts}
-						label={'Thoughts'}
-					/>
-				)}
+					{thoughtRecord.thoughts && (
+						<MoodDisplay
+							moods={thoughtRecord.thoughts.thoughts}
+							label={'Thoughts'}
+						/>
+					)}
 
-				{thoughtRecord.thoughts && (
-					<HotThoughtDisplay hotThought={thoughtRecord.thoughts.hotThought} />
-				)}
+					{thoughtRecord.thoughts && (
+						<HotThoughtDisplay hotThought={thoughtRecord.thoughts.hotThought} />
+					)}
 
-				<ArgumentAccordion argumentsText={argumentsText} />
-				{thoughtRecord.alternativethought && (
-					<MoodDisplay
-						moods={thoughtRecord.alternativethought}
-						label={'Alternative thoughts'}
-					/>
-				)}
+					<ArgumentAccordion argumentsText={argumentsText} />
+					{thoughtRecord.alternativethought && (
+						<MoodDisplay
+							moods={thoughtRecord.alternativethought}
+							label={'Alternative thoughts'}
+						/>
+					)}
 
-				{thoughtRecord.rerateemotion && (
-					<EmotionDisplay
-						label="After Emotion"
-						emotionName={thoughtRecord.rerateemotion}
-					/>
-				)}
-			</VStack>
+					{thoughtRecord.rerateemotion && (
+						<EmotionDisplay
+							label="After Emotion"
+							emotionName={thoughtRecord.rerateemotion}
+						/>
+					)}
+				</VStack>
+			</ScaleFade>
 		</>
 	)
 }

@@ -72,10 +72,11 @@ const UseThoughtRecord = (): UseThoughtRecordReturn | never => {
 				}
 			}
 		}
-		if (!isSubmitting) {
+		if (!thoughtRecord) {
 			getThoughtRecord()
 		}
-	}, [getActiveThoughtRecord, isSubmitting, state, thoughtRecord])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	const onSubmit = async (data: FormValues) => {
 		if (isQuestion(pathname)) {

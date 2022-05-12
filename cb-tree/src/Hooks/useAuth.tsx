@@ -64,7 +64,8 @@ const useAuth = () => {
 				setCurrentUser(false)
 			}
 		}
-	}, [currentUser, getUser])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	const login = useCallback(
 		(token: Token) => {

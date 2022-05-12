@@ -41,7 +41,7 @@ export const App = () => (
 	// <Router basename={process.env.PUBLIC_URL}>
 	<Router>
 		<Providers>
-			<Container p={2} centerContent minH={'80vh'} width="100vw">
+			<Container p={2} centerContent minH={'70vh'} width="100vw">
 				<Nav />
 				<Suspense fallback={<LoadingTextField />}>
 					<Routes>

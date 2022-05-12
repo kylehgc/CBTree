@@ -1,4 +1,12 @@
-import { Button, Flex, Center, Heading, HStack, VStack } from '@chakra-ui/react'
+import {
+	Button,
+	Flex,
+	Center,
+	Heading,
+	HStack,
+	VStack,
+	ScaleFade,
+} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import EmotionButton, { Emotion } from './EmotionButton'
 import LoadingTextField from '../Loading/LoadingTextField'
@@ -45,56 +53,56 @@ const EmotionPicker: React.FC = () => {
 	}
 	return (
 		<>
-			<Flex p={4}>
-				<Center
-					mt={4}
-					rounded={'75px'}
-					border={selected ? '15px solid' : 'none'}
-					borderColor={emotionColor}
-					m={0}
-					mx={-20}
-					w={{ base: 'auto', md: '100vw' }}
-					p={2}
-					height={'70vh'}
-					flexDir={'column'}
-				>
-					<Heading position={'fixed'} top={52} p={0}>
-						{label}
-					</Heading>
-					<HStack
-						height={'50%'}
+			<ScaleFade in delay={{ enter: 0.3 }}>
+				<Flex p={4}>
+					<Center
+						mt={4}
+						rounded={'75px'}
+						border={selected ? '15px solid' : 'none'}
+						borderColor={emotionColor}
+						m={0}
+						mx={-20}
+						w={{ base: 'auto', md: '100vw' }}
 						p={2}
-						w={{ base: '100%', lg: '80%' }}
-						spacing={{ base: 9, md: 'auto' }}
+						height={'70vh'}
+						flexDir={'column'}
 					>
-						{emotions.map(({ emotionName }) => (
-							<EmotionButton
-								key={emotionName}
-								emotionName={emotionName}
-								selected={selected}
-								setSelected={setSelected}
-							/>
-						))}
-					</HStack>
-					<VStack p={2} w={'full'} height={'10vh'} spacing={6}>
-						{selected ? (
-							<>
-								<Heading color={emotionColor}> {selected} </Heading>
-								<Button
-									m={2}
-									variant={'submit'}
-									isLoading={isSubmitting}
-									onClick={() => onSubmit(selected)}
-									w={'60%'}
-									minH={'40px'}
-								>
-									Submit
-								</Button>
-							</>
-						) : null}
-					</VStack>
-				</Center>
-			</Flex>
+						<Heading>{label}</Heading>
+						<HStack
+							height={'50%'}
+							p={2}
+							w={{ base: '100%', lg: '80%' }}
+							spacing={{ base: 9, md: 'auto' }}
+						>
+							{emotions.map(({ emotionName }) => (
+								<EmotionButton
+									key={emotionName}
+									emotionName={emotionName}
+									selected={selected}
+									setSelected={setSelected}
+								/>
+							))}
+						</HStack>
+						<VStack p={2} w={'full'} height={'10vh'} spacing={6}>
+							{selected ? (
+								<>
+									<Heading color={emotionColor}> {selected} </Heading>
+									<Button
+										m={2}
+										variant={'submit'}
+										isLoading={isSubmitting}
+										onClick={() => onSubmit(selected)}
+										w={'60%'}
+										minH={'40px'}
+									>
+										Submit
+									</Button>
+								</>
+							) : null}
+						</VStack>
+					</Center>
+				</Flex>
+			</ScaleFade>
 		</>
 	)
 }
