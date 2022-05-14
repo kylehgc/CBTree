@@ -44,7 +44,7 @@ const UserPassFormElements: React.FC<IProps> = ({
 				<FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
 			</FormControl>
 			<FormControl isInvalid={!!errors?.password?.message} id="password">
-				<FormLabel>Password</FormLabel>
+				<FormLabel my={2}>Password</FormLabel>
 				<Input
 					borderColor={'gray.300'}
 					color={'black'}

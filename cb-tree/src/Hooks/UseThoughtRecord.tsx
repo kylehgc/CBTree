@@ -83,7 +83,7 @@ const UseThoughtRecord = (): UseThoughtRecordReturn | never => {
 			if (pathname === '/submit') {
 				try {
 					await saveThoughtRecord()
-					navigate('/profile')
+					navigate('/thoughtrecords')
 				} catch (error) {
 					if (error instanceof Error) {
 						toast({

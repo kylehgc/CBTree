@@ -54,12 +54,14 @@ const LoggedInNav: React.FC<Props> = ({ displayName }) => {
 			<MenuList p={2} alignItems={'center'} zIndex={'overlay'}>
 				<br />
 				<Center>
-					<Avatar
-						size={'2xl'}
-						bg={backgroundColor}
-						color={foregroundColor}
-						name={displayName}
-					/>
+					<Link as={BrowserLink} to="/profile">
+						<Avatar
+							size={'2xl'}
+							bg={backgroundColor}
+							color={foregroundColor}
+							name={displayName}
+						/>
+					</Link>
 				</Center>
 				<br />
 				<Center>
@@ -68,11 +70,16 @@ const LoggedInNav: React.FC<Props> = ({ displayName }) => {
 				<br />
 				<MenuDivider />
 				<MenuItem>
-					<Link as={BrowserLink} to={'/profile'}>
+					<Link as={BrowserLink} to={'/thoughtrecords'}>
 						Your Thought Records
-					</Link>{' '}
+					</Link>
 				</MenuItem>
 				<MenuItem onClick={handleNewThoughtRecord}>New Thought Record</MenuItem>
+				<MenuItem>
+					<Link as={BrowserLink} to={'/about'}>
+						About
+					</Link>
+				</MenuItem>
 				<MenuItem onClick={handleLogout}>Logout</MenuItem>
 			</MenuList>
 		</Menu>

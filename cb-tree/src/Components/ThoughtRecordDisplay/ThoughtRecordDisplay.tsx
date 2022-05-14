@@ -40,7 +40,7 @@ const MoodDisplay: React.FC<MoodDisplayProps> = ({ moods, label }) => {
 			</Heading>
 			<List
 				m={2}
-				w={{ base: '85%', lg: '50%' }}
+				w={{ base: '85%', lg: '45%' }}
 				alignItems={'center'}
 				alignSelf={'center'}
 				bg={foregroundColor}

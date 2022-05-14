@@ -91,7 +91,7 @@ const AboutText = () => {
 				inherent to this process. CBTree is both free and open source. Allowing
 				anyone in the future to both have their own free version of the app or
 				build it out if they so desire. Figuratively growing a tree of mental
-				health that anyone can go to.
+				health that anyone can go do.
 			</Text>
 		</VStack>
 	)

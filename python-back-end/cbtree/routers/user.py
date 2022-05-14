@@ -46,11 +46,11 @@ async def send_reset_email(key: str, user_email: EmailStr):
     print(password)
     print(username)
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = "Test email"
+    msg['Subject'] = "Reset Your Passowrd"
     msg['From'] = "CBTree Admin"
     msg['to'] = user_email
     html = (f"<p>Hello, "  
- f"There was a request to change your password!"
+ f"There was a request to change your password"
 f"If you did not make this request then please ignore this email."
 f"Otherwise, please click this link to change your password: <a href='https://kylehgc.github.io/CBTree/#/reset/{key}'> Click Here </a></p> ")
     email_body = MIMEText(html, 'html')

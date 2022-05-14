@@ -4,16 +4,14 @@ import AboutText from './AboutText'
 const ThoughtRecordExplination: React.FC = () => {
 	return (
 		<>
-			<Center flexDirection={'column'} w={'100%'} p={2}>
+			<Center flexDirection={'column'} w={'100%'} p={4}>
 				<Heading textAlign={'center'}>What and Why of Thought Records </Heading>
-				<AspectRatio my={4} maxW={'400px'} minW={'200px'} ratio={313 / 716}>
+				<AspectRatio my={4} minW={'250px'} ratio={1072 / 1920}>
 					<iframe
 						title="CBTree explination"
-						width="516"
-						height="315.7"
-						src="https://www.youtube.com/embed/9WJ-ypsaqP4"
-						frameBorder="1"
-						allow="accelerometer; autoplay; clipboard-write; controls=0; encrypted-media; gyroscope; picture-in-picture"
+						src="https://www.youtube.com/embed/nypalgwSou0"
+						frameBorder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
 						allowFullScreen
 					/>
 				</AspectRatio>

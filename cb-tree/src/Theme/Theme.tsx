@@ -2,6 +2,7 @@ import { extendTheme, ThemeComponentProps } from '@chakra-ui/react'
 import { mode, SystemStyleObject } from '@chakra-ui/theme-tools'
 
 const theme: SystemStyleObject = extendTheme({
+	config: { useSystemColorMode: false, initialColorMode: 'dark' },
 	fonts: {
 		body: 'inter, sans-serif',
 		heading: 'inter, sans-serif',
@@ -28,7 +29,6 @@ const theme: SystemStyleObject = extendTheme({
 				}),
 			},
 		},
-
 		Heading: {
 			baseStyle: (props: ThemeComponentProps) => ({
 				color: mode('theme.foreground', 'theme.foregroundDark')(props),

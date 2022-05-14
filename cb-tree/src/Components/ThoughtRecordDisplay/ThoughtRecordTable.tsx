@@ -49,7 +49,6 @@ const ThoughtRecordTable: React.FC<props> = () => {
 	}, [getAllThoughtRecords, isSubmitting, thoughtRecords, toast])
 
 	const handleOnClick = (thoughtRecordId: string) => {
-		console.log(thoughtRecordId)
 		if (thoughtRecords) {
 			const chosenRecord = thoughtRecords.filter(
 				(record) => record.key === thoughtRecordId,

@@ -6,9 +6,9 @@ import Nav from './Components/Nav/Nav'
 import { Container } from '@chakra-ui/react'
 import Providers from './Components/Providers'
 import LoadingTextField from './Components/Loading/LoadingTextField'
-import Profile from './Components/Profile'
+import ThoughtRecordTable from './Components/ThoughtRecordDisplay/ThoughtRecordTable'
 import ThoughtRecordExplination from './Components/ThoughtRecordExplination'
-
+import Profile from './Components/Profile'
 const PasswordReset = lazy(
 	() => import('./Components/Authorization/PasswordReset'),
 )
@@ -45,12 +45,20 @@ export const App = () => (
 				<Nav />
 				<Suspense fallback={<LoadingTextField />}>
 					<Routes>
-						<Route path="/about" element={<ThoughtRecordExplination />} />
 						<Route
 							path="/profile"
 							element={
 								<RequireAuth>
 									<Profile />
+								</RequireAuth>
+							}
+						/>
+						<Route path="/about" element={<ThoughtRecordExplination />} />
+						<Route
+							path="/thoughtrecords"
+							element={
+								<RequireAuth>
+									<ThoughtRecordTable />
 								</RequireAuth>
 							}
 						/>
