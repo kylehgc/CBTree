@@ -102,7 +102,7 @@ const AboutText = () => {
 				</ListItem>
 			</OrderedList>
 			<Text>
-				Doing this process regularly has shown{' '}
+				Doing this process regularly has been shown{' '}
 				<Link href="https://www.hopkinsguides.com/hopkins/view/Johns_Hopkins_Psychiatry_Guide/787145/all/Cognitive_Behavioral_Therapy__CBT_#:~:text=EFFICACY,%5B3%5D%5B4%5D.">
 					<Text as="u">through repeated studies</Text>
 				</Link>{' '}

@@ -34,7 +34,7 @@ export const thoughtRecordData = {
   "/evidencefor": { label: "What is the Evidence for", type: "Text" },
   "/evidenceagainst": { label: "What is the Evidence Against", type: "Text" },
   "/alternativethought": { label: "", type: "Text" },
-  "/rerateemotion": { label: "How Do you feel?", type: "Emotion" },
+  "/rerateemotion": { label: "How do you feel?", type: "Emotion" },
   "/submit": { label: "something", type: "Submit" }
 }
 
