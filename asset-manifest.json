@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CBTree/static/css/main.a549ab81.css",
-    "main.js": "/CBTree/static/js/main.fee42758.js",
+    "main.js": "/CBTree/static/js/main.87a1b577.js",
     "static/js/124.1a23ae15.chunk.js": "/CBTree/static/js/124.1a23ae15.chunk.js",
     "static/js/492.439006f2.chunk.js": "/CBTree/static/js/492.439006f2.chunk.js",
     "static/js/904.34f2843f.chunk.js": "/CBTree/static/js/904.34f2843f.chunk.js",
@@ -21,7 +21,7 @@
     "static/js/943.3cec1fa2.chunk.js": "/CBTree/static/js/943.3cec1fa2.chunk.js",
     "static/js/493.9bf964a0.chunk.js": "/CBTree/static/js/493.9bf964a0.chunk.js",
     "static/js/798.b21a2bc9.chunk.js": "/CBTree/static/js/798.b21a2bc9.chunk.js",
-    "static/js/926.bfce9d69.chunk.js": "/CBTree/static/js/926.bfce9d69.chunk.js",
+    "static/js/926.40245f93.chunk.js": "/CBTree/static/js/926.40245f93.chunk.js",
     "static/js/47.a0d68d49.chunk.js": "/CBTree/static/js/47.a0d68d49.chunk.js",
     "static/js/58.957494e2.chunk.js": "/CBTree/static/js/58.957494e2.chunk.js",
     "static/js/678.48ef88ec.chunk.js": "/CBTree/static/js/678.48ef88ec.chunk.js",
@@ -41,7 +41,7 @@
     "static/media/inter-vietnamese-400-normal.woff2": "/CBTree/static/media/inter-vietnamese-400-normal.a1bc9a8f426924c5dea8.woff2",
     "index.html": "/CBTree/index.html",
     "main.a549ab81.css.map": "/CBTree/static/css/main.a549ab81.css.map",
-    "main.fee42758.js.map": "/CBTree/static/js/main.fee42758.js.map",
+    "main.87a1b577.js.map": "/CBTree/static/js/main.87a1b577.js.map",
     "124.1a23ae15.chunk.js.map": "/CBTree/static/js/124.1a23ae15.chunk.js.map",
     "492.439006f2.chunk.js.map": "/CBTree/static/js/492.439006f2.chunk.js.map",
     "904.34f2843f.chunk.js.map": "/CBTree/static/js/904.34f2843f.chunk.js.map",
@@ -61,7 +61,7 @@
     "943.3cec1fa2.chunk.js.map": "/CBTree/static/js/943.3cec1fa2.chunk.js.map",
     "493.9bf964a0.chunk.js.map": "/CBTree/static/js/493.9bf964a0.chunk.js.map",
     "798.b21a2bc9.chunk.js.map": "/CBTree/static/js/798.b21a2bc9.chunk.js.map",
-    "926.bfce9d69.chunk.js.map": "/CBTree/static/js/926.bfce9d69.chunk.js.map",
+    "926.40245f93.chunk.js.map": "/CBTree/static/js/926.40245f93.chunk.js.map",
     "47.a0d68d49.chunk.js.map": "/CBTree/static/js/47.a0d68d49.chunk.js.map",
     "58.957494e2.chunk.js.map": "/CBTree/static/js/58.957494e2.chunk.js.map",
     "678.48ef88ec.chunk.js.map": "/CBTree/static/js/678.48ef88ec.chunk.js.map",
@@ -73,6 +73,6 @@
   },
   "entrypoints": [
     "static/css/main.a549ab81.css",
-    "static/js/main.fee42758.js"
+    "static/js/main.87a1b577.js"
   ]
 }
