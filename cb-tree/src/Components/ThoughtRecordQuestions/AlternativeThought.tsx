@@ -2,7 +2,7 @@ import {
 	Box,
 	Heading,
 	VStack,
-	Input,
+	Textarea,
 	Button,
 	SlideFade,
 	LightMode,
@@ -38,7 +38,7 @@ const AlternativeThought: React.FC = () => {
 		? thoughtRecord.thoughts.hotThought
 		: ''
 
-	const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (
+	const handleOnChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
 		event,
 	) => {
 		setBalancedThought(event.target.value)
@@ -117,7 +117,7 @@ const AlternativeThought: React.FC = () => {
 				offsetX={100}
 			>
 				<LightMode>
-					<Input
+					<Textarea
 						color={textColor}
 						onChange={handleOnChange}
 						value={balancedThought}
@@ -127,8 +127,8 @@ const AlternativeThought: React.FC = () => {
 						variant="outlined"
 						bg={foregroundColor}
 						w={'90%'}
-						_placeholder={{ color: textColor, textAlign: 'center' }}
-						placeholder="What are some Balanced Thoughts?"
+						_placeholder={{ color: textColor, textAlign: 'left', opacity: 0.8 }}
+						placeholder="Write some balanced thoughts"
 					/>
 				</LightMode>
 				<Button

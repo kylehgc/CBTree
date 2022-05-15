@@ -66,8 +66,8 @@ export default function SignupCard() {
 			})
 			if (response.ok) {
 				const token = await response.json()
-				login(token)
-				navigate('/emotion')
+				await login(token)
+				navigate('/profile')
 			} else {
 				if (response.status === 400) {
 					toast({

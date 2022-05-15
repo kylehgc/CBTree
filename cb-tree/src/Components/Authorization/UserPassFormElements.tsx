@@ -53,7 +53,7 @@ const UserPassFormElements: React.FC<IProps> = ({
 					{...register('password', {
 						required: true,
 						maxLength: {
-							value: 10,
+							value: 24,
 							message: 'Your password is too long',
 						},
 						minLength: {

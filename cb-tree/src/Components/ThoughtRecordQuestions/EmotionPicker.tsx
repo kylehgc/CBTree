@@ -54,25 +54,25 @@ const EmotionPicker: React.FC = () => {
 	return (
 		<>
 			<ScaleFade in delay={{ enter: 0.3 }}>
-				<Flex p={4}>
+				<Flex p={2} minH={'80vh'}>
 					<Center
 						mt={4}
 						rounded={'75px'}
 						border={selected ? '15px solid' : 'none'}
 						borderColor={emotionColor}
-						m={0}
 						mx={-20}
-						w={{ base: 'auto', md: '100vw' }}
+						w={{ base: 'auto', sm: '90vw', md: '100vw' }}
 						p={2}
-						height={'70vh'}
+						minHeight={'70vh'}
 						flexDir={'column'}
 					>
 						<Heading>{label}</Heading>
 						<HStack
 							height={'50%'}
+							mx={1}
 							p={2}
-							w={{ base: '100%', lg: '80%' }}
-							spacing={{ base: 9, md: 'auto' }}
+							w={{ base: 'auto', lg: '80%' }}
+							spacing={{ base: '9', md: 'auto' }}
 						>
 							{emotions.map(({ emotionName }) => (
 								<EmotionButton

@@ -2,13 +2,22 @@ import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import RequireAuth from './Components/Authorization/RequireAuth'
 import Nav from './Components/Nav/Nav'
-
+import ReactGA from 'react-ga'
 import { Container } from '@chakra-ui/react'
 import Providers from './Components/Providers'
 import LoadingTextField from './Components/Loading/LoadingTextField'
-import ThoughtRecordTable from './Components/ThoughtRecordDisplay/ThoughtRecordTable'
-import ThoughtRecordExplination from './Components/ThoughtRecordExplination'
-import Profile from './Components/Profile'
+
+ReactGA.initialize('UA-228687787-1')
+ReactGA.pageview('/')
+
+const ThoughtRecordTable = lazy(
+	() => import('./Components/ThoughtRecordDisplay/ThoughtRecordTable'),
+)
+const Profile = lazy(() => import('./Components/Profile'))
+const ThoughtRecordExplination = lazy(
+	() => import('./Components/ThoughtRecordExplination'),
+)
+
 const PasswordReset = lazy(
 	() => import('./Components/Authorization/PasswordReset'),
 )
