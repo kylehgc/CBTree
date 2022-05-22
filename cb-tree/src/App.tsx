@@ -47,13 +47,13 @@ const ThoughtQuestion = lazy(
 )
 
 export const App = () => (
-	// <Router basename={process.env.PUBLIC_URL}>
 	<Router>
 		<Providers>
 			<Container p={2} centerContent minH={'70vh'} width="100vw">
 				<Nav />
 				<Suspense fallback={<LoadingTextField />}>
 					<Routes>
+						<Route path="/" element={<ThoughtRecordExplination />} />
 						<Route
 							path="/profile"
 							element={
@@ -81,7 +81,7 @@ export const App = () => (
 								</RequireAuth>
 							}
 						/>
-						<Route path="/" element={<Login />} />
+						<Route path="/login" element={<Login />} />
 						<Route
 							path="/rerateemotion"
 							element={

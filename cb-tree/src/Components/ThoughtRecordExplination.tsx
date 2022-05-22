@@ -1,4 +1,5 @@
-import { AspectRatio, Center, Heading } from '@chakra-ui/react'
+import { AspectRatio, Center, Heading, Link } from '@chakra-ui/react'
+import { BsGithub } from 'react-icons/bs'
 import AboutText from './AboutText'
 
 const ThoughtRecordExplination: React.FC = () => {
@@ -16,6 +17,9 @@ const ThoughtRecordExplination: React.FC = () => {
 					/>
 				</AspectRatio>
 				<AboutText />
+				<Link href="https://github.com/kylehgc/CBTree">
+					<BsGithub size={80} />
+				</Link>
 			</Center>
 		</>
 	)

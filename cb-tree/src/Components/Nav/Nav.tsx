@@ -71,7 +71,12 @@ export default function Nav() {
 						<LoggedInNav displayName={displayName} />
 					</Suspense>
 				) : (
-					<Link fontSize={15} color={'white'} to={'/'} as={ReactRouterLink}>
+					<Link
+						fontSize={15}
+						color={'white'}
+						to={'/login'}
+						as={ReactRouterLink}
+					>
 						Login
 					</Link>
 				)}

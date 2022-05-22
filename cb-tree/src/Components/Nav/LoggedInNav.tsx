@@ -31,7 +31,7 @@ const LoggedInNav: React.FC<Props> = ({ displayName }) => {
 
 	const handleLogout = () => {
 		logout()
-		navigate('/')
+		navigate('/login')
 	}
 
 	return (

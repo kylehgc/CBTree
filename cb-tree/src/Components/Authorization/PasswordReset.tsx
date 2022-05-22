@@ -27,7 +27,7 @@ const PasswordReset: React.FC = () => {
 					status: 'success',
 					description: 'Password Successfully changed redirecting to login',
 				})
-				navigate('/')
+				navigate('/login')
 			} else {
 				toast({ status: 'error', description: 'reset has expired' })
 				setIsSubmitting(false)

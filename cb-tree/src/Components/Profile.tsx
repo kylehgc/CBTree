@@ -26,7 +26,7 @@ const Profile = () => {
 	}
 	const { currentUser } = useAuth()
 	if (!currentUser) {
-		navigate('/')
+		navigate('/login')
 		return <></>
 	}
 
