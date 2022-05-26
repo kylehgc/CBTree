@@ -58,7 +58,7 @@ const EmotionPicker: React.FC = () => {
 					<Center
 						mt={4}
 						rounded={'75px'}
-						border={selected ? '15px solid' : 'none'}
+						outline={selected ? '15px solid' : 'none'}
 						borderColor={emotionColor}
 						mx={-20}
 						w={{ base: 'auto', sm: '90vw', md: '100vw' }}
