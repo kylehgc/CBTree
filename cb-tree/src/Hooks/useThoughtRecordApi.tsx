@@ -111,6 +111,7 @@ const useThoughtRecordApi = (): useThoughtRecordReturn => {
 		}
 		throw Error('Invalid return')
 	}
+
 	const updateThoughtRecord = async (
 		data: FormValues,
 		activeThoughtRecord: string,
