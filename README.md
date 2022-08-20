@@ -3,6 +3,7 @@
 
 CBTree is a web application to create and manage CBT thought records
 
+Live Link: https://www.cbtree.app
 Current version of development backend is hosted at: https://ciy1es.deta.dev/docs 
 
 https://user-images.githubusercontent.com/6609889/169714706-ab403540-84c6-467e-b809-23b9c290923f.mp4
