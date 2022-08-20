@@ -2,7 +2,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import auth, user, thoughtrecord
 
-app = FastAPI()
+description = """The Backend for CBTree"""
+
+app = FastAPI(title="CBTree Thought Record API", description=description,version="1.0", contact={
+    "name": "Kyle Christensen",
+    "url": "https://github.com/kylehgc/",
+    "email": "kylehgc@gmail.com",
+  
+},)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
