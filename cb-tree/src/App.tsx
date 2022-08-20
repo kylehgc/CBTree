@@ -49,7 +49,7 @@ const ThoughtQuestion = lazy(
 export const App = () => (
 	<Router>
 		<Providers>
-			<Container p={2} centerContent minH={'70vh'} width="100vw">
+			<Container p={2} centerContent minH={'70vh'} mx={'auto'} width="90vw">
 				<Nav />
 				<Suspense fallback={<LoadingTextField />}>
 					<Routes>

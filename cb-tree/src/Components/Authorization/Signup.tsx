@@ -11,6 +11,8 @@ import {
 	Link,
 	useToast,
 	FormErrorMessage,
+	Center,
+	useBreakpointValue,
 } from '@chakra-ui/react'
 
 import {
@@ -24,6 +26,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import UserPassFormElements from './UserPassFormElements'
 import useThemeColors from '../../Hooks/useThemeColors'
 import useAuth from '../../Hooks/useAuth'
+import GoogleSignIn from './GoogleSignIn'
 
 interface FormValues {
 	firstName?: string
@@ -47,6 +50,7 @@ export default function SignupCard() {
 	const { login, currentUser } = useAuth()
 	const navigate = useNavigate()
 	const { state } = useLocation() as LocationState
+	const width = useBreakpointValue({ base: '250', sm: '300', md: '350' })
 
 	useEffect(() => {
 		if (currentUser) {
@@ -84,14 +88,27 @@ export default function SignupCard() {
 		}
 	}
 	return (
-		<Stack spacing={8} height={'100%'} mx={'auto'} maxW={'lg'} py={12} px={6}>
+		<Center
+			flexDir={'column'}
+			gap={8}
+			height={'100%'}
+			maxW={'lg'}
+			py={8}
+			mx={2}
+			px={0}
+		>
 			<Stack align={'center'}>
 				<Heading fontSize={'4xl'} textAlign={'center'}>
 					Sign up
 				</Heading>
 			</Stack>
-			<Box rounded={'lg'} bg={foregroundColor} boxShadow={'lg'} p={8}>
+			<Box rounded={'lg'} bg={foregroundColor} boxShadow={'lg'} px={7} py={9}>
 				<form onSubmit={handleSubmit(onSubmit)}>
+					<GoogleSignIn
+						context={'signup'}
+						contextText={'signup_with'}
+						width={width}
+					/>
 					<Stack spacing={4}>
 						<HStack>
 							<Box>
@@ -164,6 +181,6 @@ export default function SignupCard() {
 					</Stack>
 				</form>
 			</Box>
-		</Stack>
+		</Center>
 	)
 }

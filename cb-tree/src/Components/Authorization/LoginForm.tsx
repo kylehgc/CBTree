@@ -7,9 +7,10 @@ import {
 	useToast,
 	Text,
 	Center,
+	Flex,
+	Divider,
 } from '@chakra-ui/react'
 import useAuth from '../../Hooks/useAuth'
-
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { loginEndpoint } from '../../Utils/api'
 import UserPassFormElements from './UserPassFormElements'
@@ -18,6 +19,7 @@ import { useEffect } from 'react'
 import { useNavigate, Link as BrowserLink, useLocation } from 'react-router-dom'
 import LoadingTextField from '../Loading/LoadingTextField'
 import { Token } from '../../types'
+import GoogleSignIn from './GoogleSignIn'
 
 interface FormValues {
 	username: string
@@ -78,7 +80,7 @@ const Login: React.FC = () => {
 		return <LoadingTextField />
 	}
 	return (
-		<Center minH={'70vh'}>
+		<Center pt={6} minH={'80vh'}>
 			<Stack spacing={8} mx={'auto'} maxW={'lg'} maxH={'100%'} px={6}>
 				<Stack spacing={4} align={'center'}>
 					<Heading textAlign={'center'} fontSize={'4xl'}>
@@ -92,6 +94,7 @@ const Login: React.FC = () => {
 				</Stack>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Box rounded={'lg'} bg={foregroundColor} boxShadow={'lg'} p={8}>
+						<GoogleSignIn />
 						<UserPassFormElements register={register} errors={errors} />
 						<Stack p={2} spacing={6}>
 							<Stack
