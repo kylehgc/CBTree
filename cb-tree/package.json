@@ -2,7 +2,6 @@
 	"name": "cb-tree",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://kylehgc.github.io/CBTree",
 	"dependencies": {
 		"@chakra-ui/icons": "^1.1.7",
 		"@chakra-ui/react": "^1.8.7",

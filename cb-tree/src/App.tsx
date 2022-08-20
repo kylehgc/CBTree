@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import RequireAuth from './Components/Authorization/RequireAuth'
 import Nav from './Components/Nav/Nav'

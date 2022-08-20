@@ -6,7 +6,6 @@ interface HotThoughtProps {
 	onSelect: (value: string) => void
 	selected: string
 }
-
 const HotThoughtSelect: React.FC<HotThoughtProps> = ({
 	thoughts,
 	onSelect,
